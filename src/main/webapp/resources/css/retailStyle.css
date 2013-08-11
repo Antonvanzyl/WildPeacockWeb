@@ -3838,3 +3838,18 @@ textarea.LV_invalid_field:active,
 }
 
 /* ########### LIGHT BOX FOR PRODUCTS: END ############# */
+
+		#makeMeScrollable
+		{
+			width:900px;
+			height: 105px;
+			position:relative;
+		}
+		
+		#makeMeScrollable div.scrollableArea *
+		{
+			position: relative;
+			float: left;
+			margin: 0;
+			padding: 0;
+		}
