@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="imagetoolbar" content="no" />
+<title>.|.. Wild Peacock Products: CONTACT US ..|.</title>
+
+    <link rel="stylesheet" href="css/page.css" type="text/css" media="screen" />
+    
+    <script language="javascript">AC_FL_RunContent = 0;</script>
+	<script src="js/AC_RunActiveContent.js" language="javascript"></script>
+
+	<script type="text/javascript" src="js/livevalidation_standalone.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.pagination.js"></script>
+    
+    <script src="js/embed_SWF.js" type="text/javascript"></script>
+    
+    <script>
+		!window.jQuery && document.write('<script src="js/jquery-1.4.3.min.js"><\/script>');
+	</script>
+	<script type="text/javascript" src="fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+	<script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+   
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			/*
+			*   Examples - various
+			*/
+
+			$("#various3").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+		});
+	</script>
+
+
+	<!-- Anything Slider optional plugins -->
+	<script type="text/javascript" src="js/jquery.easing.1.2.js"></script>
+	<!-- http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js -->
+	<script type="text/javascript" src="js/swfobject.js"></script>
+
+	<!-- Anything Slider -->
+	<link rel="stylesheet" href="css/anythingslider.css" type="text/css" media="screen" />
+	<script type="text/javascript" src="js/jquery.anythingslider.js"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.error').hide();
+	$("form#submit").submit(function() {
+									 
+    $('.error').hide();
+		
+	  var name = $("input#name").val();
+		if (name == "") {
+      $("label#name_error").show();
+      $("input#name").focus();
+      return false;
+    }
+		var email = $("input#email").val();
+		if (email == "") {
+      $("label#email_error").show();
+      $("input#email").focus();
+      return false;
+    }
+									 
+									 
+	// we want to store the values from the form input box, then send via ajax below
+	var name     = $('#name').attr('value');
+	var email     = $('#email').attr('value'); 
+		
+		$.ajax({
+			type: "POST",
+			url: "ajax.php",
+			data: "name="+ name + "&email=" + email,
+			success: function(){
+				$('form#submit').hide();
+				//$('form#submit :input').val("");
+				$('div.success').fadeIn();
+			}
+		});
+	return false;
+	});
+});
+
+</script>
+	<!-- jQuery (required) -->
+	
+
+	<script type="text/javascript">
+		// Demo functions
+		// **************
+		$(function(){
+
+			// External Link with callback function
+			$("#slide-jump").click(function(){
+				$('#slider2').anythingSlider(4, function(slider){ /* alert('Now on page ' + slider.currentPage); */ });
+				return false;
+			});
+
+			// External Link
+			$("a.muppet").click(function(){
+				$('#slider1').anythingSlider(5);
+				$(document).scrollTop(0);
+				return false;
+			});
+
+			// Report Events to console & features list
+			$('#slider1, #slider2').bind('before_initialize initialized swf_completed slideshow_start slideshow_stop slideshow_paused slideshow_unpaused slide_init slide_begin slide_complete', function(e, slider){
+				// show object ID + event (e.g. "slider1: slide_begin")
+				var txt = slider.$el[0].id + ': ' + e.type + ', now on panel #' + slider.currentPage;
+				$('#status').text(txt);
+				if (window.console && window.console.firebug){ console.debug(txt); } // added window.console.firebug to make this work in Opera
+			});
+
+			// Theme Selector (This is really for demo purposes only)
+			var themes = ['minimalist-round','minimalist-square','metallic','construction','cs-portfolio'];
+			$('#currentTheme').change(function(){
+				var theme = $(this).val();
+				if (!$('link[href*=' + theme + ']').length) {
+					$('body').append('<link rel="stylesheet" href="css/theme-' + theme + '.css" type="text/css" media="screen" />');
+				}
+				$('#slider1').closest('div.anythingSlider')
+					.removeClass( $.map(themes, function(t){ return 'anythingSlider-' + t; }).join(' ') )
+					.addClass('anythingSlider-' + theme);
+			});
+
+			// Add a slide
+			var imageNumber = 1;
+			$('button.add').click(function(){
+				$('#slider1')
+					.append('<li><img src="images/slide-tele-' + (++imageNumber%2 + 1)  + '.jpg" alt="" /></li>')
+					.anythingSlider(); // update the slider
+			});
+			$('button.remove').click(function(){
+				if ($('#slider1').data('AnythingSlider').pages > 1) {
+					$('#slider1 > li:not(.cloned):last').remove();
+					$('#slider1').anythingSlider(); // update the slider
+				}
+			});
+
+		});
+	</script>
+
+	<script type="text/javascript">
+		// Set up Sliders
+		// **************
+		$(function(){
+
+			$('#slider1').anythingSlider({
+				startStopped    : false, // If autoPlay is on, this can force it to start stopped
+				width           : 880,   // Override the default CSS width
+				theme           : 'metallic',
+				autoPlayLocked  : false,  // If true, user changing slides will not stop the slideshow
+				resumeDelay     : 20000, // Resume slideshow after user interaction, only if autoplayLocked is true (in milliseconds).
+				onSlideComplete : function(slider){
+					// alert('Welcome to Slide #' + slider.currentPage);
+				}
+			});
+
+		});
+	</script>
+
+
+
+<script type="text/javascript">
+
+            function searchPageselectCallback(page_index, jq){
+                var new_content = $('#hiddenresult div.result:eq('+page_index+')').clone();
+                $('#Searchresult').empty().append(new_content);
+                return false;
+            }
+            
+                     
+            function initPagination() {
+                
+                var num_entries = $('#hiddenresult div.result').length;
+                
+                $(".searchresult_pagination").pagination(num_entries, {
+                    callback: searchPageselectCallback,
+                    items_per_page:1
+                });
+            }
+            
+            
+            $(document).ready(function(){      
+                initPagination();
+            });
+            
+        </script>
+        
+        <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript" src="js/pirobox_extended.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$().piroBox_ext({
+	piro_speed : 700,
+		bg_alpha : 0.5,
+		piro_scroll : true // pirobox always positioned at the center of the page
+	});
+});
+</script>
+<link href="css/style_1/style.css" rel="stylesheet" type="text/css" />
+
+
+<link rel="shortcut icon" href="favicon.ico" >
+<link rel="icon" href="favicon.ico" type="image/gif" >
+
+
+</head>
+
+<body>
+
+
+<!-- GLOBAL WRAPPER STARTS HERE -->
+<div id="page-wrap">
+
+<!-- ROUNDED WRAPPER FOR SITE: START -->
+<div class="pageContent">
+    
+<!-- ############################################################################################################ -->
+<!-- #### HEADER CONTENTS: START ################################################################################ --> 
+
+		<div class="headerContentWS">
+        	<div class="headerwrapperCol1">
+            	<!-- logo here -->
+            </div>
+            
+            <div class="headerwrapperCol2_WS_Contact">
+        		<!-- text/slogan here -->
+            </div>
+        </div>
+
+<!-- #### HEADER CONTENTS: ENDS ################################################################################# -->  
+<!-- ############################################################################################################ -->
+
+<!-- ############################################################################################################ -->
+<!-- #### MAIN CONTENTS: STARTS ################################################################################# -->
+  <div class="mainContent">
+        <div class="mainContentWrapper_WS_Contact">	
+        	<div class="mainContentWrapper_WS_TopLinks">
+            	<div class="mainContentWrapper_WS_TopLinks1">
+                  	<p class="mainText_BreadCrumbs">Home &raquo; Wholesale &raquo; Contacts</p>
+                </div>
+                <div class="mainContentWrapper_WS_TopLinks2">
+                  	<p align="right" class="mainText_Site">| <a href="wholesale_home.htm" class="mainTextHead">Wholesale</a> | <a href="wholesale_products.htm" class="mainTextHead">Products</a> | <font color="#7b9a75">Contact</font></p>
+                </div>
+            </div>
+        
+        	<div class="WS_Main_Holder">
+            	<div class="WS_Main_Holder_Left">
+                	<!-- Spacer on left side -->
+                    <p>&nbsp;</p>
+                </div>
+            
+            	<div class="WS_Main_Holder_Right">
+                	<!-- Text on the right hand side -->
+                	<h5>Wholesale<br />Wild Peacock Products - contacts</h5>
+                    <div class="WS_Main_Holder_Right1">
+                    	<p class="mainText_Contacts"><b>Orders and Enquiries:</b><br />
+							T. 021 801 3663/4/5<br />
+							F. 086 577 3663<br />
+							E. <a href="mailto:food@wildpeacock.co.za>subject=Contact From Website" class="mainTextLink">food@wildpeacock.co.za</a></p>
+                    </div>
+                    <div class="WS_Main_Holder_Right2">
+                    	<p class="mainText_Contacts"><b>Accounts:</b><br />
+							T. 021 801 3662<br />
+							F. 086 577 3663<br/>
+							E. <a href="mailto:accounts@wildpeacock.co.za>subject=Contact From Website" class="mainTextLink">accounts@wildpeacock.co.za</a></p>
+                    </div>
+                    
+                    <div class="WS_Main_Holder_SplitLine">
+                    </div>
+                    
+                     <div class="WS_Main_Holder_Right1">
+                    	<p class="mainText_Contacts"><b>Sue Baker:</b><br />
+							C. 082 782 1296<br />
+							E. <a href="mailto:sue@wildpeacock.co.za>subject=Contact From Website" class="mainTextLink">sue@wildpeacock.co.za</a></p>
+                    </div>
+                    <div class="WS_Main_Holder_Right2">
+                    	<p class="mainText_Contacts"><b>Ross Baker:</b><br />
+							C. 082 923 1583<br />
+							E. <a href="mailto:Ross@wildpeacock.co.za>subject=Contact From Website" class="mainTextLink">Ross@wildpeacock.co.za</a></p>
+                    </div>
+                    
+                    <div class="WS_Main_Holder_SplitLine">
+                    </div>
+                    
+                     <div class="WS_Main_Holder_Right1">
+                    	<p class="mainText_Contacts"><b>Postal Address:</b><br />
+							P.O. Box 12168<br />Die Boord<br />Stellenbosch<br />7613</p>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        	<div class="mainContentWrapperCol2_holder_WS">
+            	<div class="mainContentWrapperCol2_squares_holder_WS">
+                <!-- Retail block -->
+                    <div class="mainContentWrapperCol2_square2_WS">
+                    	<a href="retail_home.htm" class="mainContentWrapperCol2_square2_WS">
+                        <div class="mainContentWrapperCol2_square_text_WS">
+                        	<p align="right" class="TextForIndexSquares">Retail</p>
+                        </div>
+                        </a>
+                    </div>
+                </div> 
+            </div>
+            
+        </div>
+    </div>
+        
+    <div class="footerwithround">
+       	<p class="footerTextForRoundCorners">Wild Peacock Products (Pty) Ltd. | Wild Peacock Farm, Knorhoek rd, R44, Stellenbosch, 7600 | tel: 021 801 3663/4/5 | fax: 086 577 3663 | <a href="mailto:food@wildpeacock.co.za?subject=Contact from Website" class="footerLink">food@wildpeacock.co.za</a>   </p>
+    </div>
+   	  
+<!-- #### MAIN CONTENTS: ENDS ################################################################################### -->
+<!-- ############################################################################################################ -->
+	
+  </div>
+<!-- ROUNDED WRAPPER FOR SITE: END -->
+
+
+
+<!-- ############################################################################################################ -->
+<!-- #### FOOTER CONTENTS: STARTS ############################################################################### -->
+	<div id="footer-wrap">
+		<div class="footerContent">
+			<div class="col1">
+            	<div class="col3">
+           		  <div align="left">
+					<p class="footer_copyright">
+                    &copy; Copyright 2011 Wild Peacock Products.  All rights reserved. Designed by <a class="footer_link" href="http://www.tenfourmedia.co.za" target="_blank">tenfour media</a>. Development by <a class="footer_link" href="http://www.gacreations.co.za" target="_blank">greenapple creations</a>.
+                    </p>
+				  </div>
+              </div>
+         </div>
+	</div>
+    </div>
+    
+
+<!-- #### FOOTER CONTENTS: ENDS ################################################################################# -->
+<!-- ############################################################################################################ -->
+
+</div>
+<!-- GLOBAL WRAPPER ENDS HERE -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4886765-11']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

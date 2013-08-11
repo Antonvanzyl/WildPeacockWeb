@@ -1,8 +1,8 @@
 apply plugin: 'jetty'
 
-project.ext.projectSrcDir   = "WildPeacockWeb"
-project.ext.warName = "WildPeacock.war"
-project.ext.serverDeployDir="WildPeacockWeb" 		// which jboss server to deploy
+project.ext.projectSrcDir   = "wildPeacock"
+project.ext.warName = "wildPeacock.war"
+project.ext.serverDeployDir="wildPeacock" 		// which jboss server to deploy
 
 
 sourceSets {

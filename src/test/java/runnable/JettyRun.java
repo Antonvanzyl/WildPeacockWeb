@@ -23,13 +23,13 @@ public class JettyRun {
 		PropertyConfigurator.configure("src/test/resources/log4j.properties");
 
 		System.setProperty("DEBUG", "true");
-		System.setProperty("jboss.jvmRoute", "WildPeacock_Local");
+		System.setProperty("jboss.jvmRoute", "BudgetService_Local");
 
 		server = new Server();
 
 		// create and configure the servlet
 		WebAppContext webapp = new WebAppContext();
-		webapp.setContextPath("/WildPeacock");
+		webapp.setContextPath("/antonvanzyl");
 		webapp.setWar("src/main/webapp");
 		webapp.setClassLoader(Thread.currentThread().getContextClassLoader());
 		webapp.setLogUrlOnStart(true);
