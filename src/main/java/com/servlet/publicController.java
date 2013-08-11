@@ -19,9 +19,25 @@ public class publicController extends BaseController {
 
 	@RequestMapping(value = "/home", method = { RequestMethod.GET,
 			RequestMethod.POST })
-	public ModelAndView signOut() {
+	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView("main");
-		
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/about", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public ModelAndView about() {
+		ModelAndView modelAndView = new ModelAndView("main");
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/contact", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public ModelAndView contact() {
+		ModelAndView modelAndView = new ModelAndView("main");
+
 		return modelAndView;
 	}
 
