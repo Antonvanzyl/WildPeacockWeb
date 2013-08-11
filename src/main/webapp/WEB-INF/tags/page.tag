@@ -13,15 +13,15 @@
 	
 		<title>.|.. Wild Peacock Products: RETAIL HOME ..|.</title>
 	
-	    <link rel="stylesheet" href="css/retailStyle.css" type="text/css" media="screen" />
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/retailStyle.css" type="text/css" media="screen" />
 	    
-	    <link href="css/style_1/style.css" rel="stylesheet" type="text/css" />
+	    <link href="${pageContext.request.contextPath}/resources/css/style_1/style.css" rel="stylesheet" type="text/css" />
 	
 		<link rel="shortcut icon" href="favicon.ico" >
 		<link rel="icon" href="favicon.ico" type="image/gif" >
 	
 		<!-- IMAGE SCROLLER DETAILS -->
-		<link rel="Stylesheet" type="text/css" href="css/smoothDivScroll.css" />
+		<link rel="Stylesheet" type="text/css" href="/resources/css/smoothDivScroll.css" />
 	
 	</head>
 	

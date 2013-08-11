@@ -8,7 +8,7 @@
 body   { 
 	font: 10px Arial;
 	background-color: #fff;
-	background-image:url(../img/retailBG.jpg);
+	background-image:url(../images/img/retailBG.jpg);
 	background-position:top;
 	background-repeat:repeat;
 	background-attachment:fixed;
@@ -1463,7 +1463,7 @@ ul#navlist {
 	border-left: 0px solid #33182b;
 	border-right: 0px solid #33182b;
 	border-bottom: 0px dashed #cacaca;
-	background-image:url(../img/retail_logo.jpg);
+	background-image:url(../images/img/retail_logo.jpg);
 	background-position:center;
 	background-repeat:no-repeat;
 	

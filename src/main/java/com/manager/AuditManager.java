@@ -1,5 +1,5 @@
 package com.manager;
 
-public interface AudtitManager {
+public interface AuditManager {
 
 }
