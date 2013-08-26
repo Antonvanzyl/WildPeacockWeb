@@ -4,6 +4,7 @@
 <%@attribute name="secondContent" required="false" description="content in the grey space" %>
 <%@attribute name="pageHeader" required="false" description="Main page header"%>
 <%@attribute name="subtitle" required="false"%>
+<%@attribute name="pageCSS" required="false" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -34,21 +35,15 @@
 			
 				<!-- Main Content -->
 				<div class="mainContent">
-			        <div class="mainContentWrapper_WSP">	
-			        	<div class="mainContentWrapper_WSP_TopLinks">
-			            	<div class="mainContentWrapper_WSP_TopLinks1">
-			                </div>
-			                <div class="mainContentWrapper_WSP_TopLinks2">
-			                  	<p align="right" class="mainText_Site">| <font color="#7b9a75">Retail</font> | <a href="retail_products.htm" class="mainTextHead">Deli Products</a> | <a href="retail_press.htm" class="mainTextHead">Press</a> | <a href="retail_contact.htm"  class="mainTextHead">Contact</a></p>
-			                </div>
-			            </div>
-			        
+			        <div class="${pageCSS }">	
+				        
 			        	<div class="WSP_Main_Holder">
 			           		<h5>${pageHeader}</h5>
+			           		<jsp:doBody />
 		            	</div>
 		        
 			        	<div class="mainContentWrapperCol2_holder_WSP">
-							<jsp:doBody />
+							<!-- Button on the right -->
 			            </div>
 		       		</div>
 		    	</div>

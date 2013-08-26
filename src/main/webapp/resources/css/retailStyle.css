@@ -8,7 +8,7 @@
 body   { 
 	font: 10px Arial;
 	background-color: #fff;
-	background-image:url(../images/img/retailBG.jpg);
+	background-image:url(../images/retailBG.jpg);
 	background-position:top;
 	background-repeat:repeat;
 	background-attachment:fixed;
@@ -31,7 +31,7 @@ input, select {
 input, textarea, select {
   border:1px solid #aaaaaa;
   padding:2px;
-  background:#ffffff url(../img/inputBg.gif) top left no-repeat;
+  background:#ffffff url(../images/inputBg.gif) top left no-repeat;
   margin-top:2px;
 }
 
@@ -95,7 +95,7 @@ input.button {
 	float:right;
 	border:1px solid #aaaaaa;
   	padding:5px;
-  	background:#ffffff url(../img/inputBg.gif) top left no-repeat;
+  	background:#ffffff url(../images/inputBg.gif) top left no-repeat;
 	cursor:hand;
 }
 
@@ -259,7 +259,7 @@ fieldset#ContactF {
  	border:1px solid #a0a0a0;
  	margin:10px 10px 10px 10px;
  	width:350px;
-	background-image: url(../img/contactformbg.jpg);
+	background-image: url(../images/contactformbg.jpg);
 	background-position: bottom;
 	background-repeat: repeat-x;
 	border-radius: 5px;
@@ -312,7 +312,7 @@ fieldset label{
 	padding: 10px 0px 0px 3px;
 	height:26px;
 	width:350px;
-	background-image:url(../img/linksbg_errorFont.jpg);
+	background-image:url(../images/linksbg_errorFont.jpg);
 	background-repeat:repeat-x;
 	background-position:top;
 	font: 12px Arial;
@@ -323,7 +323,7 @@ fieldset label{
 	padding: 10px 0px 0px 3px;
 	height:34px;
 	width:350px;
-	background-image:url(../img/linksbg_error.jpg);
+	background-image:url(../images/linksbg_error.jpg);
 	background-repeat:repeat-x;
 	background-position:top;
 	font: 12px Arial;
@@ -348,7 +348,7 @@ fieldset label{
 	padding: 10px 0px 0px 3px;
 	height:34px;
 	width:350px;
-	background-image:url(../img/linksbg_sent.jpg);
+	background-image:url(../images/linksbg_sent.jpg);
 	background-repeat:repeat-x;
 	background-position:top;
 	font: 12px Arial;
@@ -397,7 +397,7 @@ input.Cap {
 	margin-top:2px;
 	height:24px;
 	width:70px;
-	background-image:url(../img/linksbg_error.jpg);
+	background-image:url(../images/linksbg_error.jpg);
 	background-position:center;
 	background-repeat:repeat-x;
 	border: solid #999 1px;
@@ -946,7 +946,7 @@ ul#tabs li a:hover {
 }
 
 ul#tabs li a.current {
-	background:  url('../img/feature-tab-current.png');
+	background:  url('../images/feature-tab-current.png');
 	color: #FFF;
 }
 
@@ -1003,7 +1003,7 @@ ul#output li a:hover {
 /* ########### NAVIGATION PROPERTIES: START ############# 
 
 #nav {
-      background: url(../img/nav.jpg);
+      background: url(../images/nav.jpg);
       height: 43px;
       width: 900px;
       margin: 0px auto;
@@ -1033,35 +1033,35 @@ ul#output li a:hover {
 #list8 { width: 55px; }
 
 #list1 a:hover {
-      background: url(../img/nav.jpg) 0px -43px no-repeat;
+      background: url(../images/nav.jpg) 0px -43px no-repeat;
 }
 
 #list2 a:hover {
-      background: url(../img/nav.jpg) -60px -43px no-repeat;
+      background: url(../images/nav.jpg) -60px -43px no-repeat;
 }
 
 #list3 a:hover {
-      background: url(../img/nav.jpg) -144px -43px no-repeat;
+      background: url(../images/nav.jpg) -144px -43px no-repeat;
 }
 
 #list4 a:hover {
-      background: url(../img/nav.jpg) -228px -43px no-repeat;
+      background: url(../images/nav.jpg) -228px -43px no-repeat;
 }
 
 #list5 a:hover {
-      background: url(../img/nav.jpg) -304px -43px no-repeat;
+      background: url(../images/nav.jpg) -304px -43px no-repeat;
 }
 
 #list6 a:hover {
-      background: url(../img/nav.jpg) -375px -43px no-repeat;
+      background: url(../images/nav.jpg) -375px -43px no-repeat;
 }
 
 #list7 a:hover {
-      background: url(../img/nav.jpg) -467px -43px no-repeat;
+      background: url(../images/nav.jpg) -467px -43px no-repeat;
 }
 
 #list8 a:hover {
-      background: url(../img/nav.jpg) -547px -43px no-repeat;
+      background: url(../images/nav.jpg) -547px -43px no-repeat;
 }
 
 
@@ -1071,7 +1071,7 @@ ul#output li a:hover {
 
 #navIndex {
       height: 24px;
-	  background: url(../img/nav.png);
+	  background: url(../images/nav.png);
       width: 708px;
       margin: 0px auto;
       position: relative;
@@ -1098,27 +1098,27 @@ ul#output li a:hover {
 #list6Index { width: 133px; }
 
 #list1Index a:hover {
-      background: url(../img/nav.png) 0px -24px no-repeat;
+      background: url(../images/nav.png) 0px -24px no-repeat;
 }
 
 #list2Index a:hover {
-      background: url(../img/nav.png) -119px -24px no-repeat;
+      background: url(../images/nav.png) -119px -24px no-repeat;
 }
 
 #list3Index a:hover {
-      background: url(../img/nav.png) -238px -24px no-repeat;
+      background: url(../images/nav.png) -238px -24px no-repeat;
 }
 
 #list4Index a:hover {
-      background: url(../img/nav.png) -338px -24px no-repeat;
+      background: url(../images/nav.png) -338px -24px no-repeat;
 }
 
 #list5Index a:hover {
-      background: url(../img/nav.png) -510px -24px no-repeat;
+      background: url(../images/nav.png) -510px -24px no-repeat;
 }
 
 #list6Index a:hover {
-      background: url(../img/nav.png) -572px -24px no-repeat;
+      background: url(../images/nav.png) -572px -24px no-repeat;
 }
 
 
@@ -1141,7 +1141,7 @@ ul#output li a:hover {
 	margin-left: 0;
 	display: inline;
 	margin-top:-32px;
-	background-image:url(../img/searchbg.jpg);
+	background-image:url(../images/searchbg.jpg);
 	background-position:top;
 	background-repeat:repeat-x;
 	float: right;
@@ -1251,7 +1251,7 @@ ul#navlist {
 	color: #e88998;
 	text-decoration: none;
 	text-shadow: 0px 1px 1px #000;
-	background-image: url(../img/linedevider.jpg);
+	background-image: url(../images/linedevider.jpg);
 	background-position: center right;
 	background-repeat: no-repeat;
 }
@@ -1316,7 +1316,7 @@ ul#navlist {
 	float:right;
 	border:1px solid #aaaaaa;
   	padding:5px;
-  	background:#ffffff url(../img/inputBg.gif) top left no-repeat;
+  	background:#ffffff url(../images/inputBg.gif) top left no-repeat;
 }
 
 #prod_btn a:hover {
@@ -1328,7 +1328,7 @@ ul#navlist {
 	float:right;
 	border:1px solid #aaaaaa;
   	padding:5px;
-  	background:#ffffff url(../img/inputBg.gif) top left no-repeat;
+  	background:#ffffff url(../images/inputBg.gif) top left no-repeat;
 	cursor:hand;
 }
 
@@ -1341,7 +1341,7 @@ ul#navlist {
 	float:right;
 	border:1px solid #aaaaaa;
   	padding:5px;
-  	background:#ffffff url(../img/inputBg.gif) top left no-repeat;
+  	background:#ffffff url(../images/inputBg.gif) top left no-repeat;
 }
 
 #prodA_btn a:hover {
@@ -1353,7 +1353,7 @@ ul#navlist {
 	float:right;
 	border:1px solid #aaaaaa;
   	padding:5px;
-  	background:#ffffff url(../img/inputBg.gif) top left no-repeat;
+  	background:#ffffff url(../images/inputBg.gif) top left no-repeat;
 	cursor:hand;
 }
 /* ########### CUSTOM BUTTONS: ALL BROWSERS ############## */
@@ -1463,7 +1463,7 @@ ul#navlist {
 	border-left: 0px solid #33182b;
 	border-right: 0px solid #33182b;
 	border-bottom: 0px dashed #cacaca;
-	background-image:url(../images/img/retail_logo.jpg);
+	background-image:url(../images/retail_logo.jpg);
 	background-position:center;
 	background-repeat:no-repeat;
 	
@@ -1474,7 +1474,7 @@ ul#navlist {
 	height: 176px;
 	float: left;
 	margin: 0px 10px 0px 10px;
-	background-image:url(../img/logo.jpg);
+	background-image:url(../images/logo.jpg);
 	background-position:top left;
 	background-repeat:no-repeat;
 }
@@ -1484,7 +1484,7 @@ ul#navlist {
 	height: 176px;
 	float: right;
 	margin: 0px 10px 0px 10px;
-	background-image:url(../img/slogan.png);
+	background-image:url(../images/slogan.png);
 	background-position:bottom right;
 	background-repeat:no-repeat;
 }
@@ -1494,7 +1494,7 @@ ul#navlist {
 	height: 176px;
 	float: right;
 	margin: 0px 10px 0px 10px;
-	background-image:url(../img/wholesale_contact_slogan.jpg);
+	background-image:url(../images/wholesale_contact_slogan.jpg);
 	background-position:bottom right;
 	background-repeat:no-repeat;
 }
@@ -1504,7 +1504,7 @@ ul#navlist {
 	height: 176px;
 	float: right;
 	margin: 0px 10px 0px 10px;
-	background-image:url(../img/slogan_products.png);
+	background-image:url(../images/slogan_products.png);
 	background-position:bottom right;
 	background-repeat:no-repeat;
 }
@@ -1514,7 +1514,7 @@ ul#navlist {
 	height: 176px;
 	float: right;
 	margin: 0px 10px 0px 10px;
-	background-image:url(../img/slogan_home.png);
+	background-image:url(../images/slogan_home.png);
 	background-position:bottom right;
 	background-repeat:no-repeat;
 }
@@ -1534,7 +1534,7 @@ ul#navlist {
 	border-left: 1px solid #6c345b;
 	border-right: 1px solid #6c345b;
 	background-color: #33182b;
-	background-image: url(../img/linksbg.jpg);
+	background-image: url(../images/linksbg.jpg);
 	background-position: top;
 	background-repeat: repeat-x;
 	-webkit-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; 
@@ -1555,7 +1555,7 @@ ul#navlist {
 	margin: 15px 0px 15px 0px;
 	padding-bottom:15px;
 	border-bottom: 1px dashed #cacaca;
-	background-image:url(../img/oyster.jpg);
+	background-image:url(../images/oyster.jpg);
 	background-position:bottom center;
 	background-repeat:no-repeat;
 }
@@ -1572,7 +1572,7 @@ ul#navlist {
 	height: 75px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image:url(../img/wordingMain.jpg);
+	background-image:url(../images/wordingMain.jpg);
 	background-position:top;
 	background-repeat:repeat-x;
 }
@@ -1674,7 +1674,7 @@ a.mainContentWrapperCol2_square2:hover{
 	height: 95px;
 	float: left;
 	margin: 40px 0px 0px 0px;
-	background-image:url(../img/textmain.png);
+	background-image:url(../images/textmain.png);
 	background-position:left;
 	background-repeat:no-repeat;
 }
@@ -1696,7 +1696,7 @@ a.mainContentWrapperCol2_square2:hover{
 	margin: 0px 0px 0px 0px;
 	padding-bottom:0px;
 	border-bottom: 1px dashed #cacaca;
-	background-image:url(../img/ham.jpg);
+	background-image:url(../images/ham.jpg);
 	background-position:bottom right;
 	background-repeat:no-repeat;
 }
@@ -1750,7 +1750,7 @@ a.mainContentWrapperCol2_square2:hover{
 	height: 143px;
 	float: left;
 	margin: -15px 0px 15px 0px;
-	background-image:url(../img/retail_contact_side.png);
+	background-image:url(../images/retail_contact_side.png);
 	background-position:top left;
 	background-repeat:no-repeat;
 }
@@ -1850,7 +1850,7 @@ a.mainContentWrapperCol2_square2_WS:hover{
 	margin: 0px 0px 0px 0px;
 	padding-bottom:0px;
 	border-bottom: 1px dashed #cacaca;
-	background-image:url(../img/arties.jpg);
+	background-image:url(../images/arties.jpg);
 	background-position:bottom right;
 	background-repeat:no-repeat;
 }
@@ -1892,7 +1892,7 @@ a.mainContentWrapperCol2_square2_WS:hover{
 	height: 203px;
 	float: left;
 	margin: -10px 0px 20px 0px;
-	background-image:url(../img/mainImageRetail.jpg);
+	background-image:url(../images/mainImageRetail.jpg);
 	background-position:center;
 	background-repeat:no-repeat;
 }
@@ -1922,10 +1922,10 @@ mainContent .WSP_Spacer_Holder {
 
 .mainContent .WSP_Main_Holder_LeftBot {
 	width: 160px;
-	height: auto;
+	height: 200px;
 	float: left;
-	margin: -15px 0px 15px 0px;
-	background-image:url(../img/retailsideOne.png);
+	margin: 0px 0px 15px 0px;
+	background-image:url(../images/retailsideOne.png);
 	background-position:top;
 	background-repeat:no-repeat;
 }
@@ -1943,7 +1943,7 @@ mainContent .WSP_Spacer_Holder {
 	height: 226px;
 	float: right;
 	margin: -15px 0px 15px 0px;
-	background-image:url(../img/product_logos.jpg);
+	background-image:url(../images/product_logos.jpg);
 	background-position:center;
 	background-repeat:no-repeat;
 }
@@ -2028,7 +2028,7 @@ a.mainContentWrapperCol2_square2_WSP:hover{
 	margin: 0px 0px 0px 0px;
 	padding-bottom:0px;
 	border-bottom: 1px dashed #cacaca;
-	background-image:url(../img/home_bg.jpg);
+	background-image:url(../images/home_bg.jpg);
 	background-position:left bottom;
 	background-repeat:no-repeat;
 }
@@ -2089,7 +2089,7 @@ a.mainContentWrapperCol2_square2_WSP:hover{
 	height: 226px;
 	float: right;
 	margin: -15px 0px 15px 0px;
-	background-image:url(../img/eggs.jpg);
+	background-image:url(../images/eggs.jpg);
 	background-position:right;
 	background-repeat:no-repeat;
 }
@@ -2175,7 +2175,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	margin: 0px 0px 0px 0px;
 	padding-bottom:0px;
 	border-bottom: 1px dashed #cacaca;
-	background-image:url(../img/retail_products.jpg);
+	background-image:url(../images/retail_products.jpg);
 	background-position:0% 85%;
 	background-repeat:no-repeat;
 }
@@ -2193,7 +2193,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 172px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image:url(../img/pressImage.jpg);
+	background-image:url(../images/pressImage.jpg);
 	background-position:top right;
 	background-repeat:no-repeat;
 }
@@ -2226,7 +2226,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: auto;
 	float: left;
 	margin: -15px 0px 15px 0px;
-	background-image:url(../img/retailsideOne.png);
+	background-image:url(../images/retailsideOne.png);
 	background-position:top;
 	background-repeat:no-repeat;
 }
@@ -2244,7 +2244,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 226px;
 	float: right;
 	margin: -15px 0px 15px 0px;
-	background-image:url(../img/product_logos.jpg);
+	background-image:url(../images/product_logos.jpg);
 	background-position:center;
 	background-repeat:no-repeat;
 }
@@ -2321,7 +2321,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	-webkit-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; 
 	-moz-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; *border:1px solid #33182b;
 	background-color: #fff1f3;
-	background-image: url(../img/sidelinksbg.png);
+	background-image: url(../images/sidelinksbg.png);
 	background-position: bottom left;
 	background-repeat: no-repeat;
 }
@@ -2340,7 +2340,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 0px 0px 0px -1px;
 	padding: 0px 0px 0px 0px;
-	background-image: url(../img/print-bg.png);
+	background-image: url(../images/print-bg.png);
 	background-position: bottom center;
 	background-repeat: no-repeat;
 }
@@ -2357,7 +2357,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	-webkit-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; 
 	-moz-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; *border:1px solid #33182b;
 	background-color: White;
-	background-image:url(../img/prod.jpg);
+	background-image:url(../images/prod.jpg);
 	background-position:bottom left;
 	background-repeat:no-repeat;
 }
@@ -2374,7 +2374,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	-webkit-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; 
 	-moz-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; *border:1px solid #33182b;
 	background-color: White;
-	background-image:url(../img/avail.jpg);
+	background-image:url(../images/avail.jpg);
 	background-position:bottom left;
 	background-repeat:no-repeat;
 }
@@ -2391,7 +2391,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	-webkit-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; 
 	-moz-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; *border:1px solid #33182b;
 	background-color: White;
-	background-image:url(../img/cont.jpg);
+	background-image:url(../images/cont.jpg);
 	background-position:bottom left;
 	background-repeat:no-repeat;
 }
@@ -2503,7 +2503,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 41px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image: url(../img/homeSplitterMain.png);
+	background-image: url(../images/homeSplitterMain.png);
 	background-position: top;
 	background-repeat: repeat-x;
 }
@@ -2515,7 +2515,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 5px 10px 5px 5px;
 	padding: 5px 0px 0px 5px;
-	background-image:url(../img/productsbg.jpg);
+	background-image:url(../images/productsbg.jpg);
 	background-position:bottom;
 	background-repeat:repeat-x;
 	/*background-color: rgba(230,230,230,0.8);*/
@@ -2542,7 +2542,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 220px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image: url(../img/blocksbg.png);
+	background-image: url(../images/blocksbg.png);
 	background-position: top center;
 	background-repeat: no-repeat;
 }
@@ -2574,7 +2574,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 2px 10px 5px 5px;
 	border:#f8f8f8 solid 1px;
-	background-image: url(../img/logo1.png);
+	background-image: url(../images/logo1.png);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #fff1f3;
@@ -2595,7 +2595,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 220px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image: url(../img/blocksbg.png);
+	background-image: url(../images/blocksbg.png);
 	background-position: top center;
 	background-repeat: no-repeat;
 }
@@ -2627,7 +2627,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 2px 10px 5px 5px;
 	border:#f8f8f8 solid 1px;
-	background-image: url(../img/logo2.png);
+	background-image: url(../images/logo2.png);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #fff1f3;
@@ -2647,7 +2647,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 220px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image: url(../img/blocksbg.png);
+	background-image: url(../images/blocksbg.png);
 	background-position: top center;
 	background-repeat: no-repeat;
 }
@@ -2679,7 +2679,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 2px 10px 5px 5px;
 	border:#f8f8f8 solid 1px;
-	background-image: url(../img/logo3.png);
+	background-image: url(../images/logo3.png);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #fff1f3;
@@ -2699,7 +2699,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 220px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image: url(../img/blocksbg.png);
+	background-image: url(../images/blocksbg.png);
 	background-position: top center;
 	background-repeat: no-repeat;
 }
@@ -2716,7 +2716,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 36px;
 	float: left;
 	margin: 5px 5px 5px 5px;
-	background-image:url(../img/smallblock4.jpg);
+	background-image:url(../images/smallblock4.jpg);
 	background-position:left;
 	background-repeat:no-repeat;
 }
@@ -2727,7 +2727,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 2px 5px 5px 5px;
 	border:#f8f8f8 solid 1px;
-	background-image:url(../img/mainImage4.jpg);
+	background-image:url(../images/mainImage4.jpg);
 	background-position:top left;
 	background-repeat:no-repeat;
 }
@@ -2739,7 +2739,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 220px;
 	float: left;
 	margin:0px 0px 0px 0px;
-	background-image: url(../img/blocksbg.png);
+	background-image: url(../images/blocksbg.png);
 	background-position: top center;
 	background-repeat: no-repeat;
 }
@@ -2770,7 +2770,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 2px 10px 5px 5px;
 	border:#f8f8f8 solid 1px;
-	background-image: url(../img/logo4.png);
+	background-image: url(../images/logo4.png);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #fff1f3;
@@ -2790,7 +2790,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 220px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image: url(../img/blocksbg.png);
+	background-image: url(../images/blocksbg.png);
 	background-position: top center;
 	background-repeat: no-repeat;
 }
@@ -2822,7 +2822,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 2px 10px 5px 5px;
 	border:#f8f8f8 solid 1px;
-	background-image: url(../img/logo5.png);
+	background-image: url(../images/logo5.png);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #fff1f3;
@@ -2842,7 +2842,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 220px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image: url(../img/blocksbg.png);
+	background-image: url(../images/blocksbg.png);
 	background-position: top center;
 	background-repeat: no-repeat;
 }
@@ -2873,7 +2873,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 2px 10px 5px 5px;
 	border:#f8f8f8 solid 1px;
-	background-image: url(../img/logo6.png);
+	background-image: url(../images/logo6.png);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #fff1f3;
@@ -2893,7 +2893,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 220px;
 	float: left;
 	margin: -10px 0px 0px 0px;
-	background-image: url(../img/blocksbg.png);
+	background-image: url(../images/blocksbg.png);
 	background-position: top center;
 	background-repeat: no-repeat;
 }
@@ -2910,7 +2910,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 36px;
 	float: left;
 	margin: 5px 5px 5px 5px;
-	background-image:url(../img/smallblock8.jpg);
+	background-image:url(../images/smallblock8.jpg);
 	background-position:left;
 	background-repeat:no-repeat;
 }
@@ -2921,7 +2921,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	float: left;
 	margin: 2px 5px 5px 5px;
 	border:#f8f8f8 solid 1px;
-	background-image:url(../img/mainImage8.jpg);
+	background-image:url(../images/mainImage8.jpg);
 	background-position:top left;
 	background-repeat:no-repeat;
 }
@@ -3113,7 +3113,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: auto;
 	float: left;
 	margin: 0px 0px 5px 0px;
-	background-image:url(../img/frontlinkBG.png);
+	background-image:url(../images/frontlinkBG.png);
 	background-position:left;
 	background-repeat:no-repeat;
 }
@@ -3123,7 +3123,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 40px;
 	float: left;
 	margin: 2px 0px 2px 0px;
-	background-image:url(../img/natureSplitter.png);
+	background-image:url(../images/natureSplitter.png);
 	background-position:left;
 	background-repeat:no-repeat;
 }
@@ -3133,7 +3133,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 40px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image:url(../img/homeSplitter.png);
+	background-image:url(../images/homeSplitter.png);
 	background-position:left;
 	background-repeat:repeat-x;
 }
@@ -3143,7 +3143,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 40px;
 	float: left;
 	margin: 5px 0px 2px 0px;
-	background-image:url(../img/secureSplitter.png);
+	background-image:url(../images/secureSplitter.png);
 	background-position:left;
 	background-repeat:no-repeat;
 }
@@ -3153,7 +3153,7 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	height: 433px;
 	float: right;
 	margin: 0px 5px 0px 5px;
-	background-image:url(../img/frontpageAd.jpg);
+	background-image:url(../images/frontpageAd.jpg);
 	background-position:top center;
 	background-repeat:no-repeat;
 }
@@ -3354,19 +3354,19 @@ mainContent .wrapperClear{
 
 .feat_list ul{
 	padding: 0px;
-	list-style-image: url(../img/list_Img.png);
+	list-style-image: url(../images/list_Img.png);
 	margin: 8px 0 10px 25px;
 	color: white;
 }
 
 .feat_list ul li{
-	list-style-image: url(../img/list_Img.png);
+	list-style-image: url(../images/list_Img.png);
 	padding:0;
 	margin:0;
 }
 
 .feat_list ul li a{
-	list-style-image: url(../img/list_Img.png);
+	list-style-image: url(../images/list_Img.png);
 	padding:0;
 	margin:0;
 	color: white;
@@ -3405,7 +3405,7 @@ div.rounded div {
 div#nifty2 {
   margin: 0 0; 
   background: #28393f;
-  background-image: url(../img/introBG.png);
+  background-image: url(../images/introBG.png);
 	background-position: center;
 	background-repeat: no-repeat;
 }
