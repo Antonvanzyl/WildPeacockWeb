@@ -15,37 +15,38 @@
 		<title>.|.. Wild Peacock Products: RETAIL HOME ..|.</title>
 	
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/retailStyle.css" type="text/css" media="screen" />
-	    
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wholesaleStyle.css" type="text/css" media="screen" />
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wildPeacock.css" type="text/css" media="screen" />
 	    <link href="${pageContext.request.contextPath}/resources/css/style_1/style.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/smoothDivScroll.css" />
 	
 		<link rel="shortcut icon" href="favicon.ico" >
 		<link rel="icon" href="favicon.ico" type="image/gif" >
 	
 		<!-- IMAGE SCROLLER DETAILS -->
-		<link rel="Stylesheet" type="text/css" href="/resources/css/smoothDivScroll.css" />
 	
 	</head>
 	
-	<body>
+	<body class="${pageCSS }">
 		<div id="page-wrap">
 			<div class="pageContent">
 			
 				<!-- Header with logo's -->
-				<div class="headerContentWS"></div>
+				<div class="headerContent-${pageCSS }">
+		        	<div class="headerwrapperCol1">
+		            	<!-- logo here -->
+		            </div>
+		            
+		            <div class="headerwrapperCol2">
+		        		<!-- text/slogan here -->
+		            </div>
+				</div>
 			
 				<!-- Main Content -->
 				<div class="mainContent">
-			        <div class="${pageCSS }">	
-				        
-			        	<div class="WSP_Main_Holder">
-			           		<h5>${pageHeader}</h5>
+					
 			           		<jsp:doBody />
-		            	</div>
-		        
-			        	<div class="mainContentWrapperCol2_holder_WSP">
-							<!-- Button on the right -->
-			            </div>
-		       		</div>
+
 		    	</div>
 		        
 		        <!-- Content Footer -->

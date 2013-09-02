@@ -1,0 +1,436 @@
+.headerContent-wholesale {
+	width: 900px;
+	height: 176px;
+	position: relative;
+	margin: 0px 0px 0px 0px; /*TOP RIGHT BOTTOM LEFT*/
+	border-left: 0px solid #33182b;
+	border-right: 0px solid #33182b;
+	border-bottom: 0px dashed #cacaca;
+	background-image:url(../images/retail_logo.jpg);
+	background-position:center;
+	background-repeat:no-repeat;
+}
+
+.headerContent-wholesale .headerwrapperCol1 {
+	width: 430px;
+	height: 176px;
+	float: left;
+	margin: 0px 10px 0px 10px;
+	background-image:url(../img/logo.jpg);
+	background-position:top left;
+	background-repeat:no-repeat;
+}
+
+.headerContent-wholesale .headerwrapperCol2 {
+	width: 430px;
+	height: 176px;
+	float: right;
+	margin: 0px 10px 0px 10px;
+	background-image:url(../img/slogan.png);
+	background-position:bottom right;
+	background-repeat:no-repeat;
+}
+
+.wholesale {
+	width: 900px;
+	height: auto;
+	position: relative;
+	margin: 20px auto 0px;
+	border-left: 0px solid #33182b;
+	border-right: 0px solid #33182b;
+	background-color: #FFF;
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	-o-border-radius: 15px;
+	-khtml-border-radius: 15px;
+	-webkit-box-shadow: rgba(0,0,0,0.5) 0 0px 4px; 
+	-moz-box-shadow: rgba(0,0,0,0.5) 0 0px 4px; *border:1px solid #33182b;
+}
+
+
+
+/* ################################################################# */
+/* ################### WHOLESALE CONTACT ########################### */
+
+
+
+.mainContent .mainContentWrapper_WS_Contact {
+	width: 900px;
+	height: 480px;
+	float: left;
+	margin: 0px 0px 0px 0px;
+	padding-bottom:0px;
+	border-bottom: 1px dashed #cacaca;
+	background-image:url(../images/ham.jpg);
+	background-position:bottom right;
+	background-repeat:no-repeat;
+}
+
+.mainContent .mainContentWrapper_WS_TopLinks {
+	width: 692px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 15px 0px;
+	border-top: 1px dashed #000;
+}
+
+.mainContent .mainContentWrapper_WS_TopLinks1 {
+	width: 250px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 0px 0px;
+	
+}
+
+.mainContent .mainContentWrapper_WS_TopLinks2 {
+	width: 300px;
+	height: auto;
+	float: right;
+	margin: 0px 0px 0px 0px;
+}
+
+.mainContent .WS_Scroller_Holder {
+	width: 692px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 15px 0px;
+}
+
+.mainContent .WS_Main_Holder {
+	width: 692px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 15px 0px;
+}
+
+.mainContent .WS_Main_Holder_Left {
+	width: 160px;
+	height: auto;
+	float: left;
+	margin: -15px 0px 15px 0px;
+}
+
+.mainContent .WS_Main_Holder_Left_Contacts {
+	width: 160px;
+	height: 143px;
+	float: left;
+	margin: -15px 0px 15px 0px;
+	background-image:url(../images/retail_contact_side.png);
+	background-position:top left;
+	background-repeat:no-repeat;
+}
+
+.mainContent .WS_Main_Holder_Right {
+	width: 530px;
+	height: auto;
+	float: right;
+	margin: -15px 0px 15px 0px;
+}
+
+.mainContent .WS_Main_Holder_SplitLine {
+	width: 530px;
+	height: 10px;
+	float: right;
+	margin: 0px 0px 10px 0px;
+	border-bottom:#CACACA dashed 1px;
+}
+
+.mainContent .WS_Main_Holder_SplitLine_Press {
+	width: 460px;
+	height: 10px;
+	float: right;
+	margin: 0px 0px 10px 0px;
+	border-bottom:#CACACA dashed 1px;
+}
+
+.mainContent .WS_Main_Holder_Right1 {
+	width: 260px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 0px 0px;
+}
+
+.mainContent .WS_Main_Holder_Right2 {
+	width: 260px;
+	height: auto;
+	float: right;
+	margin: 0px 0px 0px 0px;
+}
+
+.mainContent .mainContentWrapperCol2_holder_WS {
+	width: 200px;
+	height: auto;
+	float: right;
+	margin: -2px 0px 0px 0px;
+}
+
+.mainContent .mainContentWrapperCol2_squares_holder_WS {
+	width: 200px;
+	height: 134px;
+	float: right;
+	margin: -52px 0px 0px 0px;
+}
+
+.mainContent .mainContentWrapperCol2_square2_WS {
+	width: 145px;
+	height: 134px;
+	float: left;
+	margin: 0px 15px 0px 0px;
+	background-color:#bccab9;
+	-webkit-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; 
+	-moz-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; *border:1px solid #33182b;
+	border-radius: 10px;
+	-webkit-border-radius:10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	outline: 0px solid #ddd;
+	border-top: 1px solid #a8b5a5;
+}
+
+a.mainContentWrapperCol2_square2_WS:link{
+	
+}
+
+a.mainContentWrapperCol2_square2_WS:hover{
+	background-color:#a4b6a0;
+}
+
+.mainContent .mainContentWrapperCol2_square_text_WS {
+	width: 145px;
+	height: auto;
+	float: left;
+	margin: 100px 0px 10px 0px;
+}
+
+
+/* ################### WHOLESALE CONTACT ########################### */
+/* ################################################################# */
+
+/* ################################################################# */
+/* ################### WHOLESALE PRODUCTS ########################## */
+.mainContent .mainContentWrapper_WSP {
+	width: 900px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 0px 0px;
+	padding-bottom:0px;
+	border-bottom: 1px dashed #cacaca;
+	background-image:url(../images/arties.jpg);
+	background-position:bottom right;
+	background-repeat:no-repeat;
+}
+
+.mainContent .WSP_Scroller_Holder {
+	width: 900px;
+	height: 203px;
+	float: left;
+	margin: -10px 0px 20px 0px;
+	background-image:url(../images/mainImageRetail.jpg);
+	background-position:center;
+	background-repeat:no-repeat;
+}
+
+mainContent .WSP_Spacer_Holder {
+	width: 900px;
+	height: 203px;
+	float: left;
+	margin: -10px 0px 20px 0px;
+	background-color:#C66;
+}
+
+
+.mainContent .mainContentWrapperCol2_holder_WSP {
+	width: 200px;
+	height: auto;
+	float: right;
+	margin: -2px 0px 0px 0px;
+}
+
+.mainContent .mainContentWrapperCol2_squares_holder_WSP {
+	width: 200px;
+	height: 134px;
+	float: right;
+	margin: -52px 0px 0px 0px;
+}
+
+.mainContent .mainContentWrapperCol2_square2_WSP {
+	width: 145px;
+	height: 134px;
+	float: left;
+	margin: 0px 15px 0px 0px;
+	background-color:#bccab9;
+	-webkit-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; 
+	-moz-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; *border:1px solid #33182b;
+	border-radius: 10px;
+	-webkit-border-radius:10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	outline: 0px solid #ddd;
+	border-top: 1px solid #a8b5a5;
+}
+
+a.mainContentWrapperCol2_square2_WSP:link{
+	
+}
+
+a.mainContentWrapperCol2_square2_WSP:hover{
+	background-color:#a4b6a0;
+}
+
+.mainContent .mainContentWrapperCol2_square_text_WSP {
+	width: 145px;
+	height: auto;
+	float: left;
+	margin: 100px 0px 10px 0px;
+}
+
+
+/* ################### WHOLESALE PRODUCTS ########################## */
+/* ################################################################# */
+
+/* ################################################################# */
+/* ################### WHOLESALE HOME ########################## */
+.mainContent .mainContentWrapper_WSH {
+	width: 900px;
+	height: 640px;
+	float: left;
+	margin: 0px 0px 0px 0px;
+	padding-bottom:0px;
+	border-bottom: 1px dashed #cacaca;
+	background-image:url(../images/home_bg.jpg);
+	background-position:left bottom;
+	background-repeat:no-repeat;
+}
+
+.mainContent .mainContentWrapper_WSH_TopLinks {
+	width: 692px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 15px 0px;
+	border-top: 1px dashed #000;
+}
+
+.mainContent .mainContentWrapper_WSH_TopLinks1 {
+	width: 250px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 0px 0px;
+	
+}
+
+.mainContent .mainContentWrapper_WSH_TopLinks2 {
+	width: 300px;
+	height: auto;
+	float: right;
+	margin: 0px 0px 0px 0px;
+}
+
+.mainContent .WSH_Scroller_Holder {
+	width: 900px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 20px 0px;
+}
+
+.mainContent .WSH_Main_Holder {
+	width: 692px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 15px 0px;
+}
+
+.mainContent .WSH_Main_Holder_Left {
+	width: 160px;
+	height: auto;
+	float: left;
+	margin: -15px 0px 15px 0px;
+}
+
+.mainContent .WSH_Main_Holder_Right {
+	width: 530px;
+	height: auto;
+	float: right;
+	margin: -15px 0px 15px 0px;
+}
+
+.mainContent .WSH_Main_Holder_Right_Bot_Image {
+	width: 530px;
+	height: 226px;
+	float: right;
+	margin: -15px 0px 15px 0px;
+	background-image:url(../images/eggs.jpg);
+	background-position:right;
+	background-repeat:no-repeat;
+}
+
+.mainContent .WSH_Main_Holder_ImageSpacer {
+	width: 530px;
+	height: 105px;
+	float: right;
+	margin: 0px 0px px 0px;
+	background-color:#CF0;
+}
+
+.mainContent .WSH_Main_Holder_Right1 {
+	width: 260px;
+	height: auto;
+	float: left;
+	margin: 0px 0px 0px 0px;
+}
+
+.mainContent .WSH_Main_Holder_Right2 {
+	width: 260px;
+	height: auto;
+	float: right;
+	margin: 0px 0px 0px 0px;
+}
+
+.mainContent .mainContentWrapperCol2_holder_WSH {
+	width: 200px;
+	height: auto;
+	float: right;
+	margin: -2px 0px 0px 0px;
+}
+
+.mainContent .mainContentWrapperCol2_squares_holder_WSH {
+	width: 200px;
+	height: 134px;
+	float: right;
+	margin: -52px 0px 0px 0px;
+}
+
+.mainContent .mainContentWrapperCol2_square2_WSH {
+	width: 145px;
+	height: 134px;
+	float: left;
+	margin: 0px 15px 0px 0px;
+	background-color:#bccab9;
+	-webkit-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; 
+	-moz-box-shadow: rgba(0,0,0,0.3) 0 0px 4px; *border:1px solid #33182b;
+	border-radius: 10px;
+	-webkit-border-radius:10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	outline: 0px solid #ddd;
+	border-top: 1px solid #a8b5a5;
+}
+
+a.mainContentWrapperCol2_square2_WSH:link{
+	
+}
+
+a.mainContentWrapperCol2_square2_WSH:hover{
+	background-color:#a4b6a0;
+}
+
+.mainContent .mainContentWrapperCol2_square_text_WSH {
+	width: 145px;
+	height: auto;
+	float: left;
+	margin: 100px 0px 10px 0px;
+}
+
+
+/* ################### WHOLESALE HOME ########################## */
+/* ################################################################# */
