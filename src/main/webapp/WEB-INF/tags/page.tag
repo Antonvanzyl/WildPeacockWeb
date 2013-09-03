@@ -2,77 +2,73 @@
 <%@ tag language="java" description="This is the tag to generate the page" pageEncoding="ISO-8859-1"%>
 <%@attribute name="firstContent" required="false" description="content in the white space" %>
 <%@attribute name="secondContent" required="false" description="content in the grey space" %>
+<%@attribute name="pageHeader" required="false" description="Main page header"%>
+<%@attribute name="subtitle" required="false"%>
+<%@attribute name="pageCSS" required="false" %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Anton Van Zyl dot Com</title>
-<link rel="stylesheet" href="resources/css/reset.css" type="text/css" media="all">
-<link rel="stylesheet" href="resources/css/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="resources/css/style.css" type="text/css" media="all">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="imagetoolbar" content="no" />
+	
+		<title>.|.. Wild Peacock Products: RETAIL HOME ..|.</title>
+	
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/retailStyle.css" type="text/css" media="screen" />
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wholesaleStyle.css" type="text/css" media="screen" />
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wildPeacock.css" type="text/css" media="screen" />
+	    <link href="${pageContext.request.contextPath}/resources/css/style_1/style.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/smoothDivScroll.css" />
+	
+		<link rel="shortcut icon" href="favicon.ico" >
+		<link rel="icon" href="favicon.ico" type="image/gif" >
+	
+		<!-- IMAGE SCROLLER DETAILS -->
+	
+	</head>
+	
+	<body class="${pageCSS }">
+		<div id="page-wrap">
+			<div class="pageContent">
+			
+				<!-- Header with logo's -->
+				<div class="headerContent-${pageCSS }">
+		        	<div class="headerwrapperCol1">
+		            	<!-- logo here -->
+		            </div>
+		            
+		            <div class="headerwrapperCol2">
+		        		<!-- text/slogan here -->
+		            </div>
+				</div>
+			
+				<!-- Main Content -->
+				<div class="mainContent">
+					
+			           		<jsp:doBody />
 
-
-</head>
-<body id="page2">
-<div class="body1">
-  <div class="body2">
-    <div class="body3">
-      <div class="main">
-        <!-- header -->
-        <header>
-          <div class="wrapper">
-            <h1><a href="home" id="logo"></a></h1>
-            <c:choose>
-	            <c:when test="${not empty UserModel }">
-					<div class="header-text"><br/>
-						Hi ${UserModel.username }<br/>
-						<a href="logout" >logout</a>
-					</div>
-	            </c:when>
-	            <c:otherwise>
-		            <form id="login" action="login" method="post">
-		              <div>
-		                <input type="submit" class="submit" value="">
-		              	<input id="password" name="password" tabindex="2" class="input" type="text" value="Password" onBlur="if(this.value=='') this.value='Password'" onFocus="if(this.value =='Password' ) this.value=''">
-		                <input id="username" name="username" tabindex="1" class="input" type="text" value="Username" onBlur="if(this.value=='') this.value='Username'" onFocus="if(this.value =='Username' ) this.value=''">
-		             </div>
-		            </form>
-	            </c:otherwise>
-            </c:choose>
-            <nav>
-              <ul id="menu">
-                <li id="active"><a href="index.html">Home</a></li>
-                
-                <c:if test="${not empty UserModel }">
-               	 	${UserModel.links }
-                </c:if>
-                
-                <li class="end"><a href="contact.html">Contact</a></li>
-              </ul>
-            </nav>
-          </div>
-        </header>
-        <!-- / header-->
-        <!-- content -->
-        ${firstContent }
-      </div>
-    </div>
-  </div>
-</div>
-${secondContent }
-<!-- / content -->
-<div class="main">
-  <!-- footer -->
-  <footer>
-    <div class="wrapper"> <span class="left left-align"> Copyright &copy; <a href="#">Anton Van Zyl</a> All Rights Reserved<br>
-      Design by <a target="_blank" href="http://www.antonvanzyl.com/">Anton Van Zyl</a><br>
-      </span>
-      <ul id="icons">
-        <li><a href="https://www.facebook.com/aavanzyl" class="normaltip" title="Facebook"><img src="resources/images/icon1.png" alt=""></a></li>
-      </ul>
-    </div>
-    <!-- {%FOOTER_LINK} -->
-  </footer>
-  <!-- / footer -->
-</div>
+		    	</div>
+		        
+		        <!-- Content Footer -->
+			    <div class="footerwithround">
+			       	<div align="center"><p class="footerTextForRoundCorners">Wild Peacock Food Emporium  |  30 Piet Retief Street  |  Stellenbosch  |  7600  |  tel: 082 697 0870 | <a href="mailto:sarah@wildpeacock.co.za?subject=Contact from Website" class="footerLink">sarah@wildpeacock.co.za</a>   </p></div>
+			    </div>
+		  	</div>
+		
+			<!-- Page footer -->
+			<div id="footer-wrap">
+				<div class="footerContent">
+					<div class="col1">
+	            		<div class="col3">
+	           		  		<div align="center">
+								<p class="footer_copyright">
+	                    			&copy; Copyright 2011 Wild Peacock Products.  All rights reserved. Designed by <a class="footer_link" href="http://www.tenfourmedia.co.za" target="_blank">tenfour media</a>. Development by <a class="footer_link" href="http://www.gacreations.co.za" target="_blank">greenapple creations</a>.
+	                    		</p>
+					  		</div>
+	              		</div>
+	         		</div>
+				</div>
+		    </div>
+		</div>
+	</body>
 </html>
