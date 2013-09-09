@@ -6,10 +6,10 @@
 			<div class="mainContentWrapper_WSP_TopLinks">
 				<div class="mainContentWrapper_WSP_TopLinks2">
 					<p align="right" class="mainText_Site">
-						| <a href="retail_home.htm" class="mainTextHead">Retail</a> | <a
-							href="retail_products.htm" class="mainTextHead">Deli Products</a>
+						| <a href="${pageContext.request.contextPath}/retail_home" class="mainTextHead">Retail</a> | <a
+							href="${pageContext.request.contextPath}/retail_products" class="mainTextHead">Deli Products</a>
 						| <font color="#7b9a75">Press</font> | <a
-							href="retail_contact.htm" class="mainTextHead">Contact</a>
+							href="${pageContext.request.contextPath}/retail_contact" class="mainTextHead">Contact</a>
 					</p>
 				</div>
 			</div>

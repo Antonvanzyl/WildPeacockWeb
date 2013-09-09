@@ -1,3 +1,4 @@
+
 .headerContent-wholesale {
 	width: 900px;
 	height: 176px;
@@ -6,9 +7,6 @@
 	border-left: 0px solid #33182b;
 	border-right: 0px solid #33182b;
 	border-bottom: 0px dashed #cacaca;
-	background-image:url(../images/retail_logo.jpg);
-	background-position:center;
-	background-repeat:no-repeat;
 }
 
 .headerContent-wholesale .headerwrapperCol1 {
@@ -16,7 +14,7 @@
 	height: 176px;
 	float: left;
 	margin: 0px 10px 0px 10px;
-	background-image:url(../img/logo.jpg);
+	background-image:url(../images/logo.jpg);
 	background-position:top left;
 	background-repeat:no-repeat;
 }
@@ -26,26 +24,18 @@
 	height: 176px;
 	float: right;
 	margin: 0px 10px 0px 10px;
-	background-image:url(../img/slogan.png);
+	background-image:url(../images/slogan.png);
 	background-position:bottom right;
 	background-repeat:no-repeat;
 }
 
 .wholesale {
-	width: 900px;
-	height: auto;
-	position: relative;
-	margin: 20px auto 0px;
-	border-left: 0px solid #33182b;
-	border-right: 0px solid #33182b;
-	background-color: #FFF;
-	border-radius: 15px;
-	-webkit-border-radius: 15px;
-	-moz-border-radius: 15px;
-	-o-border-radius: 15px;
-	-khtml-border-radius: 15px;
-	-webkit-box-shadow: rgba(0,0,0,0.5) 0 0px 4px; 
-	-moz-box-shadow: rgba(0,0,0,0.5) 0 0px 4px; *border:1px solid #33182b;
+	font: 10px Arial;
+	background-color: #fff;
+	background-image:url(../images/bg.png);
+	background-position:top center;
+	background-repeat:repeat-x;
+	background-attachment:fixed;
 }
 
 
@@ -57,12 +47,12 @@
 
 .mainContent .mainContentWrapper_WS_Contact {
 	width: 900px;
-	height: 480px;
+	height: 550px;
 	float: left;
 	margin: 0px 0px 0px 0px;
 	padding-bottom:0px;
 	border-bottom: 1px dashed #cacaca;
-	background-image:url(../images/ham.jpg);
+	background-image:url(../images/shrooms.jpg);
 	background-position:bottom right;
 	background-repeat:no-repeat;
 }
@@ -204,6 +194,17 @@ a.mainContentWrapperCol2_square2_WS:hover{
 }
 
 
+.headerContent-wholesale .headerwrapperCol2-contact {
+	width: 430px;
+	height: 176px;
+	float: right;
+	margin: 0px 10px 0px 10px;
+	background-image:url(../images/wholesale_contact_slogan.jpg);
+	background-position:bottom right;
+	background-repeat:no-repeat;
+}
+
+
 /* ################### WHOLESALE CONTACT ########################### */
 /* ################################################################# */
 
@@ -283,6 +284,16 @@ a.mainContentWrapperCol2_square2_WSP:hover{
 	height: auto;
 	float: left;
 	margin: 100px 0px 10px 0px;
+}
+
+.headerContent-wholesale .headerwrapperCol2-products {
+	width: 430px;
+	height: 176px;
+	float: right;
+	margin: 0px 10px 0px 10px;
+	background-image:url(../images/slogan_products.png);
+	background-position:bottom right;
+	background-repeat:no-repeat;
 }
 
 
@@ -431,6 +442,15 @@ a.mainContentWrapperCol2_square2_WSH:hover{
 	margin: 100px 0px 10px 0px;
 }
 
+.headerContent-wholesale .headerwrapperCol2-home {
+	width: 430px;
+	height: 176px;
+	float: right;
+	margin: 0px 10px 0px 10px;
+	background-image:url(../images/slogan_home.png);
+	background-position:bottom right;
+	background-repeat:no-repeat;
+}
 
 /* ################### WHOLESALE HOME ########################## */
 /* ################################################################# */

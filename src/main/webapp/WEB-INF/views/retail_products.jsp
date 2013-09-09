@@ -7,9 +7,9 @@
 			<div class="mainContentWrapper_WSP_TopLinks">
 				<div class="mainContentWrapper_WSP_TopLinks2">
 					<p align="right" class="mainText_Site">
-						| <a href="retail_home.htm" class="mainTextHead">Retail</a> | <font
-							color="#7b9a75">Deli Products</font> | <a href="retail_press.htm"
-							class="mainTextHead">Press</a> | <a href="retail_contact.htm"
+						| <a href="${pageContext.request.contextPath}/retail_home.htm" class="mainTextHead">Retail</a> | <font
+							color="#7b9a75">Deli Products</font> | <a href="${pageContext.request.contextPath}/retail_press"
+							class="mainTextHead">Press</a> | <a href="${pageContext.request.contextPath}/retail_contact"
 							class="mainTextHead">Contact</a>
 					</p>
 				</div>
