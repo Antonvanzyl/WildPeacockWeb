@@ -5,6 +5,7 @@
 <%@attribute name="pageHeader" required="false" description="Main page header"%>
 <%@attribute name="subtitle" required="false"%>
 <%@attribute name="pageCSS" required="false" %>
+<%@attribute name="slogan" required="false" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -37,15 +38,17 @@
 		            	<!-- logo here -->
 		            </div>
 		            
-		            <div class="headerwrapperCol2">
-		        		<!-- text/slogan here -->
-		            </div>
+		            <c:if test="${not empty slogan }">
+			 	      	<div class="headerwrapperCol2-${slogan}">
+			        		<!-- text/slogan here -->
+			            </div>
+		        	</c:if>
 				</div>
 			
 				<!-- Main Content -->
 				<div class="mainContent">
 					
-			           		<jsp:doBody />
+			        <jsp:doBody />
 
 		    	</div>
 		        
