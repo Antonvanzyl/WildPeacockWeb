@@ -36,7 +36,7 @@ public class publicController extends BaseController {
 	@RequestMapping(value = "/contact", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public ModelAndView contact() {
-		ModelAndView modelAndView = new ModelAndView("main");
+		ModelAndView modelAndView = new ModelAndView("contact");
 
 		return modelAndView;
 	}
