@@ -32,35 +32,6 @@ public class publicController extends BaseController {
 
 		return modelAndView;
 	}
-
-	@RequestMapping(value = "/contact", method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public ModelAndView contact() {
-		ModelAndView modelAndView = new ModelAndView("contact");
-
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/retail_contact", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView RetailContact() {
-		ModelAndView modelAndView = new ModelAndView("retail_contact");
-
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/retail_products", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView RetailProducts() {
-		ModelAndView modelAndView = new ModelAndView("retail_products");
-
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/retail_press", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView RetailPress() {
-		ModelAndView modelAndView = new ModelAndView("retail_press");
-
-		return modelAndView;
-	}
 	
 	@RequestMapping(value = "/retail_home", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView RetailHome() {
@@ -69,25 +40,6 @@ public class publicController extends BaseController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/wholesale_home", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView WholesaleHome() {
-		ModelAndView modelAndView = new ModelAndView("wholesale_home");
-
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "/wholesale_products", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView WholesaleProducts() {
-		ModelAndView modelAndView = new ModelAndView("wholesale_products");
-
-		return modelAndView;
-	}
 	
-	@RequestMapping(value = "/wholesale_contact", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView WholesaleContact() {
-		ModelAndView modelAndView = new ModelAndView("wholesale_contact");
-
-		return modelAndView;
-	}
 	
 }

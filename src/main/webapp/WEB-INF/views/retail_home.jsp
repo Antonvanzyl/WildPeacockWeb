@@ -3,16 +3,7 @@
 <wp:page pageCSS="retail" pageHeader="Page Header">
 	<div class="mainContentWrapper_WSP_Press">
 		<div class="WSP_Main_Holder">
-			<div class="mainContentWrapper_WSP_TopLinks">
-				<div class="mainContentWrapper_WSP_TopLinks2">
-					<p align="right" class="mainText_Site">
-						| <font color="#7b9a75">Retail</font> | <a
-							href="${pageContext.request.contextPath}/retail_products" class="mainTextHead">Deli
-							Products</a> | <a href="${pageContext.request.contextPath}/retail_press" class="mainTextHead">Press</a>
-						| <a href="${pageContext.request.contextPath}/retail_contact" class="mainTextHead">Contact</a>
-					</p>
-				</div>
-			</div>
+			<%@include file="/WEB-INF/jspf/retailLinks.jspf"%>
 
 			<div class="WSP_Main_Holder_Left">&nbsp;</div>
 

@@ -9,11 +9,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.PublishingManager;
@@ -25,8 +23,8 @@ import com.types.PublishingSectionType;
  * 
  */
 @Controller
-@RequestMapping("/news")
-public class NewsController extends BaseController {
+@RequestMapping("/blog")
+public class RetailBlogController extends BaseController {
 
 	@Autowired
 	private PublishingManager publishingManager;
@@ -35,8 +33,8 @@ public class NewsController extends BaseController {
 
 	@RequestMapping( method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView news() {
-		ModelAndView modelAndView = new ModelAndView("News/summary");
-		List<PublishRecord> news = publishingManager.getPublishingRecords(PublishingSectionType.NEWS, 0, numberOfRecordsPerPage);
+		ModelAndView modelAndView = new ModelAndView("Blog/summary");
+		List<PublishRecord> news = publishingManager.getPublishingRecords(PublishingSectionType.BLOG, 0, numberOfRecordsPerPage);
 		modelAndView.addObject("news", news);
 		return modelAndView;
 	}
@@ -44,7 +42,7 @@ public class NewsController extends BaseController {
 	@RequestMapping(value = "/page", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView page(@RequestParam("page") int page) {
 		int currentPage = page * numberOfRecordsPerPage;
-		ModelAndView modelAndView = new ModelAndView("News/summary");
+		ModelAndView modelAndView = new ModelAndView("Blog/summary");
 		List<PublishRecord> news = publishingManager.getPublishingRecords(PublishingSectionType.NEWS, currentPage,
 				(currentPage + numberOfRecordsPerPage));
 		
@@ -55,9 +53,11 @@ public class NewsController extends BaseController {
 	
 	@RequestMapping(value = "/detail", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView detail(@RequestParam("id") int id) {
-		ModelAndView modelAndView = new ModelAndView("News/details");
+		ModelAndView modelAndView = new ModelAndView("Blog/details");
 		modelAndView.addObject("details",publishingManager.getPublishRecord(id));
 		return modelAndView;
 	}
+
+	
 
 }

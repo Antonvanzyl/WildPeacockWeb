@@ -10,8 +10,8 @@
 			<div class="mainContentWrapper_WSH_TopLinks2">
 				<p align="right" class="mainText_Site">
 					| <font color="#7b9a75">Wholesale</font> | <a
-						href="${pageContext.request.contextPath}/wholesale_products" class="mainTextHead">Products</a> |
-					<a href="${pageContext.request.contextPath}/wholesale_contact" class="mainTextHead">Contact</a>
+						href="${pageContext.request.contextPath}/wholesale/products" class="mainTextHead">Products</a> |
+					<a href="${pageContext.request.contextPath}/wholesale/contact" class="mainTextHead">Contact</a>
 				</p>
 			</div>
 		</div>

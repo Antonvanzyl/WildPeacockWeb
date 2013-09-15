@@ -8,14 +8,14 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd
 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
 
-	
+
 
 	<context:annotation-config />
 
-	<context:component-scan annotation-config="true" base-package="capitec.dao.bancs73, capitec.dao.db, 
-			capitec.manager,capitec.startup" />
+	<context:component-scan annotation-config="true" base-package=" capitec.dao.db, 
+			com.manager" />
 
-	
+
 	<context:mbean-server />
 
 	<bean id="jmxAttributeSource" class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource" />
@@ -24,6 +24,6 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 		<property name="attributeSource" ref="jmxAttributeSource" />
 	</bean>
 
-	
+
 
 </beans>

@@ -1,0 +1,11 @@
+<div class="mainContentWrapper_WSP_TopLinks">
+	<div class="mainContentWrapper_WSP_TopLinks2">
+		<p align="right" class="mainText_Site">
+			| <a href="${pageContext.request.contextPath}/retail_products" class="mainTextHead">Home</a> 
+			| <a href="${pageContext.request.contextPath}/retail_products" class="mainTextHead">Deli Products</a> 
+			| <a href="${pageContext.request.contextPath}/blog" class="mainTextHead">Blog</a> 
+			| <a href="${pageContext.request.contextPath}/news" class="mainTextHead">News</a> 
+			| <a href="${pageContext.request.contextPath}/contact" class="mainTextHead">Contact</a>
+		</p>
+	</div>
+</div>

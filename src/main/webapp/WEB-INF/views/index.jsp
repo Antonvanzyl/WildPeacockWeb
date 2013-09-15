@@ -20,7 +20,7 @@
             	<div class="mainContentWrapperCol2_squares_holder">
                 	<!-- Wholesale block -->
                     <div class="mainContentWrapperCol2_square1">
-                    	<a href="${pageContext.request.contextPath}/wholesale_home" class="mainContentWrapperCol2_square2">
+                    	<a href="${pageContext.request.contextPath}/wholesale/home" class="mainContentWrapperCol2_square2">
                         <div class="mainContentWrapperCol2_square_text">
   		                    <p align="right" class="TextForIndexSquares">WholeSale</p>
                         </div>

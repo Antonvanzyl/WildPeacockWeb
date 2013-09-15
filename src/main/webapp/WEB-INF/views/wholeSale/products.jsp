@@ -9,9 +9,9 @@
 			</div>
 			<div class="mainContentWrapper_WSP_TopLinks2">
 				<p align="right" class="mainText_Site">
-					| <a href="${pageContext.request.contextPath}/wholesale_home"
+					| <a href="${pageContext.request.contextPath}/wholesale/home"
 						class="mainTextHead">Wholesale</a> | <font color="#7b9a75">Products</font>
-					| <a href="${pageContext.request.contextPath}/wholesale_contact"
+					| <a href="${pageContext.request.contextPath}/wholesale/contact"
 						class="mainTextHead">Contact</a>
 				</p>
 			</div>

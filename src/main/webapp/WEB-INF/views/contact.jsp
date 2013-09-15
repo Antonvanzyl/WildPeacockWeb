@@ -3,16 +3,8 @@
 <wp:page pageCSS="retail" pageHeader="Page Header">
 	<div class="mainContentWrapper_WSP_Press">
 		<div class="WSP_Main_Holder">
-			<div class="mainContentWrapper_WSP_TopLinks">
-				<div class="mainContentWrapper_WSP_TopLinks2">
-					<p align="right" class="mainText_Site">
-						| <a href="retail_home.htm" class="mainTextHead">Retail</a> | <a
-							href="retail_products.htm" class="mainTextHead">Deli Products</a>
-						| <font color="#7b9a75">Press</font> | <a
-							href="retail_contact.htm" class="mainTextHead">Contact</a>
-					</p>
-				</div>
-			</div>
+			
+			<%@include file="/WEB-INF/jspf/retailLinks.jspf"%>
 
 			<div class="WSP_Main_Holder_Left">&nbsp;</div>
 
@@ -39,18 +31,19 @@
 						E. <a href="mailto:sarah@wildpeacock.co.za&gt;subject=Contact From Website" class="mainTextLink">sarah@wildpeacock.co.za</a></p>
                     </div>
                     
-                    
-                     
-                    
                 </div>
-						
-                    <form>
-                    <p class="mainText_Contacts"><b>Get in contact with us:</b><br/><br/>
-                    <label>Name</label><input type="text"><br/>
-                    <label>Number</label><input type="text">
-                    <label>What do you want to share?</label><textarea rows="4" cols="50"></textarea>
-                    </form>
-				
+                <form:form commandName="contact" action="${pageContext.request.contextPath}/message">
+	                    
+                    	<c:if test="${not empty sent }">
+	                    	<p class="mainText_Contacts" style="color: red"><b>Message Sent</b></p>
+	                    </c:if>
+	                    <p class="mainText_Contacts"><b>Get in contact with us:</b><br/><br/>
+	                    <label>Name</label><form:input path="name"/><form:errors path="name" cssStyle="color:red"/><br/>
+	                    <label>Number</label><form:input path="number"/><form:errors path="number"cssStyle="color:red"/>
+	                    <label>What do you want to share?</label><form:textarea path="question" rows="4" cols="50"/><form:errors path="question"cssStyle="color:red"/>
+	                    <br/>
+	                    <input type="submit" value="Send">  
+                </form:form>
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">
 				<!-- Button on the right -->
