@@ -5,7 +5,6 @@
  */
 package com.manager;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.manager.mock.ProductMock;
 import com.servlet.model.Product;
 import com.servlet.model.ProductCategory;
 import com.servlet.model.ProductTag;
@@ -40,7 +40,7 @@ public class ProductManagerImpl implements ProductManager, InitializingBean {
 	}
 
 	@Override
-	public List<Product> getCategoryProducts(int categoryId,int startIndex, int count) {
+	public List<Product> getCategoryProducts(int categoryId, int startIndex, int count) {
 
 		List<Product> temp = new ArrayList<Product>();
 
@@ -67,7 +67,7 @@ public class ProductManagerImpl implements ProductManager, InitializingBean {
 	}
 
 	@Override
-	public List<Product> getTagsProducts(int tagId,int startIndex, int count) {
+	public List<Product> getTagsProducts(int tagId, int startIndex, int count) {
 		List<Product> temp = new ArrayList<Product>();
 
 		for (Product product : getProducts()) {
@@ -88,20 +88,11 @@ public class ProductManagerImpl implements ProductManager, InitializingBean {
 
 	private void refreshProducts() {
 		List<Product> temp = new ArrayList<Product>();
-
-		Product product = new Product();
-		product.setTitle("Samon");
-		product.setSubTitle("Fish");
-		product.setPrice(BigDecimal.TEN);
-		product.setProductId(1);
-
-		temp.add(product);
+		temp.addAll(ProductMock.generateProducts());
 
 		synchronized (products) {
 			products = temp;
 		}
-
-		// TODO must complete the db loading
 
 	}
 
