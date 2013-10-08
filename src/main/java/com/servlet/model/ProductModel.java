@@ -13,16 +13,16 @@ import java.util.List;
  * @author Anton Van Zyl
  * 
  */
-public class Product {
+public class ProductModel {
 
 	private int productId;
 	private String title;
 	private String subTitle;
 	private String description;
 	private BigDecimal price;
+	private ProductCategoryModel category = new ProductCategoryModel();
 
-	private List<ProductCategory> categories = new ArrayList<ProductCategory>();
-	private List<ProductTag> productTags = new ArrayList<ProductTag>();
+	private List<ProductTagModel> productTags = new ArrayList<ProductTagModel>();
 
 	public int getProductId() {
 		return productId;
@@ -64,19 +64,19 @@ public class Product {
 		this.price = price;
 	}
 
-	public List<ProductCategory> getCategories() {
-		return categories;
+	public ProductCategoryModel getCategory() {
+		return category;
 	}
 
-	public void setCategories(List<ProductCategory> categories) {
-		this.categories = categories;
+	public void setCategory(ProductCategoryModel category) {
+		this.category = category;
 	}
 
-	public List<ProductTag> getProductTags() {
+	public List<ProductTagModel> getProductTags() {
 		return productTags;
 	}
 
-	public void setProductTags(List<ProductTag> productTags) {
+	public void setProductTags(List<ProductTagModel> productTags) {
 		this.productTags = productTags;
 	}
 

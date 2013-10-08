@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.PublishingManager;
-import com.servlet.model.PublishRecord;
+import com.servlet.model.PublishRecordModel;
 import com.types.PublishingSectionType;
 
 /**
@@ -34,7 +34,7 @@ public class RetailBlogController extends BaseController {
 	@RequestMapping( method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView news() {
 		ModelAndView modelAndView = new ModelAndView("Blog/summary");
-		List<PublishRecord> news = publishingManager.getPublishingRecords(PublishingSectionType.BLOG, 0, numberOfRecordsPerPage);
+		List<PublishRecordModel> news = publishingManager.getPublishingRecords(PublishingSectionType.BLOG, 0, numberOfRecordsPerPage);
 		modelAndView.addObject("news", news);
 		return modelAndView;
 	}
@@ -43,7 +43,7 @@ public class RetailBlogController extends BaseController {
 	public ModelAndView page(@RequestParam("page") int page) {
 		int currentPage = page * numberOfRecordsPerPage;
 		ModelAndView modelAndView = new ModelAndView("Blog/summary");
-		List<PublishRecord> news = publishingManager.getPublishingRecords(PublishingSectionType.NEWS, currentPage,
+		List<PublishRecordModel> news = publishingManager.getPublishingRecords(PublishingSectionType.NEWS, currentPage,
 				(currentPage + numberOfRecordsPerPage));
 		
 		

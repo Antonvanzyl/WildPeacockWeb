@@ -15,12 +15,13 @@ import org.slf4j.LoggerFactory;
 public class BaseController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
-	
+
 	private static int time = (int) System.currentTimeMillis();
+
+	private static final String SESSION_USER = "SESSION_USER";
 
 	protected static int getUnique() {
 		return ++time;
 	}
-
 
 }

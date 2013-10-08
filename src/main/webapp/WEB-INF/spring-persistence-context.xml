@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- Use C3P0 for connection pooling. -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="initialPoolSize" value="5" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="${jdbc.connections}" />
+		<property name="maxStatementsPerConnection" value="50" />
+		<property name="maxIdleTime" value="7200" />
+	</bean>
+
+	<!-- use envers for auditing changes to tables -->
+	<bean name="auditEventListener" class="org.hibernate.envers.event.AuditEventListener" />
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.entity.db" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl}</prop> -->
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+			</props>
+		</property>
+		<property name="eventListeners">
+			<map>
+				<entry key="post-insert" value-ref="auditEventListener" />
+				<entry key="post-update" value-ref="auditEventListener" />
+				<entry key="post-delete" value-ref="auditEventListener" />
+				<!-- We must enable these again when we upgrade to the latest envers -->
+				<!-- <entry key="pre-collection-update" value-ref="auditEventListener" /> -->
+				<!-- <entry key="pre-collection-remove" value-ref="auditEventListener" /> -->
+				<!-- <entry key="post-collection-recreate" value-ref="auditEventListener" /> -->
+			</map>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- enable the configuration of transactional behavior based on annotations -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>

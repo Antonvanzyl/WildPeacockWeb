@@ -1,14 +1,17 @@
 package com.manager;
 
+import java.util.Date;
 import java.util.List;
 
-import com.servlet.model.PublishRecord;
+import com.servlet.model.PublishRecordModel;
 import com.types.PublishingSectionType;
 
 public interface PublishingManager {
 
-	List<PublishRecord> getPublishingRecords(PublishingSectionType publishingSectionType, int startIndex, int count);
+	List<PublishRecordModel> getPublishingRecords(PublishingSectionType publishingSectionType, int startIndex, int count);
 
-	PublishRecord getPublishRecord(int id);
+	PublishRecordModel getPublishRecord(int id);
+
+	void addPublishing(String Title, String Description, String subTitle, Date eventDate, PublishingSectionType publishingSectionType);
 
 }

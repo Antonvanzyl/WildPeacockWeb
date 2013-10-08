@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.servlet.model.Contact;
+import com.servlet.model.ContactModel;
 
 /**
  * @author Anton Van Zyl
@@ -23,8 +23,8 @@ import com.servlet.model.Contact;
 public class InformationController extends BaseController {
 
 	@ModelAttribute("contact")
-	public Contact getContact() {
-		return new Contact();
+	public ContactModel getContact() {
+		return new ContactModel();
 	}
 
 	@RequestMapping(value = "/contact", method = { RequestMethod.GET, RequestMethod.POST })
@@ -35,7 +35,7 @@ public class InformationController extends BaseController {
 	}
 
 	@RequestMapping(value = "/message", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView sendMessage(@ModelAttribute("contact") Contact contact, BindingResult bindingResult) {
+	public ModelAndView sendMessage(@ModelAttribute("contact") ContactModel contact, BindingResult bindingResult) {
 
 		if (StringUtils.isEmpty(contact.getName())) {
 			bindingResult.rejectValue("name", "*Required", "*Required");

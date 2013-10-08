@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Anton Van Zyl
  * 
  */
-public class PublishRecord {
+public class PublishRecordModel {
 
 	private int id;
 	private String title;

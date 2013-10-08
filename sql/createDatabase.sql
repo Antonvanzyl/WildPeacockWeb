@@ -72,7 +72,7 @@ CREATE TABLE [dbo].[Publishing](
 	[created] [datetime] NOT NULL,
 	[title] [varchar](128) NOT NULL,
 	[subtitle] [varchar](64) NOT NULL,
-	[description] [varbinary](2048) NOT NULL,
+	[description] [varchar](2048) NOT NULL,
 	[eventDate] [datetime] NOT NULL,
 	[section] [varchar](50) NOT NULL,
 	[read_count] [int] NOT NULL,

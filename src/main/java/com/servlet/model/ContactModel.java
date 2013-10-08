@@ -9,7 +9,7 @@ package com.servlet.model;
  * @author Anton Van Zyl
  * 
  */
-public class Contact {
+public class ContactModel {
 
 	private String name;
 	private String number;

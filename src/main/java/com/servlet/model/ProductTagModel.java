@@ -9,7 +9,7 @@ package com.servlet.model;
  * @author Anton Van Zyl
  * 
  */
-public class ProductTag {
+public class ProductTagModel {
 
 	private int tagId;
 	private String tagTitle;

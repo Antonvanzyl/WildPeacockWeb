@@ -9,7 +9,7 @@ package com.servlet.model;
  * @author Anton Van Zyl
  * 
  */
-public class ProductCategory {
+public class ProductCategoryModel {
 
 	private int categoryId;
 	private String categoryName;

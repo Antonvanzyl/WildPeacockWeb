@@ -6,6 +6,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
+            WEB-INF/spring-persistence-context.xml
             WEB-INF/spring-application-context.xml
 		</param-value>
 	</context-param>
@@ -66,6 +67,23 @@
 	<!-- Map all url's through the Log4JMDCFilter -->
 	<filter-mapping>
 		<filter-name>Log4JMDCFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Servlet 2.3 Filter that binds a Hibernate Session to the thread for the entire processing of the request. Intended for the "Open Session in View" pattern, i.e. to allow for lazy 
+		loading in web views despite the original transactions already being completed. -->
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>sessionFactoryBeanName</param-name>
+			<param-value>sessionFactory</param-value>
+		</init-param>
+	</filter>
+	
+	<!-- Only map xxxxx as all controllers are called via this -->
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 

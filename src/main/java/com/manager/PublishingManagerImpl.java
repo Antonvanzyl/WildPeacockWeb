@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.servlet.model.PublishRecord;
+import com.dao.db.PublishingDao;
+import com.entity.db.Publishing;
+import com.servlet.model.PublishRecordModel;
 import com.types.PublishingSectionType;
 
 /**
@@ -23,31 +26,60 @@ import com.types.PublishingSectionType;
 @Transactional
 public class PublishingManagerImpl implements PublishingManager {
 
+	@Autowired
+	private PublishingDao publishingDao;
+
 	@Override
-	public List<PublishRecord> getPublishingRecords(PublishingSectionType publishingSectionType, int startIndex, int count) {
+	public List<PublishRecordModel> getPublishingRecords(PublishingSectionType publishingSectionType, int startIndex, int count) {
 
-		List<PublishRecord> returnList = new ArrayList<PublishRecord>();
+		List<PublishRecordModel> returnList = new ArrayList<PublishRecordModel>();
 
-		for (int x = 0; x < count; x++) {
-			returnList.add(mock());
+		List<Publishing> records = publishingDao.getRecords(publishingSectionType, startIndex, count);
+		for (Publishing publishing : records) {
+			returnList.add(convert(publishing));
 		}
 
 		return returnList;
 	}
 
-	@Override
-	public PublishRecord getPublishRecord(int id) {
-		return mock();
+	private PublishRecordModel convert(Publishing publishing) {
+
+		if (publishing == null) {
+			return null;
+		}
+
+		PublishRecordModel model = new PublishRecordModel();
+
+		model.setDescription(publishing.getDescription());
+		model.setEventDate(publishing.getEventDate());
+		model.setId(publishing.getId());
+		model.setSubtitle(publishing.getSubtitle());
+		model.setTitle(publishing.getTitle());
+
+		return model;
 	}
 
-	private PublishRecord mock() {
-		PublishRecord publishRecord = new PublishRecord();
-		publishRecord
-				.setDescription("This saadadas daassd sdsf sf sddsdf sf sddsd f sf sf dssdsdfdfsddsf dsdfkjsdf kjsddf jsdhf sdhfkh sdfkjhsddjkf hdskfkhdsfhh gajhj iahdsaijhd ajklhiadklahsihd hajdijaijd oahd iuasoidj asiuhdoia idhasiod juioash diu ajsiodh iyasdio asisudhoi");
-		publishRecord.setEventDate(new Date());
-		publishRecord.setId(1);
-		publishRecord.setSubtitle("This is the sub Title");
-		publishRecord.setTitle("this is the title");
-		return publishRecord;
+	@Override
+	public PublishRecordModel getPublishRecord(int id) {
+
+		Publishing publishing = publishingDao.findById(id);
+		publishing.setReadCount(publishing.getReadCount() + 1);
+		publishingDao.merge(publishing);
+		return convert(publishing);
 	}
+
+	@Override
+	public void addPublishing(String Title, String Description, String subTitle, Date eventDate, PublishingSectionType publishingSectionType) {
+		Publishing publishing = new Publishing();
+		publishing.setTitle(Title);
+		publishing.setSubtitle(subTitle);
+		publishing.setSection(publishingSectionType);
+		publishing.setDescription(Description);
+		publishing.setReadCount(0);
+		publishing.setCreated(new Date());
+		publishing.setEventDate(eventDate);
+
+		publishingDao.merge(publishing);
+	}
+
 }
