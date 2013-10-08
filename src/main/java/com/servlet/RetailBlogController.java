@@ -24,7 +24,7 @@ import com.types.PublishingSectionType;
  */
 @Controller
 @RequestMapping("/blog")
-public class RetailBlogController extends BaseController {
+public class RetailBlogController  {
 
 	@Autowired
 	private PublishingManager publishingManager;

@@ -26,16 +26,16 @@ public class AuthorityManagerImpl implements AuthorityManager {
 	private AuthorityDao authorityDao;
 
 	@Override
-	public void authenticateUser(String username, String password) throws AccessDeniedException {
+	public boolean authenticateUser(String username, String password) throws AccessDeniedException {
 
 		Authority authority = authorityDao.getRecordByUsername(username);
 		if (authority == null) {
-			throw new AccessDeniedException("Incorrect User Name");
+			return false;
+		} else if (StringUtils.equals(password, authority.getPassword())) {
+			return false;
 		}
 
-		if (StringUtils.equals(password, authority.getPassword())) {
-			throw new AccessDeniedException("Incorrect password");
-		}
+		return true;
 	}
 
 }

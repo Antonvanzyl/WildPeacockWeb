@@ -20,7 +20,7 @@ import com.servlet.model.ContactModel;
  * 
  */
 @Controller
-public class InformationController extends BaseController {
+public class InformationController {
 
 	@ModelAttribute("contact")
 	public ContactModel getContact() {

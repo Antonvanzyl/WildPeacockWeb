@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/wholesale")
-public class WholeSaleController extends BaseController {
+public class WholeSaleController  {
 
 	@RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView WholesaleHome() {

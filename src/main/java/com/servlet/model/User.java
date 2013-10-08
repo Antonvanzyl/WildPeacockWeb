@@ -12,6 +12,7 @@ package com.servlet.model;
 public class User {
 
 	private String username;
+	private String password;
 	private boolean loggedIn;
 
 	public User() {
@@ -30,8 +31,26 @@ public class User {
 		this.username = username;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public boolean isLoggedIn() {
 		return loggedIn;
+	}
+
+	public void login() {
+		this.loggedIn = true;
+	}
+
+	public void clear() {
+		this.username = null;
+		this.password = null;
+		loggedIn = false;
 	}
 
 }

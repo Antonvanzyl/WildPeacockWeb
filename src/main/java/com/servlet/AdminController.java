@@ -5,6 +5,7 @@
  */
 package com.servlet;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,21 +24,22 @@ import com.servlet.model.User;
  */
 @Controller
 @SessionAttributes("User")
-public class AdminController extends BaseController {
+@RequestMapping(value = "/wildAdmin", method = { RequestMethod.GET, RequestMethod.POST })
+public class AdminController {
 
 	@Autowired
 	private AuthorityManager authorityManager;
-	
+
 	@ModelAttribute("User")
 	public User createUser() {
 		return new User();
 	}
 
-	@RequestMapping(value = "/admin", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping
 	public ModelAndView admin(@ModelAttribute("User") User user) {
 
 		if (!user.isLoggedIn()) {
-			return new ModelAndView("redirect:adminLogin");
+			return new ModelAndView("admin/login");
 		}
 
 		ModelAndView modelAndView = new ModelAndView("contact");
@@ -45,8 +47,31 @@ public class AdminController extends BaseController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/adminLogin", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView adminLogin(@ModelAttribute("User") User user, BindingResult bindingResult) {
+	@RequestMapping(value = "/submitLogin", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitLogin(@ModelAttribute("User") User user, BindingResult bindingResult) {
+
+		if (StringUtils.isEmpty(user.getUsername())) {
+			bindingResult.rejectValue("username", "*Required", "*Required");
+		}
+
+		if (StringUtils.isEmpty(user.getPassword())) {
+			bindingResult.rejectValue("password", "*Required", "*Required");
+		}
+
+		if (bindingResult.hasErrors()) {
+			user.clear();
+			return new ModelAndView("admin/login");
+		}
+
+		if (!authorityManager.authenticateUser(user.getUsername(), user.getPassword())) {
+			bindingResult.rejectValue("username", "*Required", "*Required");
+			bindingResult.rejectValue("password", "*Required", "*Required");
+			user.clear();
+			return new ModelAndView("admin/login");
+		}
+
+		user.login();
+
 		ModelAndView modelAndView = new ModelAndView("contact");
 
 		return modelAndView;

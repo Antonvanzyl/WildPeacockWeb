@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  * 
  */
 @Controller
-public class publicController extends BaseController {
+public class publicController {
 
 	@RequestMapping(value = "/home", method = { RequestMethod.GET,
 			RequestMethod.POST })
