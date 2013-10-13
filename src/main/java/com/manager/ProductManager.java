@@ -8,7 +8,9 @@ import java.util.List;
 import com.entity.db.Category;
 import com.entity.db.Product;
 import com.entity.db.Tag;
+import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductModel;
+import com.servlet.model.ProductTagModel;
 
 /**
  * @author CP311133
@@ -33,4 +35,12 @@ public interface ProductManager {
 	void addProduct(Product product, List<Tag> tags, List<Category> categories);
 
 	void refreshProducts();
+
+	List<ProductCategoryModel> getAllMainCategories();
+
+	List<ProductTagModel> getMainProductTags();
+
+	public List<ProductCategoryModel> getAllCategories();
+
+	public List<ProductTagModel> getAllProductTags();
 }

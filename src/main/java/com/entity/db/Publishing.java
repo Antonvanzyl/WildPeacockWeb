@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -46,6 +47,7 @@ public class Publishing implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;

@@ -31,7 +31,7 @@ public class AuthorityManagerImpl implements AuthorityManager {
 		Authority authority = authorityDao.getRecordByUsername(username);
 		if (authority == null) {
 			return false;
-		} else if (StringUtils.equals(password, authority.getPassword())) {
+		} else if (!StringUtils.equals(password, authority.getPassword())) {
 			return false;
 		}
 

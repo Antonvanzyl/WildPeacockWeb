@@ -8,8 +8,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -112,5 +114,16 @@ public class TagDao {
 			log.error("find by example failed", re);
 			throw re;
 		}
+	}
+
+	public List<Tag> getAllMainTags() {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Tag.class);
+		criteria.add(Restrictions.isNull("tag.id"));
+		return (List<Tag>)criteria.list();
+	}
+
+	public List<Tag> getAllTags() {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Tag.class);
+		return (List<Tag>)criteria.list();
 	}
 }

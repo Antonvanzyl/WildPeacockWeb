@@ -164,6 +164,36 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
+	public List<ProductCategoryModel> getAllMainCategories() {
+		final List<ProductCategoryModel> returnList = new ArrayList<ProductCategoryModel>();
+		final List<Category> dbCategories = categoryDao.getAllMainCategories();
+		for (Category category : dbCategories) {
+
+			ProductCategoryModel productCategory = new ProductCategoryModel();
+			productCategory.setCategoryId(category.getId());
+			productCategory.setCategoryName(category.getName());
+			returnList.add(productCategory);
+
+		}
+		return returnList;
+	}
+
+	@Override
+	public List<ProductCategoryModel> getAllCategories() {
+		final List<ProductCategoryModel> returnList = new ArrayList<ProductCategoryModel>();
+		final List<Category> dbCategories = categoryDao.getAllCategories();
+		for (Category category : dbCategories) {
+
+			ProductCategoryModel productCategory = new ProductCategoryModel();
+			productCategory.setCategoryId(category.getId());
+			productCategory.setCategoryName(category.getName());
+			returnList.add(productCategory);
+
+		}
+		return returnList;
+	}
+
+	@Override
 	public void addMainCategory(String categoryName, String description) {
 
 		Category category = new Category();
@@ -193,6 +223,40 @@ public class ProductManagerImpl implements ProductManager {
 
 		categoryDao.merge(category);
 		refreshProducts();
+	}
+
+	@Override
+	public List<ProductTagModel> getMainProductTags() {
+		List<Tag> tags = tagDao.getAllMainTags();
+
+		List<ProductTagModel> returnTags = new ArrayList<ProductTagModel>();
+		for (Tag tag : tags) {
+
+			ProductTagModel productTagModel = new ProductTagModel();
+			productTagModel.setTagId(tag.getId());
+			productTagModel.setTagTitle(tag.getName());
+
+			returnTags.add(productTagModel);
+		}
+
+		return returnTags;
+	}
+
+	@Override
+	public List<ProductTagModel> getAllProductTags() {
+		List<Tag> tags = tagDao.getAllTags();
+
+		List<ProductTagModel> returnTags = new ArrayList<ProductTagModel>();
+		for (Tag tag : tags) {
+
+			ProductTagModel productTagModel = new ProductTagModel();
+			productTagModel.setTagId(tag.getId());
+			productTagModel.setTagTitle(tag.getName());
+
+			returnTags.add(productTagModel);
+		}
+
+		return returnTags;
 	}
 
 	@Override

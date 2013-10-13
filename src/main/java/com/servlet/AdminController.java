@@ -5,6 +5,9 @@
  */
 package com.servlet;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +15,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.AuthorityManager;
+import com.manager.ProductManager;
+import com.servlet.model.ProductCategoryModel;
+import com.servlet.model.ProductTagModel;
 import com.servlet.model.User;
+import com.servlet.model.forms.CategoryModelForm;
+import com.servlet.model.forms.ProductModelForm;
+import com.servlet.model.forms.TagModelForm;
 
 /**
  * @author Anton Van Zyl
@@ -30,10 +40,20 @@ public class AdminController {
 	@Autowired
 	private AuthorityManager authorityManager;
 
+	@Autowired
+	private ProductManager productManager;
+
 	@ModelAttribute("User")
 	public User createUser() {
 		return new User();
 	}
+
+	/**
+	 * Authenticate
+	 * 
+	 * @param user
+	 * @return
+	 */
 
 	@RequestMapping
 	public ModelAndView admin(@ModelAttribute("User") User user) {
@@ -42,9 +62,7 @@ public class AdminController {
 			return new ModelAndView("admin/login");
 		}
 
-		ModelAndView modelAndView = new ModelAndView("contact");
-
-		return modelAndView;
+		return new ModelAndView("redirect:viewManage");
 	}
 
 	@RequestMapping(value = "/submitLogin", method = { RequestMethod.GET, RequestMethod.POST })
@@ -72,7 +90,221 @@ public class AdminController {
 
 		user.login();
 
-		ModelAndView modelAndView = new ModelAndView("contact");
+		return new ModelAndView("redirect:viewManage");
+	}
+
+	@RequestMapping(value = "/viewManage", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView viewManage(@ModelAttribute("User") User user, BindingResult bindingResult,
+			@RequestParam(value = "message", required = false) String message) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		ModelAndView modelAndView = new ModelAndView("admin/manage");
+		if (message != null) {
+			modelAndView.addObject("message", message);
+		}
+		return modelAndView;
+	}
+
+	/**
+	 * Add Category
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "/viewAddCategory", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView viewAddCategory(@ModelAttribute("User") User user) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+		List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
+
+		ModelAndView modelAndView = new ModelAndView("admin/AddCategory");
+		modelAndView.addObject("mainCategories", mainCategories);
+		modelAndView.addObject("categoryModelForm", new CategoryModelForm());
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/submitAddCategory", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitAddCategory(@ModelAttribute("categoryModelForm") CategoryModelForm categoryModelForm,
+			BindingResult bindingResult, @ModelAttribute("User") User user) throws Exception {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		if (!StringUtils.isAlpha(categoryModelForm.getName())) {
+			bindingResult.rejectValue("name", "", "*Required");
+		}
+		if (!StringUtils.isAlpha(categoryModelForm.getDescription())) {
+			bindingResult.rejectValue("description", "", "*Required");
+
+		}
+
+		if (bindingResult.hasErrors()) {
+			List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
+			ModelAndView modelAndView = new ModelAndView("admin/AddCategory");
+			modelAndView.addObject("mainCategories", mainCategories);
+			modelAndView.addObject("categoryModelForm", categoryModelForm);
+			return modelAndView;
+		}
+
+		if (categoryModelForm.getParentId() <= 0) {
+			productManager.addMainCategory(categoryModelForm.getName(), categoryModelForm.getDescription());
+		} else {
+			productManager.addSubCategory(categoryModelForm.getParentId(), categoryModelForm.getName(), categoryModelForm.getDescription());
+		}
+
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+		modelAndView.addObject("message", "Success - Adding a new category");
+
+		return modelAndView;
+	}
+
+	/**
+	 * Add Tag
+	 * 
+	 * @param user
+	 * @return
+	 */
+
+	@RequestMapping(value = "/viewAddTag", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView viewAddTag(@ModelAttribute("User") User user) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		List<ProductTagModel> mainTags = productManager.getMainProductTags();
+		ModelAndView modelAndView = new ModelAndView("admin/AddTag");
+		modelAndView.addObject("mainTags", mainTags);
+		modelAndView.addObject("tagModelForm", new TagModelForm());
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/submitAddTag", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitAddTag(@ModelAttribute("tagModelForm") TagModelForm tagModelForm, BindingResult bindingResult,
+			@ModelAttribute("User") User user) throws Exception {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		if (!StringUtils.isAlpha(tagModelForm.getName())) {
+			bindingResult.rejectValue("name", "", "*Required");
+		}
+
+		if (bindingResult.hasErrors()) {
+			List<ProductTagModel> mainTags = productManager.getMainProductTags();
+			ModelAndView modelAndView = new ModelAndView("admin/AddTag");
+			modelAndView.addObject("mainTags", mainTags);
+			modelAndView.addObject("tagModelForm", tagModelForm);
+			return modelAndView;
+		}
+
+		if (tagModelForm.getParentId() <= 0) {
+			productManager.addMainTag(tagModelForm.getName());
+		} else {
+			productManager.addSubTag(tagModelForm.getParentId(), tagModelForm.getName());
+		}
+
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+		modelAndView.addObject("message", "Success - Adding a new Tag");
+		return modelAndView;
+	}
+
+	/**
+	 * Add Product
+	 * 
+	 * @param user
+	 * @return
+	 */
+
+	@RequestMapping(value = "/viewAddProduct", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView viewAddProduct(@ModelAttribute("User") User user) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		List<ProductTagModel> mainTags = productManager.getAllProductTags();
+		List<ProductCategoryModel> mainCategories = productManager.getAllCategories();
+
+		ModelAndView modelAndView = new ModelAndView("admin/AddProduct");
+		modelAndView.addObject("categoryList", mainCategories);
+		modelAndView.addObject("tagList", mainTags);
+
+		modelAndView.addObject("productModelForm", new ProductModelForm());
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/submitAddProduct", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitAddProduct(@ModelAttribute("productModelForm") ProductModelForm productModelForm,
+			BindingResult bindingResult, @ModelAttribute("User") User user) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		if (StringUtils.isEmpty(productModelForm.getTitle())) {
+			bindingResult.rejectValue("title", "", "*Required");
+		}
+		if (StringUtils.isEmpty(productModelForm.getSubTitle())) {
+			bindingResult.rejectValue("subTitle", "", "*Required");
+		}
+
+		if (StringUtils.isEmpty(productModelForm.getDescription())) {
+			bindingResult.rejectValue("description", "", "*Required");
+		}
+
+		if (productModelForm.getPrice() == null || BigDecimal.ZERO.compareTo(productModelForm.getPrice()) > 0) {
+			bindingResult.rejectValue("price", "", "*Required");
+		}
+
+		if (productModelForm.getCategoryId() <= 0) {
+			bindingResult.rejectValue("categoryId", "", "*Required");
+		}
+
+		if (productModelForm.getTagIds() == null || productModelForm.getTagIds().length == 0) {
+			bindingResult.rejectValue("tagIds", "", "*Required");
+		}
+
+		if (bindingResult.hasErrors()) {
+			List<ProductTagModel> mainTags = productManager.getAllProductTags();
+			List<ProductCategoryModel> mainCategories = productManager.getAllCategories();
+
+			ModelAndView modelAndView = new ModelAndView("admin/AddProduct");
+			modelAndView.addObject("categoryList", mainCategories);
+			modelAndView.addObject("tagList", mainTags);
+			modelAndView.addObject("productModelForm", productModelForm);
+			return modelAndView;
+
+		}
+
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+		modelAndView.addObject("message", "Success - Adding a new Product");
+		return modelAndView;
+
+	}
+
+	/**
+	 * Add Publishing
+	 * 
+	 * @param user
+	 * @return
+	 */
+
+	@RequestMapping(value = "/viewAddPublishing", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView viewAddPublishing(@ModelAttribute("User") User user) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		ModelAndView modelAndView = new ModelAndView("admin/AddPublishing");
 
 		return modelAndView;
 	}

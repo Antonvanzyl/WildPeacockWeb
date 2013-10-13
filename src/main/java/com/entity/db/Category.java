@@ -5,9 +5,11 @@ package com.entity.db;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -54,6 +56,7 @@ public class Category implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -64,7 +67,7 @@ public class Category implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "parentId", nullable = false)
+	@JoinColumn(name = "parentId", nullable = true)
 	public Category getCategory() {
 		return this.category;
 	}

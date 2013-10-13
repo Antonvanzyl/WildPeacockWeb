@@ -18,12 +18,12 @@ public class ProductCategoryModel {
 		return categoryId;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
-	}
-
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
 	}
 
 	public void setCategoryName(String categoryName) {
