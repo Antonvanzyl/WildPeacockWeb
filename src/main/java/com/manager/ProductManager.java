@@ -5,12 +5,10 @@ package com.manager;
 
 import java.util.List;
 
-import com.entity.db.Category;
-import com.entity.db.Product;
-import com.entity.db.Tag;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductModel;
 import com.servlet.model.ProductTagModel;
+import com.servlet.model.forms.ProductModelForm;
 
 /**
  * @author CP311133
@@ -32,9 +30,7 @@ public interface ProductManager {
 
 	public void addSubTag(int parentTag, String tagName) throws Exception;
 
-	void addProduct(Product product, List<Tag> tags, List<Category> categories);
-
-	void refreshProducts();
+	void addProduct(ProductModelForm productModelForm);
 
 	List<ProductCategoryModel> getAllMainCategories();
 
@@ -43,4 +39,6 @@ public interface ProductManager {
 	public List<ProductCategoryModel> getAllCategories();
 
 	public List<ProductTagModel> getAllProductTags();
+
+	void refreshProducts();
 }

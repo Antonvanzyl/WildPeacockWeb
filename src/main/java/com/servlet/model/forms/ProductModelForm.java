@@ -2,6 +2,9 @@ package com.servlet.model.forms;
 
 import java.math.BigDecimal;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.validation.BindingResult;
+
 public class ProductModelForm {
 
 	private String title;
@@ -58,6 +61,39 @@ public class ProductModelForm {
 
 	public void setTagIds(int[] tagIds) {
 		this.tagIds = tagIds;
+	}
+
+	public void validate(BindingResult bindingResult) {
+
+		if (StringUtils.isEmpty(this.getTitle())) {
+			bindingResult.rejectValue("title", "", "*Required");
+		} else if (StringUtils.length(this.getTitle()) > 128) {
+			bindingResult.rejectValue("title", "", "*Too Long (127 char max)");
+		}
+
+		if (StringUtils.isEmpty(this.getSubTitle())) {
+			bindingResult.rejectValue("subTitle", "", "*Required");
+		} else if (StringUtils.length(this.getSubTitle()) > 64) {
+			bindingResult.rejectValue("subTitle", "", "*Too Long (64 char max)");
+		}
+
+		if (StringUtils.isEmpty(this.getDescription())) {
+			bindingResult.rejectValue("description", "", "*Required");
+		} else if (StringUtils.length(this.getDescription()) > 2048) {
+			bindingResult.rejectValue("description", "", "*Too Long (2048 char max)");
+		}
+
+		if (this.getPrice() == null || BigDecimal.ZERO.compareTo(this.getPrice()) > 0) {
+			bindingResult.rejectValue("price", "", "*Required");
+		}
+
+		if (this.getCategoryId() <= 0) {
+			bindingResult.rejectValue("categoryId", "", "*Required");
+		}
+
+		if (this.getTagIds() == null || this.getTagIds().length == 0) {
+			bindingResult.rejectValue("tagIds", "", "*Required");
+		}
 	}
 
 }

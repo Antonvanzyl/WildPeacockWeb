@@ -5,7 +5,6 @@
  */
 package com.servlet;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,11 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.AuthorityManager;
 import com.manager.ProductManager;
+import com.manager.PublishingManager;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductTagModel;
 import com.servlet.model.User;
 import com.servlet.model.forms.CategoryModelForm;
 import com.servlet.model.forms.ProductModelForm;
+import com.servlet.model.forms.PublishModelForm;
 import com.servlet.model.forms.TagModelForm;
 
 /**
@@ -42,6 +43,9 @@ public class AdminController {
 
 	@Autowired
 	private ProductManager productManager;
+
+	@Autowired
+	private PublishingManager publishingManager;
 
 	@ModelAttribute("User")
 	public User createUser() {
@@ -122,7 +126,7 @@ public class AdminController {
 		}
 		List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
 
-		ModelAndView modelAndView = new ModelAndView("admin/AddCategory");
+		ModelAndView modelAndView = new ModelAndView("admin/category/AddCategory");
 		modelAndView.addObject("mainCategories", mainCategories);
 		modelAndView.addObject("categoryModelForm", new CategoryModelForm());
 		return modelAndView;
@@ -136,17 +140,11 @@ public class AdminController {
 			return new ModelAndView("admin/login");
 		}
 
-		if (!StringUtils.isAlpha(categoryModelForm.getName())) {
-			bindingResult.rejectValue("name", "", "*Required");
-		}
-		if (!StringUtils.isAlpha(categoryModelForm.getDescription())) {
-			bindingResult.rejectValue("description", "", "*Required");
-
-		}
+		categoryModelForm.validate(bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
-			ModelAndView modelAndView = new ModelAndView("admin/AddCategory");
+			ModelAndView modelAndView = new ModelAndView("admin/category/AddCategory");
 			modelAndView.addObject("mainCategories", mainCategories);
 			modelAndView.addObject("categoryModelForm", categoryModelForm);
 			return modelAndView;
@@ -179,7 +177,7 @@ public class AdminController {
 		}
 
 		List<ProductTagModel> mainTags = productManager.getMainProductTags();
-		ModelAndView modelAndView = new ModelAndView("admin/AddTag");
+		ModelAndView modelAndView = new ModelAndView("admin/tag/AddTag");
 		modelAndView.addObject("mainTags", mainTags);
 		modelAndView.addObject("tagModelForm", new TagModelForm());
 		return modelAndView;
@@ -193,13 +191,11 @@ public class AdminController {
 			return new ModelAndView("admin/login");
 		}
 
-		if (!StringUtils.isAlpha(tagModelForm.getName())) {
-			bindingResult.rejectValue("name", "", "*Required");
-		}
+		tagModelForm.validate(bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			List<ProductTagModel> mainTags = productManager.getMainProductTags();
-			ModelAndView modelAndView = new ModelAndView("admin/AddTag");
+			ModelAndView modelAndView = new ModelAndView("admin/tag/AddTag");
 			modelAndView.addObject("mainTags", mainTags);
 			modelAndView.addObject("tagModelForm", tagModelForm);
 			return modelAndView;
@@ -233,7 +229,7 @@ public class AdminController {
 		List<ProductTagModel> mainTags = productManager.getAllProductTags();
 		List<ProductCategoryModel> mainCategories = productManager.getAllCategories();
 
-		ModelAndView modelAndView = new ModelAndView("admin/AddProduct");
+		ModelAndView modelAndView = new ModelAndView("admin/product/AddProduct");
 		modelAndView.addObject("categoryList", mainCategories);
 		modelAndView.addObject("tagList", mainTags);
 
@@ -249,40 +245,20 @@ public class AdminController {
 			return new ModelAndView("admin/login");
 		}
 
-		if (StringUtils.isEmpty(productModelForm.getTitle())) {
-			bindingResult.rejectValue("title", "", "*Required");
-		}
-		if (StringUtils.isEmpty(productModelForm.getSubTitle())) {
-			bindingResult.rejectValue("subTitle", "", "*Required");
-		}
-
-		if (StringUtils.isEmpty(productModelForm.getDescription())) {
-			bindingResult.rejectValue("description", "", "*Required");
-		}
-
-		if (productModelForm.getPrice() == null || BigDecimal.ZERO.compareTo(productModelForm.getPrice()) > 0) {
-			bindingResult.rejectValue("price", "", "*Required");
-		}
-
-		if (productModelForm.getCategoryId() <= 0) {
-			bindingResult.rejectValue("categoryId", "", "*Required");
-		}
-
-		if (productModelForm.getTagIds() == null || productModelForm.getTagIds().length == 0) {
-			bindingResult.rejectValue("tagIds", "", "*Required");
-		}
+		productModelForm.validate(bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			List<ProductTagModel> mainTags = productManager.getAllProductTags();
 			List<ProductCategoryModel> mainCategories = productManager.getAllCategories();
 
-			ModelAndView modelAndView = new ModelAndView("admin/AddProduct");
+			ModelAndView modelAndView = new ModelAndView("admin/product/AddProduct");
 			modelAndView.addObject("categoryList", mainCategories);
 			modelAndView.addObject("tagList", mainTags);
 			modelAndView.addObject("productModelForm", productModelForm);
 			return modelAndView;
-
 		}
+
+		productManager.addProduct(productModelForm);
 
 		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
 		modelAndView.addObject("message", "Success - Adding a new Product");
@@ -304,8 +280,32 @@ public class AdminController {
 			return new ModelAndView("admin/login");
 		}
 
-		ModelAndView modelAndView = new ModelAndView("admin/AddPublishing");
+		ModelAndView modelAndView = new ModelAndView("admin/publishing/AddPublishing");
+		modelAndView.addObject("publishModelForm", new PublishModelForm());
+		return modelAndView;
+	}
 
+	@RequestMapping(value = "/submitAddPublishing", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitAddPublishing(@ModelAttribute("publishModelForm") PublishModelForm publishModelForm,
+			BindingResult bindingResult, @ModelAttribute("User") User user) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		publishModelForm.validate(bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			ModelAndView modelAndView = new ModelAndView("admin/publishing/AddPublishing");
+			modelAndView.addObject("publishModelForm", publishModelForm);
+			return modelAndView;
+		}
+
+		publishingManager.addPublishing(publishModelForm.getTitle(), publishModelForm.getDescription(), publishModelForm.getSubtitle(),
+				publishModelForm.getEventDate(), publishModelForm.getSection());
+
+		ModelAndView modelAndView = new ModelAndView("admin/AddPublishing");
+		modelAndView.addObject("message", "Success - Adding a new " + publishModelForm.getSection() + " Success");
 		return modelAndView;
 	}
 

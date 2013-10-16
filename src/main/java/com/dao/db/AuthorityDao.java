@@ -2,22 +2,20 @@ package com.dao.db;
 
 // Generated 03 Oct 2013 3:23:45 PM by Hibernate Tools 3.4.0.CR1
 
+import static org.hibernate.criterion.Example.create;
+
 import java.util.List;
 
-import javax.naming.InitialContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.entity.db.Authority;
-
-import static org.hibernate.criterion.Example.create;
 
 /**
  * Home object for domain model class Authority.
@@ -27,7 +25,7 @@ import static org.hibernate.criterion.Example.create;
 @Repository("Authority")
 public class AuthorityDao {
 
-	private static final Log log = LogFactory.getLog(AuthorityDao.class);
+	private final  Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private SessionFactory sessionFactory;

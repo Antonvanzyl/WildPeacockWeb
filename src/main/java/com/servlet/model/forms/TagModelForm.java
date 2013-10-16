@@ -5,6 +5,9 @@
  */
 package com.servlet.model.forms;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.validation.BindingResult;
+
 /**
  * @author Anton Van Zyl
  * 
@@ -28,6 +31,17 @@ public class TagModelForm {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void validate(BindingResult bindingResult) {
+
+		if (StringUtils.isEmpty(name)) {
+			bindingResult.rejectValue("name", "", "*Required");
+		} else if (!StringUtils.isAlpha(this.name)) {
+			bindingResult.rejectValue("name", "", "*Must Be Aplha");
+		} else if (StringUtils.length(this.name) > 64) {
+			bindingResult.rejectValue("name", "", "*Incorrect Length (Max 64 char)");
+		}
 	}
 
 }

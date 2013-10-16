@@ -7,6 +7,7 @@ package com.manager;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,10 +22,12 @@ import com.dao.db.TagDao;
 import com.entity.db.Category;
 import com.entity.db.Product;
 import com.entity.db.ProductTags;
+import com.entity.db.ProductTagsId;
 import com.entity.db.Tag;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductModel;
 import com.servlet.model.ProductTagModel;
+import com.servlet.model.forms.ProductModelForm;
 
 /**
  * @author Anton Van Zyl
@@ -288,17 +291,41 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public void addProduct(Product product, List<Tag> tags, List<Category> categories) {
+	public void addProduct(ProductModelForm productModelForm) {
 
-		Product dbProduct = productDao.merge(product);
+		Product product = new Product();
+		product.setTitle(productModelForm.getTitle());
+		product.setSubTitle(productModelForm.getSubTitle());
+		product.setDescription(productModelForm.getDescription());
+		product.setPrice(productModelForm.getPrice());
 
-		for (Tag tag : tags) {
+		Category category = categoryDao.findById(productModelForm.getCategoryId());
+		if (category == null) {
+			throw new NullPointerException("No category found for id [" + productModelForm.getCategoryId() + "]");
+		}
+		product.setCategory(category);
+
+		product = productDao.merge(product);
+
+		for (int tagId : productModelForm.getTagIds()) {
 			ProductTags productTag = new ProductTags();
 			productTag.setCreated(new Date());
-			productTag.setProduct(dbProduct);
+			productTag.setProduct(product);
+
+			Tag tag = tagDao.findById(tagId);
+			if (tag == null) {
+				throw new NullPointerException("No tag found for id [" + tagId + "]");
+			}
 			productTag.setTag(tag);
+			
+			ProductTagsId id = new ProductTagsId();
+			id.setProductId(product.getId());
+			id.setTagId(tag.getId());
+			productTag.setId(id);
+
 			productTagsDao.merge(productTag);
 		}
+
 
 		refreshProducts();
 	}

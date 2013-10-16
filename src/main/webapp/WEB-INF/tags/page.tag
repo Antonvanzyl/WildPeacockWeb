@@ -21,11 +21,14 @@
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/multi-select.css" type="text/css" media="screen" />
 	    <link href="${pageContext.request.contextPath}/resources/css/style_1/style.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/smoothDivScroll.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	
 		<link rel="shortcut icon" href="favicon.ico" >
 		<link rel="icon" href="favicon.ico" type="image/gif" >
-	
-		<script src="${pageContext.request.contextPath}/resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+		
+  		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/jquery.multi-select.js" type="text/javascript"></script>
 	
 		<!-- IMAGE SCROLLER DETAILS -->
