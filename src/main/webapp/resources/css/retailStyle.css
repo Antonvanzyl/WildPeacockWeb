@@ -99,7 +99,7 @@
 }
 
 .mainContent .Retail_Main_Holder_Right {
-	width: 530px;
+	width: 95%;
 	height: auto;
 	float: right;
 	margin: -15px 0px 15px 0px;
@@ -152,6 +152,7 @@ color: #7b9a75;
 .mainContent .mainContentWrapper_WSP_Press {
 	width: 900px;
 	height: auto;
+	min-height:460px;
 	float: left;
 	margin: 0px 0px 0px 0px;
 	padding-bottom:0px;

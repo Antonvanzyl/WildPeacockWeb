@@ -5,6 +5,7 @@
  */
 package com.manager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dao.db.PublishingDao;
 import com.entity.db.Publishing;
 import com.servlet.model.PublishRecordModel;
+import com.servlet.model.forms.PublishModelForm;
 import com.types.PublishingSectionType;
 
 /**
@@ -55,12 +57,40 @@ public class PublishingManagerImpl implements PublishingManager {
 		model.setId(publishing.getId());
 		model.setSubtitle(publishing.getSubtitle());
 		model.setTitle(publishing.getTitle());
+		model.setPublishingSectionType(publishing.getSection()); 
+		return model;
+	}
+	
+	private PublishModelForm convertPublishModelForm(Publishing publishing) {
 
+		if (publishing == null) {
+			return null;
+		}
+
+		PublishModelForm model = new PublishModelForm();
+
+		model.setDescription(publishing.getDescription());
+		
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		model.setEventDate(format.format(publishing.getEventDate())); 
+		model.setId(publishing.getId());
+		model.setSubtitle(publishing.getSubtitle());
+		model.setTitle(publishing.getTitle());
+		model.setSection(publishing.getSection()); 
 		return model;
 	}
 
 	@Override
-	public PublishRecordModel getPublishRecord(int id) {
+	public PublishModelForm getPublishRecord(int id) {
+
+		Publishing publishing = publishingDao.findById(id);
+		publishing.setReadCount(publishing.getReadCount() + 1);
+		publishingDao.merge(publishing);
+		return convertPublishModelForm(publishing);
+	}
+	
+	@Override
+	public PublishRecordModel getPublishRecordAndAddReadCount(int id) {
 
 		Publishing publishing = publishingDao.findById(id);
 		publishing.setReadCount(publishing.getReadCount() + 1);
@@ -80,6 +110,45 @@ public class PublishingManagerImpl implements PublishingManager {
 		publishing.setEventDate(eventDate);
 
 		publishingDao.merge(publishing);
+	}
+	
+	
+	@Override
+	public void updatePublishing(int id, String title, String description, String subtitle, Date eventDate, PublishingSectionType section) {
+		
+		Publishing publishing = publishingDao.findById(id);
+		publishing.setTitle(title);
+		publishing.setSubtitle(subtitle);
+		publishing.setSection(section);
+		publishing.setDescription(description);
+		publishing.setEventDate(eventDate);
+
+		publishingDao.merge(publishing);
+	}
+	
+	@Override
+	public List<PublishRecordModel> getAllPublishingRecords() {
+		
+		List<PublishRecordModel> returnList = new ArrayList<PublishRecordModel>();
+
+		List<Publishing> records = publishingDao.getAllRecords( );
+		for (Publishing publishing : records) {
+			returnList.add(convert(publishing));
+		}
+
+		return returnList;
+	}
+	
+	@Override
+	public void deletePublishing(int id) throws Exception {
+		Publishing record = publishingDao.findById(id);
+		
+		if(record ==null)
+		{
+			throw new Exception("Publishing does not exist");
+		}
+		
+		publishingDao.delete(record);
 	}
 
 }

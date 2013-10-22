@@ -6,17 +6,29 @@
 			<div class="WSP_Main_Holder_Left">&nbsp;</div>
 			<div class="Retail_Main_Holder_Right">
 				<div class="retailHeader">
-					Admin Manage<br />
+					Admin Search Tag<br />
 				</div>
 			</div>
 			<div class="Retail_Main_Holder_Right">
 				<p class="mainText_Contacts">
-				Welcome to the admin management page, use the navigation to manage the content of the site.<br/>
-				All functionality will be handled here, you will be able to define the categories, tags, products and write on news/blogs.
-				Deletion of items are also available. 
-				<div>
-					<h2 style="color: red">${message }</h2>
-				</div>
+				<p class="mainText_Contacts">
+					<b>This is the tag edit for wild peacock:</b><br />
+				<table border="1" style="width: 500px; border-bottom-style:  solid; " >
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>edit</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${tags }" var="tag">
+							<tr>
+								<td>${tag.tagTitle }</td>
+								<td><a href="${pageContext.request.contextPath}/editTag?tagId=${tag.tagId }">Edit ${tag.tagTitle }</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">
 				<!-- Button on the right -->

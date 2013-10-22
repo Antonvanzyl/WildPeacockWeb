@@ -5,9 +5,11 @@
  */
 package com.servlet;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,6 +25,7 @@ import com.manager.ProductManager;
 import com.manager.PublishingManager;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductTagModel;
+import com.servlet.model.PublishRecordModel;
 import com.servlet.model.User;
 import com.servlet.model.forms.CategoryModelForm;
 import com.servlet.model.forms.ProductModelForm;
@@ -35,7 +38,6 @@ import com.servlet.model.forms.TagModelForm;
  */
 @Controller
 @SessionAttributes("User")
-@RequestMapping(value = "/wildAdmin", method = { RequestMethod.GET, RequestMethod.POST })
 public class AdminController {
 
 	@Autowired
@@ -59,7 +61,7 @@ public class AdminController {
 	 * @return
 	 */
 
-	@RequestMapping
+	@RequestMapping(value = "/wildAdmin", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView admin(@ModelAttribute("User") User user) {
 
 		if (!user.isLoggedIn()) {
@@ -69,14 +71,21 @@ public class AdminController {
 		return new ModelAndView("redirect:viewManage");
 	}
 
+	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView logout(@ModelAttribute("User") User user) {
+
+		user.clear();
+		return new ModelAndView("redirect:wildAdmin");
+	}
+
 	@RequestMapping(value = "/submitLogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView submitLogin(@ModelAttribute("User") User user, BindingResult bindingResult) {
 
-		if (StringUtils.isEmpty(user.getUsername())) {
+		if (StringUtils.isEmpty(user.getUsername()) && StringUtils.isAlphanumeric(user.getUsername())) {
 			bindingResult.rejectValue("username", "*Required", "*Required");
 		}
 
-		if (StringUtils.isEmpty(user.getPassword())) {
+		if (StringUtils.isEmpty(user.getPassword()) && StringUtils.isAlphanumeric(user.getPassword())) {
 			bindingResult.rejectValue("password", "*Required", "*Required");
 		}
 
@@ -162,6 +171,68 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/searchCategory", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchCategory(@ModelAttribute("User") User user) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		List<ProductCategoryModel> categories = productManager.getAllCategories();
+		ModelAndView modelAndView = new ModelAndView("admin/category/FindCategory");
+		modelAndView.addObject("categories", categories);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/editCategory", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView editCategory(@ModelAttribute("User") User user, @RequestParam("categoryId") int categoryId) throws Exception {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
+
+		ModelAndView modelAndView = new ModelAndView("admin/category/EditCategory");
+		modelAndView.addObject("mainCategories", mainCategories);
+
+		CategoryModelForm categoryForm = productManager.getCategory(categoryId);
+		modelAndView.addObject("categoryModelForm", categoryForm);
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/submitEditCategory", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitEditCategory(@ModelAttribute("categoryModelForm") CategoryModelForm categoryModelForm,
+			BindingResult bindingResult, @ModelAttribute("User") User user) throws Exception {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		categoryModelForm.validate(bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
+			ModelAndView modelAndView = new ModelAndView("admin/category/EditCategory");
+			modelAndView.addObject("mainCategories", mainCategories);
+			modelAndView.addObject("categoryModelForm", categoryModelForm);
+			return modelAndView;
+		}
+
+		if (categoryModelForm.getParentId() <= 0) {
+			productManager.updateMainCategory(categoryModelForm.getId(), categoryModelForm.getName(), categoryModelForm.getDescription());
+		} else {
+			productManager.updateSubCategory(categoryModelForm.getId(), categoryModelForm.getParentId(), categoryModelForm.getName(),
+					categoryModelForm.getDescription());
+		}
+
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+		modelAndView.addObject("message", "Success - Adding updated the category");
+
+		return modelAndView;
+	}
+
 	/**
 	 * Add Tag
 	 * 
@@ -205,6 +276,67 @@ public class AdminController {
 			productManager.addMainTag(tagModelForm.getName());
 		} else {
 			productManager.addSubTag(tagModelForm.getParentId(), tagModelForm.getName());
+		}
+
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+		modelAndView.addObject("message", "Success - Adding a new Tag");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/searchTag", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchTag(@ModelAttribute("User") User user) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		List<ProductTagModel> tags = productManager.getAllProductTags();
+		ModelAndView modelAndView = new ModelAndView("admin/tag/FindTag");
+		modelAndView.addObject("tags", tags);
+		return modelAndView;
+
+	}
+
+	@RequestMapping(value = "/editTag", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView editTag(@ModelAttribute("User") User user, @RequestParam("tagId") int tagId) throws Exception {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		List<ProductTagModel> mainTags = productManager.getMainProductTags();
+		ModelAndView modelAndView = new ModelAndView("admin/tag/EditTag");
+		modelAndView.addObject("mainTags", mainTags);
+
+		TagModelForm tagModelForm = productManager.getTags(tagId);
+
+		modelAndView.addObject("tagModelForm", tagModelForm);
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/submitEditTag", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitEditTag(@ModelAttribute("tagModelForm") TagModelForm tagModelForm, BindingResult bindingResult,
+			@ModelAttribute("User") User user) throws Exception {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		tagModelForm.validate(bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			List<ProductTagModel> mainTags = productManager.getMainProductTags();
+			ModelAndView modelAndView = new ModelAndView("admin/tag/EditTag");
+			modelAndView.addObject("mainTags", mainTags);
+			modelAndView.addObject("tagModelForm", tagModelForm);
+			return modelAndView;
+		}
+
+		if (tagModelForm.getParentId() <= 0) {
+			productManager.updateMainTag(tagModelForm.getId(), tagModelForm.getName());
+		} else {
+			productManager.updateSubTag(tagModelForm.getId(), tagModelForm.getParentId(), tagModelForm.getName());
 		}
 
 		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
@@ -287,7 +419,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/submitAddPublishing", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView submitAddPublishing(@ModelAttribute("publishModelForm") PublishModelForm publishModelForm,
-			BindingResult bindingResult, @ModelAttribute("User") User user) {
+			BindingResult bindingResult, @ModelAttribute("User") User user) throws ParseException {
 
 		if (!user.isLoggedIn()) {
 			return new ModelAndView("admin/login");
@@ -302,11 +434,78 @@ public class AdminController {
 		}
 
 		publishingManager.addPublishing(publishModelForm.getTitle(), publishModelForm.getDescription(), publishModelForm.getSubtitle(),
-				publishModelForm.getEventDate(), publishModelForm.getSection());
+				DateUtils.parseDate(publishModelForm.getEventDate(), "dd/MM/yyyy"), publishModelForm.getSection());
 
-		ModelAndView modelAndView = new ModelAndView("admin/AddPublishing");
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
 		modelAndView.addObject("message", "Success - Adding a new " + publishModelForm.getSection() + " Success");
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/searchPublishing", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchPublishing(@ModelAttribute("User") User user) {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		List<PublishRecordModel> publishings = publishingManager.getAllPublishingRecords();
+		ModelAndView modelAndView = new ModelAndView("admin/publishing/FindPublishing");
+		modelAndView.addObject("publishings", publishings);
+		return modelAndView;
+
+	}
+	
+	@RequestMapping(value = "/editPublishing", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView editPublishing(@ModelAttribute("User") User user, @RequestParam("id") int id) throws Exception {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		PublishModelForm publishRecordModel = publishingManager.getPublishRecord(id);
+		
+		ModelAndView modelAndView = new ModelAndView("admin/publishing/EditPublishing");
+		modelAndView.addObject("publishModelForm", publishRecordModel);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/submitEditPublishing", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitEditPublishing(@ModelAttribute("publishModelForm") PublishModelForm publishModelForm,
+			BindingResult bindingResult, @ModelAttribute("User") User user) throws ParseException {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		publishModelForm.validate(bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			ModelAndView modelAndView = new ModelAndView("admin/publishing/EditPublishing");
+			modelAndView.addObject("publishModelForm", publishModelForm);
+			return modelAndView;
+		}
+
+		publishingManager.updatePublishing(publishModelForm.getId(), publishModelForm.getTitle(), publishModelForm.getDescription(), publishModelForm.getSubtitle(),
+				DateUtils.parseDate(publishModelForm.getEventDate(), "dd/MM/yyyy"), publishModelForm.getSection());
+
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+		modelAndView.addObject("message", "Success - Updated " + publishModelForm.getSection() + " Success");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/deletePublishing", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView deletePublishing(@ModelAttribute("User") User user, @RequestParam("id") int id) throws Exception {
+
+		if (!user.isLoggedIn()) {
+			return new ModelAndView("admin/login");
+		}
+
+		publishingManager.deletePublishing(id);
+
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+		modelAndView.addObject("message", "Success - publishing deleted");
+		return modelAndView;
+
 	}
 
 }

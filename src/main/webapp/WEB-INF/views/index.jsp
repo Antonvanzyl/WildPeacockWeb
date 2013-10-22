@@ -43,7 +43,7 @@
                 
                 <div class="mainContentWrapperCol2_icons_holder">
                 	<p align="right" class="mainText_socialIcons">Follow us on:<br>
-                    <a href="http://www.facebook.com/group.php?gid=100746986824" target="_blank"><img src="../../resources/images/facebook.jpg" /></a> &nbsp;<a href="http://twitter.com/#!/@WildPeacock" target="_blank"><img src="../images/twitter.jpg" /></a></p>
+                    <a href="http://www.facebook.com/group.php?gid=100746986824" target="_blank"><img src="${pageContext.request.contextPath}/resources/images/facebook.jpg" /></a> &nbsp;<a href="http://twitter.com/#!/@WildPeacock" target="_blank"><img src="${pageContext.request.contextPath}/resources/images/twitter.jpg" /></a></p>
                 </div>
                 
             </div>

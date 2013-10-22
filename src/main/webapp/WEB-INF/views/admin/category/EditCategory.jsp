@@ -11,11 +11,13 @@
 			</div>
 			<div class="Retail_Main_Holder_Right">
 				<p class="mainText_Contacts">
-					<form:form commandName="categoryModelForm" action="${pageContext.request.contextPath}/submitAddCategory">
+					<form:form commandName="categoryModelForm" action="${pageContext.request.contextPath}/submitEditCategory">
 						<p class="mainText_Contacts">
 							<b>This is the Category add for wild peacock:</b><br />
 							
 							<br />If you are adding a main category, select none. <br/>
+							
+							
 							<select id="parentId" name="parentId">
 								<option value="0">None</option>
 									<c:forEach items="${mainCategories }" var="category" >
@@ -33,8 +35,8 @@
 							
 							<br /> <label>Description</label>
 							<form:input path="description" /><form:errors path="description" cssStyle="color:red" />
-							
-							<br /><br/> <input type="submit" value="Add Category">
+							<form:hidden path="id" />
+							<br /><br/> <input type="submit" value="Update Category">
 					</form:form>
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">

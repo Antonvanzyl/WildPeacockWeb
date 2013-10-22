@@ -18,19 +18,22 @@
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/retailStyle.css" type="text/css" media="screen" />
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wholesaleStyle.css" type="text/css" media="screen" />
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wildPeacock.css" type="text/css" media="screen" />
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style_1/style.css" type="text/css"  />
+
+		<!-- New styling for jquery mobile -->	    
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/multi-select.css" type="text/css" media="screen" />
-	    <link href="${pageContext.request.contextPath}/resources/css/style_1/style.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/smoothDivScroll.css" />
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	
-		<link rel="shortcut icon" href="favicon.ico" >
-		<link rel="icon" href="favicon.ico" type="image/gif" >
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css"/>
+    	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu.css" type="text/css" />
+    
+		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" >
+		<link rel="icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" type="image/gif" >
 		
   		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/jquery.multi-select.js" type="text/javascript"></script>
-	
+    	<script src="${pageContext.request.contextPath}/resources/js/menu.js" type="text/javascript"></script>
+    	
 		<!-- IMAGE SCROLLER DETAILS -->
 	
 	</head>
@@ -72,7 +75,9 @@
 	            		<div class="col3">
 	           		  		<div align="center">
 								<p class="footer_copyright">
-	                    			&copy; Copyright 2011 Wild Peacock Products.  All rights reserved. Designed by <a class="footer_link" href="http://www.tenfourmedia.co.za" target="_blank">tenfour media</a>. Development by <a class="footer_link" href="http://www.gacreations.co.za" target="_blank">greenapple creations</a>.
+	                    			&copy; Copyright 2011 Wild Peacock Products.  All rights reserved. Designed by <a class="footer_link" href="http://www.tenfourmedia.co.za" target="_blank">tenfour media</a>. Development by <a class="footer_link" href="http://www.linkedin.com/pub/anton-adriaan-van-zyl/4a/252/90" target="_blank">Anton Van Zyl</a>.
+	                    		<div id="copyright">Copyright &copy; 2013 <a href="http://apycom.com/">Apycom jQuery Menus</a></div>
+	                    		
 	                    		</p>
 					  		</div>
 	              		</div>

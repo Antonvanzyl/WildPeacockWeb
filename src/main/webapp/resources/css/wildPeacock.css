@@ -50,7 +50,7 @@
 }
 
 .mainContent .WSP_Main_Holder {
-	width: 692px;
+	width: 100%;
 	height: auto;
 	float: left;
 	margin: 0px 0px 15px 0px;
@@ -124,7 +124,7 @@
 }
 
 .mainContent .mainContentWrapper_WSP_TopLinks {
-	width: 692px;
+	width: 100%;
 	height: auto;
 	float: left;
 	margin: 0px 0px 15px 0px;
@@ -1541,6 +1541,7 @@ ul#navlist {
 
 .mainContent {
 	width: 900px;
+	min-height: 500px;
 	height: auto;
 	position: relative;
 	margin: 0px 0px 0px 0px; /*TOP RIGHT BOTTOM LEFT*/

@@ -110,7 +110,36 @@
 	</security-constraint>
 
 	<session-config id="SessionConfig">
-		<session-timeout>5</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
+	
+	<error-page>
+		<error-code>400</error-code>
+		<location>/jspExceptionHandler?errorType=400</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/jspExceptionHandler?errorType=403</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/jspExceptionHandler?errorType=404</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/jspExceptionHandler?errorType=405</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/jspExceptionHandler?errorType=500</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/jspExceptionHandler?errorType=503</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/jspExceptionHandler</location>
+	</error-page>
 
 </web-app>

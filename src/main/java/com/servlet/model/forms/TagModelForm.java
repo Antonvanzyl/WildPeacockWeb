@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
  */
 public class TagModelForm {
 
+	private int id;
 	private int parentId;
 	private String name;
 
@@ -31,6 +32,14 @@ public class TagModelForm {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void validate(BindingResult bindingResult) {

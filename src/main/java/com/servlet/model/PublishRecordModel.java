@@ -7,6 +7,8 @@ package com.servlet.model;
 
 import java.util.Date;
 
+import com.types.PublishingSectionType;
+
 /**
  * @author Anton Van Zyl
  * 
@@ -18,6 +20,7 @@ public class PublishRecordModel {
 	private String subtitle;
 	private String description;
 	private Date eventDate;
+	private PublishingSectionType publishingSectionType;
 
 	public int getId() {
 		return id;
@@ -59,4 +62,12 @@ public class PublishRecordModel {
 		this.eventDate = eventDate;
 	}
 
+	public PublishingSectionType getPublishingSectionType() {
+		return publishingSectionType;
+	}
+	
+	public void setPublishingSectionType(PublishingSectionType publishingSectionType) {
+		this.publishingSectionType = publishingSectionType;
+	}
+	
 }

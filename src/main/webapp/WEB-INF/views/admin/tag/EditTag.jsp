@@ -10,33 +10,33 @@
 
 			<div class="Retail_Main_Holder_Right">
 				<div class="retailHeader">
-					Admin Add Tag<br />
+					Admin Edit Tag<br />
 				</div>
 			</div>
 			<div class="Retail_Main_Holder_Right">
 			<p class="mainText_Contacts">
                <form:form commandName="tagModelForm" action="${pageContext.request.contextPath}/submitAddTag">
 						<p class="mainText_Contacts">
-							<b>This is the tag add for wild peacock:</b><br />
+							<b>This is the tag Edit for wild peacock:</b><br />
 							
 							<br />If you are adding a main Tag, select none. <br/>
-							<select id="parentId" name="parentId">
+							<select id="parentId" name="parentId" >
 								<option value="0">None</option>
 								<c:forEach items="${mainTags }" var="tag">
 								<c:choose>
-										<c:when test="${tag.tagId == tagModelForm.parentId}">
-											<option value="${tag.tagId }" selected="selected">${tag.tagTitle }</option>
-										</c:when>
-										<c:otherwise>
+									<c:when test="${tag.tagId == tagModelForm.parentId}">
+										<option value="${tag.tagId }" selected="selected">${tag.tagTitle }</option>
+									</c:when>
+									<c:otherwise>
 										<option value="${tag.tagId }">${tag.tagTitle }</option>
-										</c:otherwise>
+									</c:otherwise>
 								</c:choose>
 								</c:forEach>
-								
 							</select> <label>Name</label>
 							<form:input path="name" /> <form:errors path="name" cssStyle="color:red" />
+							<form:hidden path="id" />
 							<br/>
-							<br /> <input type="submit" value="Add Tag">
+							<br /> <input type="submit" value="Update Tag">
 					</form:form>
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">

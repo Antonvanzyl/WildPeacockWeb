@@ -40,6 +40,13 @@ public class publicController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value = "/jspExceptionHandler", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView contact() {
+		ModelAndView modelAndView = new ModelAndView("exception");
+
+		return modelAndView;
+	}
+	
 	
 	
 }

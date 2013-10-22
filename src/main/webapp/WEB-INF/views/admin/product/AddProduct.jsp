@@ -15,7 +15,7 @@
 			</div>
 			<div class="Retail_Main_Holder_Right">
 			<p class="mainText_Contacts">
-                <form:form commandName="productModelForm" action="${pageContext.request.contextPath}/wildAdmin/submitAddProduct">
+                <form:form commandName="productModelForm" action="${pageContext.request.contextPath}/submitAddProduct">
 						<p class="mainText_Contacts">
 							<b>This is the Product add for wild peacock:</b><br />
 							

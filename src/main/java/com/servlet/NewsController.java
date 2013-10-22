@@ -54,7 +54,7 @@ public class NewsController {
 	@RequestMapping(value = "/detail", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView detail(@RequestParam("id") int id) {
 		ModelAndView modelAndView = new ModelAndView("News/details");
-		modelAndView.addObject("details",publishingManager.getPublishRecord(id));
+		modelAndView.addObject("details",publishingManager.getPublishRecordAndAddReadCount(id));
 		return modelAndView;
 	}
 

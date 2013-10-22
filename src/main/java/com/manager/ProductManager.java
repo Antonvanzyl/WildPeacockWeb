@@ -8,7 +8,9 @@ import java.util.List;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductModel;
 import com.servlet.model.ProductTagModel;
+import com.servlet.model.forms.CategoryModelForm;
 import com.servlet.model.forms.ProductModelForm;
+import com.servlet.model.forms.TagModelForm;
 
 /**
  * @author CP311133
@@ -41,4 +43,16 @@ public interface ProductManager {
 	public List<ProductTagModel> getAllProductTags();
 
 	void refreshProducts();
+
+	public CategoryModelForm getCategory(int categoryId) throws Exception;
+
+	public void updateMainCategory(int id, String name, String description) throws Exception;
+
+	public void updateSubCategory(int id, int parentCategory, String categoryName, String description) throws Exception;
+
+	public TagModelForm getTags(int tagId) throws Exception;
+
+	public void updateMainTag(int id, String name) throws Exception;
+
+	public void updateSubTag(int id, int parentId, String name) throws Exception;
 }

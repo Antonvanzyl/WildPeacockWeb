@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 public class CategoryModelForm {
 
 	private int parentId;
+	private int id;
 	private String name;
 	private String description;
 
@@ -40,6 +41,14 @@ public class CategoryModelForm {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void validate(BindingResult bindingResult) {

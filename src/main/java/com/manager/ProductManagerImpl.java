@@ -7,7 +7,6 @@ package com.manager;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +26,9 @@ import com.entity.db.Tag;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductModel;
 import com.servlet.model.ProductTagModel;
+import com.servlet.model.forms.CategoryModelForm;
 import com.servlet.model.forms.ProductModelForm;
+import com.servlet.model.forms.TagModelForm;
 
 /**
  * @author Anton Van Zyl
@@ -190,6 +191,7 @@ public class ProductManagerImpl implements ProductManager {
 			ProductCategoryModel productCategory = new ProductCategoryModel();
 			productCategory.setCategoryId(category.getId());
 			productCategory.setCategoryName(category.getName());
+			productCategory.setCategoryDescription(category.getDescription());
 			returnList.add(productCategory);
 
 		}
@@ -225,7 +227,68 @@ public class ProductManagerImpl implements ProductManager {
 		category.setCategory(parentCategory);
 
 		categoryDao.merge(category);
+		
 		refreshProducts();
+	}
+
+	@Override
+	public void updateMainCategory(int id, String name, String description) throws Exception {
+
+		Category currentCategory = categoryDao.findById(id);
+		if (currentCategory == null) {
+			throw new Exception("Category does not exist");
+		}
+
+		currentCategory.setDescription(description);
+		currentCategory.setName(name);
+
+		categoryDao.merge(currentCategory);
+		
+		refreshProducts();
+
+	}
+
+	@Override
+	public void updateSubCategory(int id, int parentCategoryId, String categoryName, String description) throws Exception {
+
+		Category currentCategory = categoryDao.findById(id);
+		if (currentCategory == null) {
+			throw new Exception("Category does not exist");
+		}
+
+		Category parentCategory = categoryDao.findById(parentCategoryId);
+
+		if (parentCategory.getCategory() != null) {
+			throw new Exception("Cannot add a category to a sub category");
+		}
+
+		currentCategory.setDescription(description);
+		currentCategory.setName(categoryName);
+		currentCategory.setCategory(parentCategory);
+
+		categoryDao.merge(currentCategory);
+		
+		refreshProducts();
+
+	}
+
+	@Override
+	public CategoryModelForm getCategory(int categoryId) throws Exception {
+		Category currentCategory = categoryDao.findById(categoryId);
+		if (currentCategory == null) {
+			throw new Exception("Category does not exist");
+		}
+
+		CategoryModelForm categoryModelForm = new CategoryModelForm();
+		categoryModelForm.setId(currentCategory.getId());
+		categoryModelForm.setName(currentCategory.getName());
+		categoryModelForm.setDescription(currentCategory.getDescription());
+
+		if (currentCategory.getCategory() != null) {
+			categoryModelForm.setParentId(currentCategory.getCategory().getId());
+		}
+
+		return categoryModelForm;
 	}
 
 	@Override
@@ -263,6 +326,25 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
+	public TagModelForm getTags(int tagId) throws Exception {
+
+		Tag tag = tagDao.findById(tagId);
+		if (tag == null) {
+			throw new Exception("Cannot add a tag to a sub tag");
+		}
+
+		TagModelForm modelForm = new TagModelForm();
+
+		modelForm.setId(tag.getId());
+		modelForm.setName(tag.getName());
+		if (tag.getTag() != null) {
+			modelForm.setParentId(tag.getTag().getId());
+		}
+
+		return modelForm;
+	}
+
+	@Override
 	public void addMainTag(String tagName) {
 
 		Tag tag = new Tag();
@@ -287,6 +369,39 @@ public class ProductManagerImpl implements ProductManager {
 		tag.setTag(parentTag);
 		tagDao.merge(tag);
 
+		refreshProducts();
+	}
+	
+	@Override
+	public void updateMainTag(int id, String name) throws Exception {
+		
+		Tag parentTag = tagDao.findById(id);
+		if (parentTag == null) {
+			throw new Exception("Tag does not exist");
+		}
+		parentTag.setName(name);
+		tagDao.merge(parentTag);
+		
+		refreshProducts();
+	}
+	
+	@Override
+	public void updateSubTag(int id, int parentId, String name) throws Exception {
+		
+		Tag currentTag = tagDao.findById(id);
+		if (currentTag== null) {
+			throw new Exception("Tag does not exist");
+		}
+		
+		Tag parentTag = tagDao.findById(parentId);
+		if (parentTag.getTag() != null) {
+			throw new Exception("Cannot add a tag to a sub tag");
+		}
+
+		currentTag.setTag(parentTag);
+		currentTag.setName(name);
+		tagDao.merge(currentTag);
+		
 		refreshProducts();
 	}
 
@@ -317,7 +432,7 @@ public class ProductManagerImpl implements ProductManager {
 				throw new NullPointerException("No tag found for id [" + tagId + "]");
 			}
 			productTag.setTag(tag);
-			
+
 			ProductTagsId id = new ProductTagsId();
 			id.setProductId(product.getId());
 			id.setTagId(tag.getId());
@@ -325,7 +440,6 @@ public class ProductManagerImpl implements ProductManager {
 
 			productTagsDao.merge(productTag);
 		}
-
 
 		refreshProducts();
 	}

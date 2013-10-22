@@ -125,4 +125,9 @@ public class PublishingDao {
 
 		return (List<Publishing>) criteria.list();
 	}
+
+	public List<Publishing> getAllRecords() {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Publishing.class);
+		return (List<Publishing>) criteria.list();
+	}
 }
