@@ -8,36 +8,35 @@ package com.servlet;
 import java.text.ParseException;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.AuthorityManager;
 import com.manager.ProductManager;
 import com.manager.PublishingManager;
+import com.security.User;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductTagModel;
 import com.servlet.model.PublishRecordModel;
-import com.servlet.model.User;
 import com.servlet.model.forms.CategoryModelForm;
 import com.servlet.model.forms.ProductModelForm;
 import com.servlet.model.forms.PublishModelForm;
 import com.servlet.model.forms.TagModelForm;
+import com.util.Copyright;
 
 /**
  * @author Anton Van Zyl
  * 
  */
 @Controller
-@SessionAttributes("User")
 public class AdminController {
 
 	@Autowired
@@ -49,70 +48,28 @@ public class AdminController {
 	@Autowired
 	private PublishingManager publishingManager;
 
-	@ModelAttribute("User")
-	public User createUser() {
-		return new User();
-	}
-
 	/**
 	 * Authenticate
 	 * 
 	 * @param user
 	 * @return
 	 */
-
 	@RequestMapping(value = "/wildAdmin", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView admin(@ModelAttribute("User") User user) {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
-
-		return new ModelAndView("redirect:viewManage");
+	public ModelAndView admin() {
+		return new ModelAndView("admin/login");
 	}
 
-	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView logout(@ModelAttribute("User") User user) {
+	@RequestMapping(value = "/failedLogin", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitLogin() {
 
-		user.clear();
-		return new ModelAndView("redirect:wildAdmin");
+		ModelAndView modelAndView = new ModelAndView("admin/login");
+		modelAndView.addObject("error", "Incorrect credentials provided");
+		return modelAndView;
 	}
 
-	@RequestMapping(value = "/submitLogin", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView submitLogin(@ModelAttribute("User") User user, BindingResult bindingResult) {
-
-		if (StringUtils.isEmpty(user.getUsername()) && StringUtils.isAlphanumeric(user.getUsername())) {
-			bindingResult.rejectValue("username", "*Required", "*Required");
-		}
-
-		if (StringUtils.isEmpty(user.getPassword()) && StringUtils.isAlphanumeric(user.getPassword())) {
-			bindingResult.rejectValue("password", "*Required", "*Required");
-		}
-
-		if (bindingResult.hasErrors()) {
-			user.clear();
-			return new ModelAndView("admin/login");
-		}
-
-		if (!authorityManager.authenticateUser(user.getUsername(), user.getPassword())) {
-			bindingResult.rejectValue("username", "*Required", "*Required");
-			bindingResult.rejectValue("password", "*Required", "*Required");
-			user.clear();
-			return new ModelAndView("admin/login");
-		}
-
-		user.login();
-
-		return new ModelAndView("redirect:viewManage");
-	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/viewManage", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView viewManage(@ModelAttribute("User") User user, BindingResult bindingResult,
-			@RequestParam(value = "message", required = false) String message) {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+	public ModelAndView viewManage(@RequestParam(value = "message", required = false) String message) {
 
 		ModelAndView modelAndView = new ModelAndView("admin/manage");
 		if (message != null) {
@@ -121,18 +78,30 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/disable", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView disable() {
+		Copyright.setAvailable(false);
+		return new ModelAndView("admin/login");
+	}
+
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/enable", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView enable() {
+		Copyright.setAvailable(true);
+		return new ModelAndView("admin/login");
+	}
+
 	/**
 	 * Add Category
 	 * 
 	 * @param user
 	 * @return
 	 */
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/viewAddCategory", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewAddCategory(@ModelAttribute("User") User user) {
 
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
 		List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
 
 		ModelAndView modelAndView = new ModelAndView("admin/category/AddCategory");
@@ -141,13 +110,10 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitAddCategory", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView submitAddCategory(@ModelAttribute("categoryModelForm") CategoryModelForm categoryModelForm,
-			BindingResult bindingResult, @ModelAttribute("User") User user) throws Exception {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+			BindingResult bindingResult) throws Exception {
 
 		categoryModelForm.validate(bindingResult);
 
@@ -171,12 +137,9 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/searchCategory", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchCategory(@ModelAttribute("User") User user) {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
 
 		List<ProductCategoryModel> categories = productManager.getAllCategories();
 		ModelAndView modelAndView = new ModelAndView("admin/category/FindCategory");
@@ -184,12 +147,9 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/editCategory", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView editCategory(@ModelAttribute("User") User user, @RequestParam("categoryId") int categoryId) throws Exception {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+	public ModelAndView editCategory(@RequestParam("categoryId") int categoryId) throws Exception {
 
 		List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
 
@@ -202,13 +162,10 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitEditCategory", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView submitEditCategory(@ModelAttribute("categoryModelForm") CategoryModelForm categoryModelForm,
-			BindingResult bindingResult, @ModelAttribute("User") User user) throws Exception {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+			BindingResult bindingResult) throws Exception {
 
 		categoryModelForm.validate(bindingResult);
 
@@ -239,13 +196,9 @@ public class AdminController {
 	 * @param user
 	 * @return
 	 */
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/viewAddTag", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewAddTag(@ModelAttribute("User") User user) {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
 
 		List<ProductTagModel> mainTags = productManager.getMainProductTags();
 		ModelAndView modelAndView = new ModelAndView("admin/tag/AddTag");
@@ -254,13 +207,10 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitAddTag", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView submitAddTag(@ModelAttribute("tagModelForm") TagModelForm tagModelForm, BindingResult bindingResult,
 			@ModelAttribute("User") User user) throws Exception {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
 
 		tagModelForm.validate(bindingResult);
 
@@ -283,12 +233,9 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/searchTag", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchTag(@ModelAttribute("User") User user) {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
 
 		List<ProductTagModel> tags = productManager.getAllProductTags();
 		ModelAndView modelAndView = new ModelAndView("admin/tag/FindTag");
@@ -297,12 +244,9 @@ public class AdminController {
 
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/editTag", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView editTag(@ModelAttribute("User") User user, @RequestParam("tagId") int tagId) throws Exception {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+	public ModelAndView editTag(@RequestParam("tagId") int tagId) throws Exception {
 
 		List<ProductTagModel> mainTags = productManager.getMainProductTags();
 		ModelAndView modelAndView = new ModelAndView("admin/tag/EditTag");
@@ -315,13 +259,10 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitEditTag", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView submitEditTag(@ModelAttribute("tagModelForm") TagModelForm tagModelForm, BindingResult bindingResult,
 			@ModelAttribute("User") User user) throws Exception {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
 
 		tagModelForm.validate(bindingResult);
 
@@ -350,13 +291,9 @@ public class AdminController {
 	 * @param user
 	 * @return
 	 */
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/viewAddProduct", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewAddProduct(@ModelAttribute("User") User user) {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
 
 		List<ProductTagModel> mainTags = productManager.getAllProductTags();
 		List<ProductCategoryModel> mainCategories = productManager.getAllCategories();
@@ -369,13 +306,9 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitAddProduct", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView submitAddProduct(@ModelAttribute("productModelForm") ProductModelForm productModelForm,
-			BindingResult bindingResult, @ModelAttribute("User") User user) {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+	public ModelAndView submitAddProduct(@ModelAttribute("productModelForm") ProductModelForm productModelForm, BindingResult bindingResult) {
 
 		productModelForm.validate(bindingResult);
 
@@ -404,26 +337,19 @@ public class AdminController {
 	 * @param user
 	 * @return
 	 */
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/viewAddPublishing", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewAddPublishing(@ModelAttribute("User") User user) {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
 
 		ModelAndView modelAndView = new ModelAndView("admin/publishing/AddPublishing");
 		modelAndView.addObject("publishModelForm", new PublishModelForm());
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitAddPublishing", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView submitAddPublishing(@ModelAttribute("publishModelForm") PublishModelForm publishModelForm,
-			BindingResult bindingResult, @ModelAttribute("User") User user) throws ParseException {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+			BindingResult bindingResult) throws ParseException {
 
 		publishModelForm.validate(bindingResult);
 
@@ -441,12 +367,9 @@ public class AdminController {
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/searchPublishing", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchPublishing(@ModelAttribute("User") User user) {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
 
 		List<PublishRecordModel> publishings = publishingManager.getAllPublishingRecords();
 		ModelAndView modelAndView = new ModelAndView("admin/publishing/FindPublishing");
@@ -454,28 +377,22 @@ public class AdminController {
 		return modelAndView;
 
 	}
-	
-	@RequestMapping(value = "/editPublishing", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView editPublishing(@ModelAttribute("User") User user, @RequestParam("id") int id) throws Exception {
 
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/editPublishing", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView editPublishing(@RequestParam("id") int id) throws Exception {
 
 		PublishModelForm publishRecordModel = publishingManager.getPublishRecord(id);
-		
+
 		ModelAndView modelAndView = new ModelAndView("admin/publishing/EditPublishing");
 		modelAndView.addObject("publishModelForm", publishRecordModel);
 		return modelAndView;
 	}
-	
+
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitEditPublishing", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView submitEditPublishing(@ModelAttribute("publishModelForm") PublishModelForm publishModelForm,
-			BindingResult bindingResult, @ModelAttribute("User") User user) throws ParseException {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+			BindingResult bindingResult) throws ParseException {
 
 		publishModelForm.validate(bindingResult);
 
@@ -485,20 +402,18 @@ public class AdminController {
 			return modelAndView;
 		}
 
-		publishingManager.updatePublishing(publishModelForm.getId(), publishModelForm.getTitle(), publishModelForm.getDescription(), publishModelForm.getSubtitle(),
-				DateUtils.parseDate(publishModelForm.getEventDate(), "dd/MM/yyyy"), publishModelForm.getSection());
+		publishingManager.updatePublishing(publishModelForm.getId(), publishModelForm.getTitle(), publishModelForm.getDescription(),
+				publishModelForm.getSubtitle(), DateUtils.parseDate(publishModelForm.getEventDate(), "dd/MM/yyyy"),
+				publishModelForm.getSection());
 
 		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
 		modelAndView.addObject("message", "Success - Updated " + publishModelForm.getSection() + " Success");
 		return modelAndView;
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/deletePublishing", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView deletePublishing(@ModelAttribute("User") User user, @RequestParam("id") int id) throws Exception {
-
-		if (!user.isLoggedIn()) {
-			return new ModelAndView("admin/login");
-		}
+	public ModelAndView deletePublishing(@RequestParam("id") int id) throws Exception {
 
 		publishingManager.deletePublishing(id);
 

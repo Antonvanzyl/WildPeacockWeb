@@ -29,13 +29,14 @@ public class NewsController {
 	@Autowired
 	private PublishingManager publishingManager;
 
-	private final int numberOfRecordsPerPage = 100;
+	private final int numberOfRecordsPerPage = 20;
 
 	@RequestMapping( method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView news() {
 		ModelAndView modelAndView = new ModelAndView("News/summary");
 		List<PublishRecordModel> news = publishingManager.getPublishingRecords(PublishingSectionType.NEWS, 0, numberOfRecordsPerPage);
 		modelAndView.addObject("news", news);
+		modelAndView.addObject("currentPage", 1);
 		return modelAndView;
 	}
 
@@ -46,7 +47,8 @@ public class NewsController {
 		List<PublishRecordModel> news = publishingManager.getPublishingRecords(PublishingSectionType.NEWS, currentPage,
 				(currentPage + numberOfRecordsPerPage));
 		
-		
+
+		modelAndView.addObject("currentPage", page);
 		modelAndView.addObject("news", news);
 		return modelAndView;
 	}

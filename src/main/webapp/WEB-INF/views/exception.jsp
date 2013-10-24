@@ -12,7 +12,7 @@
 					Error<br />Request could not be completed
 				</div>
 
-				<p class="mainText_Contacts">Seems like something went wrong, we are sorry for the inconvenience. Please try again.</p>
+				<p class="mainText_Contacts">Seems like something went wrong (${error}), we are sorry for the inconvenience. Please try again.</p>
 			</div>
 
 

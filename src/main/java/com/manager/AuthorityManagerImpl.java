@@ -18,7 +18,7 @@ import com.entity.db.Authority;
  * @author Anton Van Zyl
  * 
  */
-@Component
+@Component("authorityManager")
 @Transactional
 public class AuthorityManagerImpl implements AuthorityManager {
 

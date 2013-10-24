@@ -7,26 +7,18 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<!-- THIS MUST ONLY BE USED IN DEV -->
-	<!-- <security:debug /> -->
-
-	<!-- remember to uncomment springSecurityFilterChain in web.xml -->
 	<security:global-method-security secured-annotations="enabled" />
 
-	<security:http auto-config="true" create-session="always">
-		<security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" /> 
-<!-- 		<security:intercept-url pattern="/services/**" access="IS_AUTHENTICATED_REMEMBERED" />  -->
-<!-- 		<security:intercept-url pattern="/web/**" access="ROLE_ADMIN" />  -->
-		<security:http-basic />
+	<security:http auto-config="true" use-expressions="true" access-denied-page="/jspExceptionHandler?errorType=403">
+		<security:form-login login-page="/wildAdmin" authentication-failure-url="/failedLogin" default-target-url="/viewManage" />
+		<security:logout invalidate-session="true" logout-success-url="/wildAdmin" logout-url="/logout" />
 	</security:http>
 
-
-	<bean id="authenticationService" class="capitec.security.ServiceAuthProvider" />
+	<bean id="authenticationService" class="com.security.ServiceAuthProvider" />
 
 	<security:authentication-manager>
 		<security:authentication-provider ref='authenticationService' />
 	</security:authentication-manager>
-
 
 
 </beans>

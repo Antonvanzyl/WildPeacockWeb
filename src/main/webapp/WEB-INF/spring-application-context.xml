@@ -33,6 +33,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 
 	<util:list id="propertyFiles">
 		<value>WEB-INF/jdbc.properties</value>
+		<value>WEB-INF/system.properties</value>
 	</util:list>
 	
 	<!-- The EncryptablePropertyPlaceholderConfigurer will read the .properties files and make their values accessible as ${var} -->

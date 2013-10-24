@@ -68,6 +68,7 @@ dependencies {
 	compile("org.springframework.security:spring-security-core:${project.springVersion}") { exclude group: 'commons-logging' }
 	compile("org.springframework.security:spring-security-web:${project.springVersion}") { exclude group: 'commons-logging' }
 	compile("org.springframework.security:spring-security-config:${project.springVersion}") { exclude group: 'commons-logging' }
+	compile("org.aspectj:aspectjweaver:1.6.11")
 	compile("javax.mail:mail:1.5.0-b01")
 	compile("javax.activation:activation:1.1.1")
 	
