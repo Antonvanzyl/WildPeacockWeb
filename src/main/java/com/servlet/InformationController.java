@@ -5,17 +5,8 @@
  */
 package com.servlet;
 
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.manager.MessagingManager;
 import com.servlet.model.ContactModel;
 
 /**
@@ -32,11 +24,8 @@ import com.servlet.model.ContactModel;
 @Controller
 public class InformationController {
 
-	@Value("${mail.to.address}")
-	private String toAddress;
-
-	@Value("${mail.host}")
-	private String host;
+	@Autowired
+	private MessagingManager messagingManager;
 
 	@ModelAttribute("contact")
 	public ContactModel getContact() {
@@ -77,7 +66,7 @@ public class InformationController {
 		messageBuilder.append("\nQuestion Message:\n\n");
 		messageBuilder.append(contact.getQuestion());
 
-		boolean success = sendEmail(contact.getEmail(), subjectBuilder.toString(), messageBuilder.toString());
+		boolean success = messagingManager.sendEmail(contact.getEmail(), subjectBuilder.toString(), messageBuilder.toString());
 
 		ModelAndView modelAndView = new ModelAndView("forward:/contact");
 		modelAndView.addObject("sent", success);
@@ -87,34 +76,4 @@ public class InformationController {
 		return modelAndView;
 	}
 
-	private boolean sendEmail(String fromAddress, String subject, String messageText) {
-
-		// Get system properties
-		Properties properties = System.getProperties();
-
-		// Setup mail server
-		properties.setProperty("mail.smtp.host", host);
-		properties.setProperty("mail.user", "myuser");
-		properties.setProperty("mail.password", "mypwd");
-
-		// Get the default Session object.
-		Session session = Session.getDefaultInstance(properties);
-
-		try {
-			// Create a default MimeMessage object.
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(fromAddress));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(toAddress));
-			message.setSubject(subject);
-			message.setText(messageText);
-
-			// Send message
-			Transport.send(message);
-			System.out.println("Sent message successfully....");
-			return true;
-		} catch (MessagingException mex) {
-			mex.printStackTrace();
-			return false;
-		}
-	}
 }

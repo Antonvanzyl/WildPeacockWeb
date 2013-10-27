@@ -126,4 +126,10 @@ public class TagDao {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Tag.class);
 		return (List<Tag>)criteria.list();
 	}
+
+	public List<Tag> getAllSubTags(int id) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Tag.class);
+		criteria.add(Restrictions.eq("tag.id",id));
+		return (List<Tag>)criteria.list();
+	}
 }

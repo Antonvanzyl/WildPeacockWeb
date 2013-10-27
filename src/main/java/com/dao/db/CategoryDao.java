@@ -128,4 +128,11 @@ public class CategoryDao {
 
 		return (List<Category>) criteria.list();
 	}
+
+	public List<Category> getAllSubCategories(int parentId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Category.class);
+		criteria.add(Restrictions.eq("category.id",parentId));
+
+		return (List<Category>) criteria.list();
+	}
 }

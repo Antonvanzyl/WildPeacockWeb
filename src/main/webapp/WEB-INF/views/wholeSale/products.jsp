@@ -2,20 +2,7 @@
 
 <wp:page pageCSS="wholesale" pageHeader="Page Header" slogan="products">
 	<div class="mainContentWrapper_WSP">
-		<div class="mainContentWrapper_WSP_TopLinks">
-			<div class="mainContentWrapper_WSP_TopLinks1">
-				<!-- 				<p class="mainText_BreadCrumbs">Home &raquo; Wholesale &raquo;
-					Products</p> -->
-			</div>
-			<div class="mainContentWrapper_WSP_TopLinks2">
-				<p align="right" class="mainText_Site">
-					| <a href="${pageContext.request.contextPath}/wholesale/home"
-						class="mainTextHead">Wholesale</a> | <font color="#7b9a75">Products</font>
-					| <a href="${pageContext.request.contextPath}/wholesale/contact"
-						class="mainTextHead">Contact</a>
-				</p>
-			</div>
-		</div>
+		<%@include file="/WEB-INF/jspf/wholeSaleLinks.jspf"%>
 
 		<div class="WSP_Main_Holder">
 			<div class="WSP_Main_Holder_Left">
@@ -35,35 +22,6 @@
 					green listed seafoods.</p>
 
 			</div>
-
-
-			<!-- ############################### IMAGE SCROLLER STARTS ##### -->
-
-			<div class="WSP_Scroller_Holder">
-				<div id="makeMeScrollable" align="center">
-
-					<div class="scrollingHotSpotLeft"></div>
-
-					<div class="scrollingHotSpotRight"></div>
-
-					<div class="scrollWrapper">
-						<div class="scrollableArea">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/1.jpg"
-								alt="image" width="510" height="105" /> <img
-								src="${pageContext.request.contextPath}/resources/images/2.jpg"
-								alt="image" width="452" height="105" /> <img
-								src="${pageContext.request.contextPath}/resources/images/3.jpg"
-								alt="image" width="474" height="105" id="startAtMe" /> <img
-								src="${pageContext.request.contextPath}/resources/images/4.jpg"
-								alt="image" width="505" height="105" /> <img
-								src="${pageContext.request.contextPath}/resources/images/5.jpg"
-								alt="image" width="480" height="105" />
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- ############################### IMAGE SCROLLER STARTS ##### -->
 
 			<div class="WSP_Main_Holder_Right">
 				<!-- Text on the right hand side -->

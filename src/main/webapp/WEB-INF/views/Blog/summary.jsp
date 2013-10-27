@@ -10,22 +10,17 @@
 				</div>
 			</div>
 			<div class="Retail_Main_Holder_Right">
-				<table style="width: 800px;">
-					<c:forEach items="${news }" var="item">
-						<tr>
-							<td width="600px" style="border-bottom: 1px; border-bottom-style: dashed;">
-								<p class="mainText_Contacts">
-									<a href="${pageContext.request.contextPath}/blog/detail?id=${item.id}" class="mainTextLinkPress"> <b><i>${item.title }</i></b><br /> ${item.subtitle }
-									</a>
-								</p>
-							</td>
-							<td style="border-bottom: 1px; border-bottom-style: dashed;"><wp:facebook-like pageURL="${pageContext.request.contextPath}/blog/detail?id=${item.id}"></wp:facebook-like>
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-				
-				<wp:pagingControl pageNumber="${currentPage }" pageURL="${pageContext.request.contextPath}/blog/page?page=" showNext="${ fn:length( news ) >20}"/>
+				<c:forEach items="${news }" var="item">
+					<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 15px; max-height: 100px;">
+							<p>
+								<a href="${pageContext.request.contextPath}/blog/detail?id=${item.id}" class="mainTextLinkPress"> <strong><i>${item.title }</i></strong><br /> ${item.subtitle }</a>
+								<span style="position: relative; height: 25px; float:right;top: -10px "><wp:facebook-like pageURL="${pageContext.request.contextPath}/blog/detail?id=${item.id}" showFaces="false" height="25px"/></span>
+							</p>
+						</div>
+					</div>
+				</c:forEach>
+				<wp:pagingControl pageNumber="${currentPage }" pageURL="${pageContext.request.contextPath}/blog/page?page=" showNext="${ fn:length( news ) >=20}" />
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">
 				<!-- Button on the right -->

@@ -4,9 +4,12 @@
 package com.manager;
 
 import java.util.List;
+import java.util.Map;
 
+import com.servlet.model.ProductCategoryMenuModel;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductModel;
+import com.servlet.model.ProductTagMenuModel;
 import com.servlet.model.ProductTagModel;
 import com.servlet.model.forms.CategoryModelForm;
 import com.servlet.model.forms.ProductModelForm;
@@ -55,4 +58,8 @@ public interface ProductManager {
 	public void updateMainTag(int id, String name) throws Exception;
 
 	public void updateSubTag(int id, int parentId, String name) throws Exception;
+
+	public List<ProductCategoryMenuModel> getProductMenuCategories();
+
+	public Map<ProductTagMenuModel, List<ProductTagMenuModel>> getAllMenuProductTags();
 }

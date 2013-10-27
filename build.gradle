@@ -71,6 +71,7 @@ dependencies {
 	compile("org.aspectj:aspectjweaver:1.6.11")
 	compile("javax.mail:mail:1.5.0-b01")
 	compile("javax.activation:activation:1.1.1")
+	compile("org.json:json:20090211")
 	
 	compile "org.jasypt:jasypt:1.9.0",
 	"org.jasypt:jasypt-hibernate3:1.9.0",

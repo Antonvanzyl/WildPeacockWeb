@@ -46,7 +46,7 @@
 	                    <br/>
 	                    <input type="submit" value="Send Message">  
                 </form:form>
-                <wp:facebook-like pageURL=""/>
+                <wp:facebook-like pageURL="" height="50px" showFaces="true"/>
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">
 				<!-- Button on the right -->

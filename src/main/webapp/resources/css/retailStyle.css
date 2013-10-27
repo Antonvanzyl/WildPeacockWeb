@@ -6,47 +6,42 @@
 	border-left: 0px solid #33182b;
 	border-right: 0px solid #33182b;
 	border-bottom: 0px dashed #cacaca;
-	background-image:url(../images/retail_logo.jpg);
-	background-position:center;
-	background-repeat:no-repeat;
-	
+	background-image: url(../images/retail_logo.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 /* ########### BODY PROPERTIES: START #############   106 32*/
-* { 
-	margin: 0; 
+* {
+	margin: 0;
 	padding: 0;
 }
 
-.retail  { 
+.retail {
 	font: 10px Arial;
 	background-color: #fff;
-	background-image:url(../images/retailBG.jpg);
-	background-position:top;
-	background-repeat:repeat;
-	background-attachment:fixed;
+	background-image: url(../images/retailBG.jpg);
+	background-position: top;
+	background-repeat: repeat;
+	background-attachment: fixed;
 	/*background: -webkit-gradient(linear,left bottom,left top,color-stop(0.39, rgb(188,207,51)),color-stop(0.7, rgb(226,249,77)));
 	background:  -moz-linear-gradient(top, white, #e3e2e3);*/
 }
 /* ########### BODY PROPERTIES: END ############# */
 
-
 /* ################################################################# */
 /* ################### RETAIL HOME ########################## */
-
-
 .mainContent .mainContentWrapper_Retail {
 	width: 900px;
 	height: 640px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	padding-bottom:0px;
+	padding-bottom: 0px;
 	border-bottom: 1px dashed #cacaca;
-	background-image:url(../images/retail_products.jpg);
-	background-position:0% 85%;
-	background-repeat:no-repeat;
+	background-image: url(../images/retail_products.jpg);
+	background-position: 0% 85%;
+	background-repeat: no-repeat;
 }
-
 
 .mainContent .Press_Scroller_Holder {
 	width: 900px;
@@ -60,9 +55,9 @@
 	height: 172px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	background-image:url(../images/pressImage.jpg);
-	background-position:top right;
-	background-repeat:no-repeat;
+	background-image: url(../images/pressImage.jpg);
+	background-position: top right;
+	background-repeat: no-repeat;
 }
 
 .mainContent .Press_Scroller_Holder_Right {
@@ -72,13 +67,11 @@
 	margin: 0px 0px 0px 0px;
 }
 
-
 .mainContent .Retail_Main_Holder {
 	width: 692px;
 	height: auto;
 	float: left;
 	margin: 0px 0px 15px 0px;
-	
 }
 
 .mainContent .Retail_Main_Holder_Left {
@@ -93,17 +86,16 @@
 	height: auto;
 	float: left;
 	margin: -15px 0px 15px 0px;
-	background-image:url(../images/retailsideOne.png);
-	background-position:top;
-	background-repeat:no-repeat;
+	background-image: url(../images/retailsideOne.png);
+	background-position: top;
+	background-repeat: no-repeat;
 }
 
 .mainContent .Retail_Main_Holder_Right {
 	width: 95%;
 	height: auto;
 	float: right;
-	margin: -15px 0px 15px 0px;
-	
+	margin: -15px 22px 15px 0px;
 }
 
 .mainContent .Retail_Main_Holder_Right_Bot_Image {
@@ -111,9 +103,9 @@
 	height: 226px;
 	float: right;
 	margin: -15px 0px 15px 0px;
-	background-image:url(../images/product_logos.jpg);
-	background-position:center;
-	background-repeat:no-repeat;
+	background-image: url(../images/product_logos.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .mainContent .Retail_Main_Holder_ImageSpacer {
@@ -121,7 +113,7 @@
 	height: 105px;
 	float: right;
 	margin: 0px 0px px 0px;
-	background-color:#CF0;
+	background-color: #CF0;
 }
 
 .mainContent .Retail_Main_Holder_Right1 {
@@ -140,22 +132,45 @@
 
 /* ################### RETAIL HOME ########################## */
 /* ################################################################# */
-
 .retailHeader {
-padding: 0px;
-font: 20px Century Gothic, Arial, Helvetica;
-line-height: 1.6;
-font-weight: bold;
-color: #7b9a75;
+	padding: 0px;
+	font: 20px Century Gothic, Arial, Helvetica;
+	line-height: 1.6;
+	font-weight: bold;
+	color: #7b9a75;
 }
 
 .mainContent .mainContentWrapper_WSP_Press {
 	width: 900px;
 	height: auto;
-	min-height:460px;
+	min-height: 460px;
 	float: left;
 	margin: 0px 0px 0px 0px;
-	padding-bottom:0px;
+	padding-bottom: 0px;
 	border-bottom: 1px dashed #cacaca;
 	background-color: #fff;
+}
+
+.ui-menu {
+	width: 150px;
+}
+
+.ui-autocomplete-category {
+	font-weight: bold;
+	padding: .2em .4em;
+	margin: .8em 0 .2em;
+	line-height: 1.5;
+}
+
+#container {
+	width: 95%;
+	margin: auto;
+}
+
+.item {
+	background: rgb(135, 199, 135);
+	width: 80px;
+	height: 80px;
+	padding-left: 5px;
+	padding-top: 5px;
 }

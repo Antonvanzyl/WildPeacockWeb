@@ -1,0 +1,19 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div id="menu" class="mainContentWrapper_WSP_TopLinks" style="position: relative">
+	<ul class="menu">
+		<li><a href="${pageContext.request.contextPath}/wholesale/home"><span>Home</span></a></li>
+		<li><a href="${pageContext.request.contextPath}/retail_home" class="parent"><span>Retail</span></a>
+			<div>
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/retail_home"><span>Home</span></a></li>
+					<li><a href="${pageContext.request.contextPath}/view_Retail_Products"><span>Deli Products</span></a></li>
+					<li><a href="${pageContext.request.contextPath}/blog"><span>Blog</span></a></li>
+					<li><a href="${pageContext.request.contextPath}/news"><span>News</span></a></li>
+					<li ><a href="${pageContext.request.contextPath}/contact"><span>Contact</span></a></li>
+				</ul>
+			</div>
+		</li>
+		<li><a href="${pageContext.request.contextPath}/wholesale/products"><span>Whole Sale Products</span></a></li>
+		<li class="last"><a href="${pageContext.request.contextPath}/wholesale/contact"><span>Contact</span></a></li>
+	</ul>
+</div>

@@ -2,19 +2,8 @@
 
 <wp:page pageCSS="wholesale" pageHeader="Page Header" slogan="home">
 	<div class="mainContentWrapper_WSH">
-		<div class="mainContentWrapper_WSH_TopLinks">
-			<div class="mainContentWrapper_WSH_TopLinks1">
-<!-- 				<p class="mainText_BreadCrumbs">Home &raquo; Wholesale &raquo;
-					Home</p> -->
-			</div>
-			<div class="mainContentWrapper_WSH_TopLinks2">
-				<p align="right" class="mainText_Site">
-					| <font color="#7b9a75">Wholesale</font> | <a
-						href="${pageContext.request.contextPath}/wholesale/products" class="mainTextHead">Products</a> |
-					<a href="${pageContext.request.contextPath}/wholesale/contact" class="mainTextHead">Contact</a>
-				</p>
-			</div>
-		</div>
+		
+		<%@include file="/WEB-INF/jspf/wholeSaleLinks.jspf"%>
 
 		<div class="WSH_Main_Holder">
 			<div class="WSH_Main_Holder_Left">

@@ -2,19 +2,7 @@
 
 <wp:page pageCSS="wholesale" pageHeader="Page Header" slogan="contact">
 	<div class="mainContentWrapper_WS_Contact">
-		<div class="mainContentWrapper_WS_TopLinks">
-			<div class="mainContentWrapper_WS_TopLinks1">
-<!-- 				<p class="mainText_BreadCrumbs">Home &raquo; Wholesale &raquo;
-					Contacts</p> -->
-			</div>
-			<div class="mainContentWrapper_WS_TopLinks2">
-				<p align="right" class="mainText_Site">
-					| <a href="${pageContext.request.contextPath}/wholesale/home" class="mainTextHead">Wholesale</a> |
-					<a href="${pageContext.request.contextPath}/wholesale/products" class="mainTextHead">Products</a>
-					| <font color="#7b9a75">Contact</font>
-				</p>
-			</div>
-		</div>
+		<%@include file="/WEB-INF/jspf/wholeSaleLinks.jspf"%>
 
 		<div class="WS_Main_Holder">
 			<div class="WS_Main_Holder_Left">
@@ -67,6 +55,24 @@
 					<p class="mainText_Contacts">
 						<b>Postal Address:</b><br /> P.O. Box 12168<br />Die Boord<br />Stellenbosch<br />7613
 					</p>
+					 <form:form commandName="contact" action="${pageContext.request.contextPath}/message">
+	                    <c:choose>
+		                    <c:when test="${not empty sent && sent == true }">
+		                    	<p class="mainText_Contacts" style="color: red"><b>Message Sent Success</b></p>
+		                    </c:when>
+		                    <c:when test="${not empty sent && sent == false }">
+		                    	<p class="mainText_Contacts" style="color: red"><b>Message Sent Failed<br/> please contact Sarah directly at <a href="mailto:sarah@wildpeacock.co.za">sarah@wildpeacock.co.za</a></p> </b></p>
+		                   </c:when>
+	                    </c:choose>
+	                    <p class="mainText_Contacts"><b>Get in contact with us:</b><br/><br/>
+	                    <label>Name</label><form:input path="name"/><form:errors path="name" cssStyle="color:red"/><br/>
+	                    <label>Number</label><form:input path="number"/><form:errors path="number"cssStyle="color:red"/>
+	                    <label>Email</label><form:input path="email"/><form:errors path="email"cssStyle="color:red"/>
+	                    <label>What do you want to share?</label><form:textarea path="question" rows="10" cols="250"/><form:errors path="question"cssStyle="color:red"/>
+	                    <br/>
+	                    <input type="submit" value="Send Message">  
+                </form:form>
+                <wp:facebook-like pageURL=""/>
 				</div>
 
 			</div>
@@ -74,16 +80,9 @@
 
 		<div class="mainContentWrapperCol2_holder_WS">
 			<div class="mainContentWrapperCol2_squares_holder_WS">
-				<!-- Retail block -->
-				<!--                     <div class="mainContentWrapperCol2_square2_WS">
-                    	<a href="retail_home.htm" class="mainContentWrapperCol2_square2_WS">
-                        <div class="mainContentWrapperCol2_square_text_WS">
-                        	<p align="right" class="TextForIndexSquares">Retail</p>
-                        </div>
-                        </a>
-                    </div> -->
 			</div>
 		</div>
+		
 
 	</div>
 </wp:page>

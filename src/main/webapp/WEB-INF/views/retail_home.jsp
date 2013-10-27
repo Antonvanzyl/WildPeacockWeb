@@ -27,7 +27,7 @@
 
 			</div>
 
-			<div class="Retail_Main_Holder_Right">
+			<div class="Retail_Main_Holder_Right" style=" width: 710px;">
 				<p class="mainText_Contacts">The Food Emporium focuses on
 					supplying all the fine delicacies , previousliy only available on a
 					wholesale level, now to the public. Other Fine Food specialities

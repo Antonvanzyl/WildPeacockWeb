@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.manager.AuthorityManager;
 import com.manager.ProductManager;
 import com.manager.PublishingManager;
-import com.security.User;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductTagModel;
 import com.servlet.model.PublishRecordModel;
@@ -85,7 +84,6 @@ public class AdminController {
 		return new ModelAndView("admin/login");
 	}
 
-	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/enable", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView enable() {
 		Copyright.setAvailable(true);
@@ -100,7 +98,7 @@ public class AdminController {
 	 */
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/viewAddCategory", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView viewAddCategory(@ModelAttribute("User") User user) {
+	public ModelAndView viewAddCategory() {
 
 		List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
 
@@ -139,7 +137,7 @@ public class AdminController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/searchCategory", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView searchCategory(@ModelAttribute("User") User user) {
+	public ModelAndView searchCategory() {
 
 		List<ProductCategoryModel> categories = productManager.getAllCategories();
 		ModelAndView modelAndView = new ModelAndView("admin/category/FindCategory");
@@ -198,7 +196,7 @@ public class AdminController {
 	 */
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/viewAddTag", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView viewAddTag(@ModelAttribute("User") User user) {
+	public ModelAndView viewAddTag() {
 
 		List<ProductTagModel> mainTags = productManager.getMainProductTags();
 		ModelAndView modelAndView = new ModelAndView("admin/tag/AddTag");
@@ -209,8 +207,8 @@ public class AdminController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitAddTag", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView submitAddTag(@ModelAttribute("tagModelForm") TagModelForm tagModelForm, BindingResult bindingResult,
-			@ModelAttribute("User") User user) throws Exception {
+	public ModelAndView submitAddTag(@ModelAttribute("tagModelForm") TagModelForm tagModelForm, BindingResult bindingResult)
+			throws Exception {
 
 		tagModelForm.validate(bindingResult);
 
@@ -235,7 +233,7 @@ public class AdminController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/searchTag", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView searchTag(@ModelAttribute("User") User user) {
+	public ModelAndView searchTag() {
 
 		List<ProductTagModel> tags = productManager.getAllProductTags();
 		ModelAndView modelAndView = new ModelAndView("admin/tag/FindTag");
@@ -261,8 +259,8 @@ public class AdminController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitEditTag", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView submitEditTag(@ModelAttribute("tagModelForm") TagModelForm tagModelForm, BindingResult bindingResult,
-			@ModelAttribute("User") User user) throws Exception {
+	public ModelAndView submitEditTag(@ModelAttribute("tagModelForm") TagModelForm tagModelForm, BindingResult bindingResult)
+			throws Exception {
 
 		tagModelForm.validate(bindingResult);
 
@@ -293,7 +291,7 @@ public class AdminController {
 	 */
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/viewAddProduct", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView viewAddProduct(@ModelAttribute("User") User user) {
+	public ModelAndView viewAddProduct() {
 
 		List<ProductTagModel> mainTags = productManager.getAllProductTags();
 		List<ProductCategoryModel> mainCategories = productManager.getAllCategories();
@@ -339,7 +337,7 @@ public class AdminController {
 	 */
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/viewAddPublishing", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView viewAddPublishing(@ModelAttribute("User") User user) {
+	public ModelAndView viewAddPublishing() {
 
 		ModelAndView modelAndView = new ModelAndView("admin/publishing/AddPublishing");
 		modelAndView.addObject("publishModelForm", new PublishModelForm());
@@ -369,7 +367,7 @@ public class AdminController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/searchPublishing", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView searchPublishing(@ModelAttribute("User") User user) {
+	public ModelAndView searchPublishing() {
 
 		List<PublishRecordModel> publishings = publishingManager.getAllPublishingRecords();
 		ModelAndView modelAndView = new ModelAndView("admin/publishing/FindPublishing");

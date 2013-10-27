@@ -15,6 +15,9 @@
 	
 		<title>.|.. Wild Peacock Products: RETAIL HOME ..|.</title>
 	
+		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" >
+		<link rel="icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" type="image/gif" >
+
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/retailStyle.css" type="text/css" media="screen" />
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wholesaleStyle.css" type="text/css" media="screen" />
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wildPeacock.css" type="text/css" media="screen" />
@@ -22,17 +25,16 @@
 
 		<!-- New styling for jquery mobile -->	    
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/multi-select.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css"/>
-    	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu.css" type="text/css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui-1.10.3.custom.min.css" type="text/css"/>
+    	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu-green-yellow.css" type="text/css" />
     
-		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" >
-		<link rel="icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" type="image/gif" >
 		
   		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/jquery.multi-select.js" type="text/javascript"></script>
-    	<script src="${pageContext.request.contextPath}/resources/js/menu.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/resources/js/freewall.js" type="text/javascript"></script>
+    	<script src="${pageContext.request.contextPath}/resources/js/menu-green-yellow.js" type="text/javascript"></script>
     	
 		<!-- IMAGE SCROLLER DETAILS -->
 	
