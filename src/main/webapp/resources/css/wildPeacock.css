@@ -26,7 +26,6 @@
 	height: auto;
 	position: float;
 	margin: 0px 0px 0px 0px; /*TOP RIGHT BOTTOM LEFT*/
-	background-color:#990;
 	border-top: 1px dashed #cacaca;
 }
 
@@ -823,6 +822,8 @@ p {
 }
 
 .footerTextForRoundCorners {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 	padding: 10px;
 	font: 11px Century Gothic, Arial, Helvetica;
 	color: #666666;
@@ -2675,7 +2676,6 @@ mainContent .wrapperClear {
 	height: auto;
 	position: float;
 	margin: 0px 0px 0px 0px; /*TOP RIGHT BOTTOM LEFT*/
-	background-color: #990;
 	border-top: 1px dashed #cacaca;
 }
 

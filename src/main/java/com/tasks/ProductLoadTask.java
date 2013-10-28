@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.manager.ProductManager;
+import com.manager.PublishingManager;
 import com.util.ResourceLoaderTask;
 
 /**
@@ -21,11 +22,15 @@ public class ProductLoadTask extends ResourceLoaderTask {
 	private static final Logger log = LoggerFactory.getLogger(ProductLoadTask.class);
 	@Autowired
 	private ProductManager productManager;
+	
+	@Autowired
+	private PublishingManager publishingManager;
 
 	@Override
 	protected void loadResource() throws Exception {
 		log.info("Loading Products");
 		productManager.refreshProducts();
+		publishingManager.loadPublishings();
 	}
 
 }

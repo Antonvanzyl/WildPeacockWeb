@@ -37,6 +37,7 @@ public class NewsController {
 		List<PublishRecordModel> news = publishingManager.getPublishingRecords(PublishingSectionType.NEWS, 0, numberOfRecordsPerPage);
 		modelAndView.addObject("news", news);
 		modelAndView.addObject("currentPage", 1);
+		modelAndView.addObject("totalRecords", publishingManager.getNewsSize());
 		return modelAndView;
 	}
 
@@ -50,6 +51,7 @@ public class NewsController {
 
 		modelAndView.addObject("currentPage", page);
 		modelAndView.addObject("news", news);
+		modelAndView.addObject("totalRecords", publishingManager.getNewsSize());
 		return modelAndView;
 	}
 	

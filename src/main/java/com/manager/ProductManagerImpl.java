@@ -207,10 +207,9 @@ public class ProductManagerImpl implements ProductManager {
 
 			for (Tag subTag : subTags) {
 				ProductTagMenuModel productSubTagModel = new ProductTagMenuModel();
-				productSubTagModel.setTagId(tag.getId());
-				productSubTagModel.setTagTitle(tag.getName());
-				productSubTagModel.setParentTagId(tag.getId());
-
+				productSubTagModel.setTagId(subTag.getId());
+				productSubTagModel.setTagTitle(subTag.getName());
+				productSubTagModel.setParentTagId(subTag.getId());
 				subTagsModels.add(productSubTagModel);
 			}
 
@@ -232,7 +231,7 @@ public class ProductManagerImpl implements ProductManager {
 	public Map<ProductTagMenuModel, List<ProductTagMenuModel>> getAllMenuProductTags() {
 
 		final Map<ProductTagMenuModel, List<ProductTagMenuModel>> tempTags = new HashMap<ProductTagMenuModel, List<ProductTagMenuModel>>();
-		
+
 		synchronized (memoryTags) {
 			tempTags.putAll(memoryTags);
 		}
@@ -485,6 +484,10 @@ public class ProductManagerImpl implements ProductManager {
 		product.setSubTitle(productModelForm.getSubTitle());
 		product.setDescription(productModelForm.getDescription());
 		product.setPrice(productModelForm.getPrice());
+		product.setCreated(new Date());
+		product.setDisplay("");
+		byte[] photo = { 1, 2, 41 };
+		product.setPhotoUrl(photo);
 
 		Category category = categoryDao.findById(productModelForm.getCategoryId());
 		if (category == null) {

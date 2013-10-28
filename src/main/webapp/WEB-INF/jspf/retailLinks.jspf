@@ -1,71 +1,75 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<c:choose>
-	<c:when test="${pageContext['request'].userPrincipal != null}">
-		<div id="menu" class="mainContentWrapper_WSP_TopLinks" style="position: relative" >
-			<ul class="menu">
-				<li><a href="${pageContext.request.contextPath}/retail_home"><span>Home</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/wholesale/home"><span>Whole Sale</span></a></li>
-				<li><a href="#" class="parent"><span>Deli Products</span></a>
-					<div>
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/view_Retail_Products"><span>View Deli Products</span></a></li>
-							<li><a href="#" class="parent"><span>Category</span></a>
-								<div>
-									<ul>
-										<li><a href="${pageContext.request.contextPath}/viewAddCategory"><span>Add A Category</span></a></li>
-										<li><a href="${pageContext.request.contextPath}/searchCategory"><span>Edit A Category</span></a></li>
-									</ul>
-								</div></li>
-							<li><a href="#" class="parent"><span>Tag</span></a>
-								<div>
-									<ul>
-										<li><a href="${pageContext.request.contextPath}/viewAddTag"><span>Add A Tag</span></a></li>
-										<li><a href="${pageContext.request.contextPath}/searchTag"><span>Edit A Tag</span></a></li>
-									</ul>
-								</div></li>
-							<li><a href="#" class="parent"><span>Product</span></a>
-								<div>
-									<ul>
-										<li><a href="${pageContext.request.contextPath}/viewAddProduct"><span>Add A Product</span></a></li>
-										<li><a href="${pageContext.request.contextPath}/viewEditProduct"><span>Edit or Delete A Product</span></a></li>
-									</ul>
-								</div></li>
-						</ul>
-					</div></li>
-				<li><a href="${pageContext.request.contextPath}/blog"><span>Blog</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/news"><span>News</span></a></li>
-				<li><a href="#" class="parent"><span>Publishing</span></a>
-					<div>
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/viewAddPublishing"><span>Add A Publishing</span></a></li>
-							<li><a href="${pageContext.request.contextPath}/searchPublishing"><span>Edit or Delete A Publishing</span></a></li>
-						</ul>
-					</div></li>
-				<li><a href="${pageContext.request.contextPath}/contact"><span>Contact</span></a></li>
-				<li class="last"><a href="logout"><span>Sign Out</span></a></li>
-			</ul>
-		</div>
-	</c:when>
-	<c:otherwise>
-		<div id="menu" class="mainContentWrapper_WSP_TopLinks" style="position: relative">
-			<ul class="menu">
-				<li><a href="${pageContext.request.contextPath}/retail_home"><span>Home</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/wholesale/home" class="parent"><span>Whole Sale</span></a>
-					<div>
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/wholesale/home"><span>Home</span></a></li>
-							<li><a href="${pageContext.request.contextPath}/wholesale/products"><span>Products</span></a></li>
-							<li><a href="${pageContext.request.contextPath}/wholesale/contact"><span>Contact</span></a></li>
-						</ul>
-					</div>
-				</li>
-				<li><a href="${pageContext.request.contextPath}/view_Retail_Products"><span>Deli Products</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/blog"><span>Blog</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/news"><span>News</span></a></li>
-				<li class="last"><a href="${pageContext.request.contextPath}/contact"><span>Contact</span></a></li>
-			</ul>
-		</div>
-	</c:otherwise>
-</c:choose>
-
+<sec:authorize ifAnyGranted="ROLE_ADMIN">
+	<div id="menu" class="mainContentWrapper_WSP_TopLinks" style="position: relative">
+		<ul class="menu">
+			<li class="current"><a href="${pageContext.request.contextPath}/retail_home"><span>Home</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/wholesale/home" class="parent"><span>Whole Sale</span></a>
+				<div class="current">
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/wholesale/home"><span>Home</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/wholesale/products"><span>Products</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/wholesale/contact"><span>Contact</span></a></li>
+					</ul>
+				</div></li>
+			<li><a href="#" class="parent"><span>Deli Products</span></a>
+				<div>
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/view_Retail_Products"><span>View Deli Products</span></a></li>
+						<li><a href="#" class="parent"><span>Category</span></a>
+							<div>
+								<ul>
+									<li><a href="${pageContext.request.contextPath}/viewAddCategory"><span>Add A Category</span></a></li>
+									<li><a href="${pageContext.request.contextPath}/searchCategory"><span>Edit A Category</span></a></li>
+								</ul>
+							</div></li>
+						<li><a href="#" class="parent"><span>Tag</span></a>
+							<div>
+								<ul>
+									<li><a href="${pageContext.request.contextPath}/viewAddTag"><span>Add A Tag</span></a></li>
+									<li><a href="${pageContext.request.contextPath}/searchTag"><span>Edit A Tag</span></a></li>
+								</ul>
+							</div></li>
+						<li><a href="#" class="parent"><span>Product</span></a>
+							<div>
+								<ul>
+									<li><a href="${pageContext.request.contextPath}/viewAddProduct"><span>Add A Product</span></a></li>
+									<li><a href="${pageContext.request.contextPath}/viewEditProduct"><span>Edit or Delete A Product</span></a></li>
+								</ul>
+							</div></li>
+					</ul>
+				</div></li>
+			<li><a href="${pageContext.request.contextPath}/blog"><span>Blog</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/news"><span>News</span></a></li>
+			<li><a href="#" class="parent"><span>Publishing</span></a>
+				<div>
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/viewAddPublishing"><span>Add A Publishing</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/searchPublishing"><span>Edit or Delete A Publishing</span></a></li>
+					</ul>
+				</div></li>
+			<li><a href="${pageContext.request.contextPath}/contact"><span>Contact</span></a></li>
+			<li class="last"><a href="${pageContext.request.contextPath}/logout"><span>Sign Out</span></a></li>
+		</ul>
+	</div>
+</sec:authorize>
+<sec:authorize ifNotGranted="ROLE_ADMIN">
+	<div id="menu" class="mainContentWrapper_WSP_TopLinks" style="position: relative">
+		<ul class="menu">
+			<li><a href="${pageContext.request.contextPath}/retail_home"><span>Home</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/wholesale/home" class="parent"><span>Whole Sale</span></a>
+				<div>
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/wholesale/home"><span>Home</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/wholesale/products"><span>Products</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/wholesale/contact"><span>Contact</span></a></li>
+					</ul>
+				</div></li>
+			<li><a href="${pageContext.request.contextPath}/view_Retail_Products"><span>Deli Products</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/blog"><span>Blog</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/news"><span>News</span></a></li>
+			<li class="last"><a href="${pageContext.request.contextPath}/contact"><span>Contact</span></a></li>
+		</ul>
+	</div>
+</sec:authorize>

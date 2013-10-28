@@ -6,6 +6,7 @@
 <%@attribute name="subtitle" required="false"%>
 <%@attribute name="pageCSS" required="false" %>
 <%@attribute name="slogan" required="false" %>
+<%@attribute name="paging" required="false" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -27,14 +28,14 @@
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/multi-select.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui-1.10.3.custom.min.css" type="text/css"/>
     	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu-green-yellow.css" type="text/css" />
-    
-		
+    	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/simplePagination.css" type="text/css" />
   		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/jquery.multi-select.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/freewall.js" type="text/javascript"></script>
     	<script src="${pageContext.request.contextPath}/resources/js/menu-green-yellow.js" type="text/javascript"></script>
+    	<script src="${pageContext.request.contextPath}/resources/js/jquery.simplePagination.js" type="text/javascript"></script>
     	
 		<!-- IMAGE SCROLLER DETAILS -->
 	
@@ -63,7 +64,7 @@
 			        <jsp:doBody />
 
 		    	</div>
-		        
+		        ${paging }
 		        <!-- Content Footer -->
 			    <div class="footerwithround">
 			       	<div align="center"><p class="footerTextForRoundCorners">Wild Peacock Food Emporium  |  30 Piet Retief Street  |  Stellenbosch  |  7600  |  tel: 082 697 0870 | <a href="mailto:sarah@wildpeacock.co.za?subject=Contact from Website" class="footerLink">sarah@wildpeacock.co.za</a>   </p></div>

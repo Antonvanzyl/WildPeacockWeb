@@ -8,9 +8,19 @@ package com.servlet;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,6 +48,8 @@ import com.util.Copyright;
 @Controller
 public class AdminController {
 
+	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
+
 	@Autowired
 	private AuthorityManager authorityManager;
 
@@ -55,6 +67,14 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/wildAdmin", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView admin() {
+
+		SecurityContext securityContext = SecurityContextHolder.getContext();
+
+		final Authentication authToken = securityContext.getAuthentication();
+		if (authToken != null && authToken.isAuthenticated()) {
+			new ModelAndView("admin/manage");
+		}
+
 		return new ModelAndView("admin/login");
 	}
 
@@ -64,6 +84,31 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView("admin/login");
 		modelAndView.addObject("error", "Incorrect credentials provided");
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			try {
+				log.info("Invalidating session: " + session.getId());
+				// the SessionDestroyedListener will do the logout
+				session.invalidate();
+			} catch (Exception e) {
+				log.debug("Session already invalidated: " + session.getId());
+			}
+		}
+		
+		SecurityContext securityContext = SecurityContextHolder.getContext();
+		securityContext.setAuthentication(null);
+
+		// clear the cookie(s)
+		Cookie cookie = new Cookie("JSESSIONID", null);
+		cookie.setPath(request.getContextPath());
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+
+		return new ModelAndView("admin/login");
 	}
 
 	@Secured("ROLE_ADMIN")

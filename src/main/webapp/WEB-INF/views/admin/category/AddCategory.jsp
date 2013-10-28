@@ -15,6 +15,14 @@
 						<p class="mainText_Contacts">
 							<b>This is the Category add for wild peacock:</b><br />
 							
+							<div class="ui-widget">
+								<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+									<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+									<strong>Remember:</strong> A category is a placing in which a product fall, like cheese, wine, food type. A category should not be used for when 
+									you want to add more specific things to a product, like age, year, taste. To do that, please use tags.</p>
+								</div>
+							</div>
+							
 							<br />If you are adding a main category, select none. <br/>
 							<select id="parentId" name="parentId">
 								<option value="0">None</option>

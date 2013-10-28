@@ -10,6 +10,15 @@
 				</div>
 			</div>
 			<div class="Retail_Main_Holder_Right">
+				<c:if test="${not empty message }">
+					<div class="ui-widget">
+							<div class="ui-state-highlight ui-corner-all" style="margin-top: 15px; max-height: 100px;">
+								<p>
+									<strong><i>Attention</i></strong><br /> ${message }</a>
+								</p>
+							</div>
+					</div>
+				</c:if>
 				<p class="mainText_Contacts">
 				Welcome to the admin management page, use the navigation to manage the content of the site.<br/>
 				You will notice the added menu items when your are in admin mode.
@@ -27,9 +36,6 @@
 				When in admin mode, a timeout of 30min is in-forced with no activity. However; It is recommended that you log out once done as a safety measure. 
 				Admin functions will only be available to a valid admin user. There is no way to add a new admin user with the UI interface, a admin user needs to be added directly on the database it self.   
 				
-				<div>
-					<h2 style="color: red">${message }</h2>
-				</div>
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">
 				<!-- Button on the right -->

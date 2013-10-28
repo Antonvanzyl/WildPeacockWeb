@@ -17,7 +17,12 @@
 			<p class="mainText_Contacts">
                 <form:form commandName="publishModelForm" action="${pageContext.request.contextPath}/submitAddPublishing">
 	                    <p class="mainText_Contacts"><b>This is the publishing for wild peacock:</b><br/><br/>
-	                    
+	                    <div class="ui-widget">
+								<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+									<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+									<strong>Remember:</strong> When writing about a upcoming event, choose event, when writing about a blog, choose blog </p>
+								</div>
+						</div>
 	
 	                    <label>Title</label><form:input path="title"/><form:errors path="title" cssStyle="color:red"/><br/>
 	                    <label>Sub-Title</label><form:input path="subtitle"/><form:errors path="subtitle"cssStyle="color:red"/>

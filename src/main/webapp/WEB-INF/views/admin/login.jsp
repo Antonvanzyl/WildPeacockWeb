@@ -5,27 +5,26 @@
 			<%@include file="/WEB-INF/jspf/retailLinks.jspf"%>
 			<div class="WSP_Main_Holder_Left">&nbsp;</div>
 			<div class="Retail_Main_Holder_Right">
-				<div class="retailHeader">
-					Admin Login<br />
+				<div class="ui-widget" style="width: 400px; left: 25%; position: relative;">
+					<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+						<p>
+							<span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span> <strong>Admin Login</strong><br />This is the login for
+							wild peacock site Admin, unauthorised access is strictly prohibited.
+							<div id="login-error">${error}</div>
+							<form action="<c:url value='secure' />" method="post">
+							<label for="username">Username</label> <input id="username" name="username" type="text" /> 
+							<label for="password">Password</label> <input id="password" name="password" type="password" />
+							<br />
+							<br /> 
+							<input type="submit" value="Login" />
+							</form>
+						</p>
+					</div>
 				</div>
-			</div>
-			<div class="Retail_Main_Holder_Right">
-				<p class="mainText_Contacts">
-					<c:set var="loginUrl">
-						<c:url value='j_spring_security_check' />
-					</c:set>
-				<p class="mainText_Contacts">
-					<b>This is the Admin login for wild peacock:</b><br />
-					<br />
-				<div id="login-error">${error}</div>
-				<form action="${loginUrl }" method="post">
-					<label for="j_username">Username</label> <input id="j_username" name="j_username" type="text" />
-					<label for="j_password">Password</label> <input id="j_password" name="j_password" type="password" /><br/><br/>
-					<input type="submit" value="Login" />
-				</form>
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">
 				<!-- Button on the right -->
 			</div>
 		</div>
+
 </wp:page>

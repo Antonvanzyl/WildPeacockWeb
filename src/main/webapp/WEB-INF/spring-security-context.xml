@@ -9,16 +9,50 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 
 	<security:global-method-security secured-annotations="enabled" />
 
-	<security:http auto-config="true" use-expressions="true" access-denied-page="/jspExceptionHandler?errorType=403">
-		<security:form-login login-page="/wildAdmin" authentication-failure-url="/failedLogin" default-target-url="/viewManage" />
-		<security:logout invalidate-session="true" logout-success-url="/wildAdmin" logout-url="/logout" />
-	</security:http>
+	<security:http pattern="/" security="none" />
+	<security:http pattern="/resource/*" security="none" />
+	<security:http pattern="/jspExceptionHandler/*" security="none" />
 
-	<bean id="authenticationService" class="com.security.ServiceAuthProvider" />
 
-	<security:authentication-manager>
+	<bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+
+	<bean id="authenticationService" class="com.security.WildAuthProvider" />
+
+	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider ref='authenticationService' />
 	</security:authentication-manager>
 
+	<bean id="authenticationFilter" class="com.security.WildAuthenticationProcessingFilter">
+		<constructor-arg name="defaultFilterProcessesUrl" value="/secure" />
+		<!-- <constructor-arg name="defaultFilterProcessesUrl" value="/secure" /> -->
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="defaultHandler">
+			<bean class="com.security.WildOptionHandler">
+				<property name="method" value="POST" />
+				<property name="authenticationFactory">
+					<bean class="com.security.WildSecureAuthFactory" />
+				</property>
+				<property name="primaryAuthenticator" value="true" />
+				<property name="successHandler">
+					<bean class="com.security.WildSecureBrowserSuccessInnerAuthHandler" />
+				</property>
+				<property name="failureHandlerUrl" value="/failedLogin" />
+			</bean>
+		</property>
+	</bean>
+
+
+	<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<property name="loginFormUrl" value="/wildAdmin" />
+	</bean>
+
+	<security:http entry-point-ref="authenticationEntryPoint" create-session="ifRequired">
+		<security:intercept-url pattern="/**" access="ROLE_ANON_AUTH,ROLE_ADMIN" />
+		<security:access-denied-handler error-page="/jspExceptionHandler?errorType=403" />
+		<security:custom-filter position="FORM_LOGIN_FILTER" ref="authenticationFilter" />
+		<security:session-management invalid-session-url="/" session-authentication-error-url="/jspExceptionHandler?errorType=403">
+		</security:session-management>
+		<security:anonymous granted-authority="ROLE_ANON_AUTH" />
+	</security:http>
 
 </beans>

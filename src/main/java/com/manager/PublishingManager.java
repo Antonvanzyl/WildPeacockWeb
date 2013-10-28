@@ -23,4 +23,10 @@ public interface PublishingManager {
 
 	PublishRecordModel getPublishRecordAndAddReadCount(int id);
 
+	int getNewsSize();
+
+	int getBlogSize();
+
+	void loadPublishings();
+
 }

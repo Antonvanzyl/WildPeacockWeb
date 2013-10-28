@@ -13,6 +13,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.ProductManager;
 import com.servlet.model.ProductCategoryMenuModel;
+import com.servlet.model.ProductModel;
 import com.servlet.model.ProductTagMenuModel;
 import com.servlet.sort.TagComparator;
 
@@ -36,8 +38,8 @@ public class ProductController {
 
 	@Autowired
 	private ProductManager productManager;
-	
-	private final TagComparator  tagComparator = new TagComparator();
+
+	private final TagComparator tagComparator = new TagComparator();
 
 	@RequestMapping(value = "/view_Retail_Products", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView home() {
@@ -46,19 +48,41 @@ public class ProductController {
 
 		List<ProductCategoryMenuModel> categories = productManager.getProductMenuCategories();
 
+		int categoryId = 0;
+		if (categories.size() > 0) {
+			categoryId = categories.get(0).getCategoryId();
+		}
+
 		modelAndView.addObject("categories", categories);
+		modelAndView.addObject("selectedCategoryId", categoryId);
 		modelAndView.addObject("tagsScript", buildTagScript());
 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/getProducts", method = { RequestMethod.GET, RequestMethod.POST })
-	public void getProducts(@RequestParam("categoryId")int categoryId,HttpServletResponse response) throws IOException {
+	public void getProducts(@RequestParam("categoryId") int categoryId, HttpServletResponse response) throws IOException {
+
+		final StringBuilder builder = new StringBuilder();
+
+		if (categoryId != 0) {
+			List<ProductModel> products = productManager.getCategoryProducts(categoryId, 0, 1000);
+
+			for (ProductModel productModel : products) {
+				builder.append("<li class=\"item\">" + productModel.getTitle() + "</li>");
+			}
+		}
+
+		if (StringUtils.isEmpty(builder.toString())) {
+			builder.append("No Products to display...");
+		}
+		
+		System.out.println(builder.toString());
 
 		JSONObject jsonObject = new JSONObject();
 
 		try {
-			jsonObject.put("product", generateProductItem());
+			jsonObject.put("product", builder.toString());
 		} catch (JSONException e) {
 			throw new IOException(e);
 		}
@@ -68,41 +92,29 @@ public class ProductController {
 		response.getOutputStream().flush();
 
 	}
-	
-	private String generateProductItem()
-	{
-		StringBuilder builder = new StringBuilder();
-		for(int x = 0;x<100;x++) {
-		builder.append("<li class=\"item\">"+x+"</li>");
-		}
-		System.out.println(builder.toString());
-		return builder.toString();
-	}
 
 	private String buildTagScript() {
 		Map<ProductTagMenuModel, List<ProductTagMenuModel>> tags = productManager.getAllMenuProductTags();
 
-		
 		final StringBuilder builder = new StringBuilder();
 		int count = 1;
-		
-		
+
 		List<ProductTagMenuModel> menu = new ArrayList<ProductTagMenuModel>();
 		menu.addAll(tags.keySet());
-		
-		Collections.sort(menu,tagComparator);
+
+		Collections.sort(menu, tagComparator);
 
 		for (ProductTagMenuModel productTagModel : menu) {
 
 			String category = productTagModel.getTagTitle();
 			builder.append(createTagItemScript(category, productTagModel));
-			
+
 			List<ProductTagMenuModel> subTags = tags.get(productTagModel);
 			for (ProductTagMenuModel productTagSubMenuModel : subTags) {
 				builder.append(",");
 				builder.append(createTagItemScript(category, productTagSubMenuModel));
 			}
-			
+
 			if (count < tags.size()) {
 				builder.append(",");
 			}
@@ -112,9 +124,8 @@ public class ProductController {
 
 		return builder.toString();
 	}
-	
-	private String createTagItemScript(String category,ProductTagMenuModel menuModel)
-	{
+
+	private String createTagItemScript(String category, ProductTagMenuModel menuModel) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("{");
 		builder.append("label : \"");

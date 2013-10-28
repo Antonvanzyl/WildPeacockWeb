@@ -37,6 +37,7 @@ public class RetailBlogController {
 		List<PublishRecordModel> news = publishingManager.getPublishingRecords(PublishingSectionType.BLOG, 0, numberOfRecordsPerPage);
 		modelAndView.addObject("news", news);
 		modelAndView.addObject("currentPage", 1);
+		modelAndView.addObject("totalRecords", publishingManager.getBlogSize());
 		return modelAndView;
 	}
 
@@ -50,6 +51,7 @@ public class RetailBlogController {
 
 		modelAndView.addObject("news", news);
 		modelAndView.addObject("currentPage", page);
+		modelAndView.addObject("totalRecords", publishingManager.getBlogSize());
 		return modelAndView;
 	}
 

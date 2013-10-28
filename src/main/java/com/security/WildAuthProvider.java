@@ -1,10 +1,8 @@
 package com.security;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -14,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.AuthorityManager;
 
@@ -22,7 +19,7 @@ import com.manager.AuthorityManager;
  * @author Gary Plante (cp312084)
  * 
  */
-public class ServiceAuthProvider implements AuthenticationProvider, ApplicationContextAware {
+public class WildAuthProvider implements AuthenticationProvider, ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
 
@@ -38,21 +35,19 @@ public class ServiceAuthProvider implements AuthenticationProvider, ApplicationC
 
 		getServiceUserManager();
 
-		String username = String.valueOf(authentication.getPrincipal());
-		String password = String.valueOf(authentication.getCredentials());
-
-		if (StringUtils.isEmpty(username) && StringUtils.isAlphanumeric(username)) {
-			throw new BadCredentialsException("login.incorrect");
+		if (!(authentication instanceof WildSecureLoginToken)) {
+			throw new BadCredentialsException("login.incorrect.type");
 		}
 
-		if (StringUtils.isEmpty(password) && StringUtils.isAlphanumeric(password)) {
-			throw new BadCredentialsException("login.incorrect");
-		}
+		WildSecureLoginToken loginToken = (WildSecureLoginToken) authentication;
+
+		String username = loginToken.getUsername();
+		String password = loginToken.getPassword();
 
 		if (authorityManager.authenticateUser(username, password)) {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-			return (Authentication) new User(username,password,authorities);
+			return (Authentication) new WildSecureLoginToken(loginToken, authorities);
 		}
 		throw new BadCredentialsException("login.incorrect");
 

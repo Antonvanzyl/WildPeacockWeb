@@ -1,12 +1,16 @@
 <%@include file="/WEB-INF/jspf/include-header.jspf"%>
 <wp:page pageCSS="retail" pageHeader="Page Header">
+<jsp:attribute name="paging">
+<wp:pagingControl pageNumber="${currentPage }" pageURL="${pageContext.request.contextPath}/news/page?page=" itemsTotal="${totalRecords }" itemsOnPage="20"/>
+</jsp:attribute>
+<jsp:body>
 	<div class="mainContentWrapper_WSP_Press">
 		<div class="WSP_Main_Holder">
 			<%@include file="/WEB-INF/jspf/retailLinks.jspf"%>
 			<div class="WSP_Main_Holder_Left">&nbsp;</div>
 			<div class="Retail_Main_Holder_Right">
 				<div class="retailHeader">
-					News<br />Wild Peacock Food Emporium
+					News<br />
 				</div>
 			</div>
 			<div class="Retail_Main_Holder_Right">
@@ -20,10 +24,10 @@
 						</div>
 					</div>
 					</c:forEach>
-			<wp:pagingControl pageNumber="${currentPage }" pageURL="${pageContext.request.contextPath}/news/page?page=" showNext="${ fn:length( news ) >=20}"/>
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">
 				<!-- Button on the right -->
 			</div>
 		</div>
+</jsp:body>
 </wp:page>

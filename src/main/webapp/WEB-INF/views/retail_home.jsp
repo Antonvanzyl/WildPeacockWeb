@@ -1,6 +1,6 @@
 <%@include file="/WEB-INF/jspf/include-header.jspf"%>
 
-<wp:page pageCSS="retail" pageHeader="Page Header">
+<wp:page pageCSS="retail" pageHeader="Page Header"  slogan="home">
 	<div class="mainContentWrapper_WSP_Press">
 		<div class="WSP_Main_Holder">
 			<%@include file="/WEB-INF/jspf/retailLinks.jspf"%>

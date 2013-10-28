@@ -72,7 +72,7 @@
 	                    <br/>
 	                    <input type="submit" value="Send Message">  
                 </form:form>
-                <wp:facebook-like pageURL=""/>
+                <wp:facebook-like pageURL="" showFaces="false" height="25px"/>
 				</div>
 
 			</div>

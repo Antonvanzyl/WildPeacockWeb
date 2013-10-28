@@ -14,7 +14,7 @@
 					<b><i>${details.title }</i></b><br />${details.subtitle }<br/><br/>${details.description }
 				</p>
 
-			<wp:facebook-like pageURL="${pageContext.request.contextPath}/blog/detail?id=${details.id}"></wp:facebook-like>
+			<wp:facebook-like pageURL="${pageContext.request.contextPath}/blog/detail?id=${details.id}" showFaces="false" height="80px"></wp:facebook-like>
 			</div>
 			
 			<div class="mainContentWrapperCol2_holder_WSP">

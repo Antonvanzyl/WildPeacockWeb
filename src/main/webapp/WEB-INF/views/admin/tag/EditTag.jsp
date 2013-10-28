@@ -18,7 +18,12 @@
                <form:form commandName="tagModelForm" action="${pageContext.request.contextPath}/submitAddTag">
 						<p class="mainText_Contacts">
 							<b>This is the tag Edit for wild peacock:</b><br />
-							
+							<div class="ui-widget">
+								<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+									<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+									<strong>Remember:</strong> A tag is a specific representation on a group of products, like year, taste, origen. </p>
+								</div>
+							</div>
 							<br />If you are adding a main Tag, select none. <br/>
 							<select id="parentId" name="parentId" >
 								<option value="0">None</option>
