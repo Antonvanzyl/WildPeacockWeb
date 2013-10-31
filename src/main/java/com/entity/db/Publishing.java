@@ -85,7 +85,7 @@ public class Publishing implements java.io.Serializable {
 		this.subtitle = subtitle;
 	}
 
-	@Column(name = "description", nullable = false, length = 2048)
+	@Column(name = "description", nullable = false, length = 4096)
 	public String getDescription() {
 		return this.description;
 	}

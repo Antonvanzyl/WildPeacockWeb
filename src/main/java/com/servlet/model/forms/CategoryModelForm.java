@@ -54,7 +54,7 @@ public class CategoryModelForm {
 	public void validate(BindingResult bindingResult) {
 		if (StringUtils.isEmpty(this.name)) {
 			bindingResult.rejectValue("name", "", "*Required");
-		} else if (!StringUtils.isAlpha(this.name)) {
+		} else if (!StringUtils.isAlphaSpace(this.name)) {
 			bindingResult.rejectValue("name", "", "*Must Be Aplha");
 		} else if (StringUtils.length(this.name) > 128) {
 			bindingResult.rejectValue("name", "", "*Max lenght 128 char");
@@ -62,7 +62,7 @@ public class CategoryModelForm {
 
 		if (StringUtils.isEmpty(this.description)) {
 			bindingResult.rejectValue("description", "", "*Required");
-		} else if (!StringUtils.isAlpha(this.description)) {
+		} else if (!StringUtils.isAlphaSpace(this.description)) {
 			bindingResult.rejectValue("description", "", "*Must Be Aplha");
 		} else if (StringUtils.length(this.description) > 128) {
 			bindingResult.rejectValue("description", "", "*Max lenght 128 char");

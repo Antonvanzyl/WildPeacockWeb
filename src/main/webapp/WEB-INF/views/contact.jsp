@@ -1,6 +1,7 @@
 <%@include file="/WEB-INF/jspf/include-header.jspf"%>
 
 <wp:page pageCSS="retail" pageHeader="Page Header" slogan="contact">
+
 	<div class="mainContentWrapper_WSP_Press">
 		<div class="WSP_Main_Holder">
 			
@@ -26,9 +27,14 @@
                     	<p class="mainText_Contacts"><b>Food Emporium</b><br>
 						T. 021 887 7585<br>
 						E. <a href="mailto:sarah@wildpeacock.co.za" class="mainTextLink">sarah@wildpeacock.co.za</a></p>
+						
                     </div>
                     
                 </div>
+                 <wp:facebook-like pageURL="" height="50px" showFaces="true"/>
+                <wp:GoogleMap style="margin:10px"></wp:GoogleMap>
+                
+                
                 <form:form commandName="contact" action="${pageContext.request.contextPath}/message">
 	                    <c:choose>
 		                    <c:when test="${not empty sent && sent == true }">
@@ -46,10 +52,11 @@
 	                    <br/>
 	                    <input type="submit" value="Send Message">  
                 </form:form>
-                <wp:facebook-like pageURL="" height="50px" showFaces="true"/>
+               
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">
 				<!-- Button on the right -->
 			</div>
 		</div>
+	</div>
 </wp:page>

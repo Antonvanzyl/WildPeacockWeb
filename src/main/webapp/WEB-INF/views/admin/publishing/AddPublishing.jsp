@@ -1,6 +1,11 @@
 <%@include file="/WEB-INF/jspf/include-header.jspf"%>
 
 <wp:page pageCSS="retail" pageHeader="Page Header">
+<jsp:attribute name="extraScripts">
+         <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+</jsp:attribute>
+<jsp:body>
+
 	<div class="mainContentWrapper_WSP_Press">
 		<div class="WSP_Main_Holder">
 			
@@ -25,8 +30,8 @@
 						</div>
 	
 	                    <label>Title</label><form:input path="title"/><form:errors path="title" cssStyle="color:red"/><br/>
-	                    <label>Sub-Title</label><form:input path="subtitle"/><form:errors path="subtitle"cssStyle="color:red"/>
-	                    <label>Description</label><form:textarea rows="10" path="description"/><form:errors path="description"cssStyle="color:red"/>
+	                    <label>Sub-Title</label><form:input path="subtitle"/><form:errors path="subtitle"cssStyle="color:red"/><br/><br/>
+	                    <label>Description</label><form:textarea rows="30" path="description"/><form:errors path="description"cssStyle="color:red"/>
 	                    <label>EventDate</label><form:input path="eventDate" id="datepicker" /><form:errors path="eventDate"cssStyle="color:red"/>
 	                     
 	                    <label>Section</label>
@@ -39,6 +44,11 @@
 	                    <br/><br/>
 	                    <input type="submit" value="Add Publishing">  
                 </form:form>
+                
+				<script type="text/javascript">
+				
+				</script>
+				
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">
 				<!-- Button on the right -->
@@ -46,10 +56,21 @@
 		</div>
 		
 		 <script>
-		 $(function() {
-			    $("#datepicker").datepicker({
-		            dateFormat:'dd/mm/yy'
-		        }).val();
-		});
+			tinymce.init({
+			    selector: "textarea",
+			    plugins: [
+			        "advlist autolink lists preview code",
+			        "visualblocks ",
+			        "table preview"
+			    ],
+			    toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | preview"
+			});
+		 
+			$(function() {
+				    $("#datepicker").datepicker({
+			            dateFormat:'dd/mm/yy'
+			        }).val();
+			});
  		</script>
+ 		</jsp:body>
 </wp:page>

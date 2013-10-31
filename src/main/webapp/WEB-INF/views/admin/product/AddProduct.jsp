@@ -1,6 +1,12 @@
 <%@include file="/WEB-INF/jspf/include-header.jspf"%>
 
 <wp:page pageCSS="retail" pageHeader="Page Header">
+<jsp:attribute name="extraScripts">
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/multi-select.css" type="text/css" media="screen" />
+		<script src="${pageContext.request.contextPath}/resources/js/jquery.multi-select.js" type="text/javascript"></script>
+        <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+</jsp:attribute>
+<jsp:body>
 	<div class="mainContentWrapper_WSP_Press">
 		<div class="WSP_Main_Holder">
 			
@@ -63,9 +69,24 @@
 				<!-- Button on the right -->
 			</div>
 		</div>
-		 
+		 </div>
 		 <script type="text/javascript">
 		 $('#tagIds').multiSelect()
+		 tinymce.init({
+			    selector: "textarea",
+			    plugins: [
+			        "advlist autolink lists preview code",
+			        "visualblocks ",
+			        "table preview"
+			    ],
+			    toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | preview"
+			});
 		 
+			$(function() {
+				    $("#datepicker").datepicker({
+			            dateFormat:'dd/mm/yy'
+			        }).val();
+			});
 		 </script>
+		 </jsp:body>
 </wp:page>

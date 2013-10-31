@@ -118,7 +118,23 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView("admin/manage");
 		if (message != null) {
 			modelAndView.addObject("message", message);
+			productManager.refreshProducts();
+			publishingManager.loadPublishings();
 		}
+		return modelAndView;
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/refreshSiteDate", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView refreshSiteDate(@RequestParam(value = "message", required = false) String message) {
+
+		log.info("Refresh of products requested");
+		productManager.refreshProducts(); 
+		publishingManager.loadPublishings();
+		
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+		modelAndView.addObject("message", "Success - Adding a new category");
+
 		return modelAndView;
 	}
 
@@ -465,5 +481,10 @@ public class AdminController {
 		return modelAndView;
 
 	}
+	
+	
+	
+	
+	
 
 }

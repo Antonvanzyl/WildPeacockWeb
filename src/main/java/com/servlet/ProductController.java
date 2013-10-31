@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,14 +43,12 @@ public class ProductController {
 	private final TagComparator tagComparator = new TagComparator();
 
 	@RequestMapping(value = "/view_Retail_Products", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView home() {
+	public ModelAndView home(@RequestParam(required = false, value = "categoryId") Integer categoryId) {
 
 		ModelAndView modelAndView = new ModelAndView("products/summary");
 
 		List<ProductCategoryMenuModel> categories = productManager.getProductMenuCategories();
-
-		int categoryId = 0;
-		if (categories.size() > 0) {
+		if (categoryId == null && categories.size() > 0) {
 			categoryId = categories.get(0).getCategoryId();
 		}
 
@@ -61,28 +60,21 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/getProducts", method = { RequestMethod.GET, RequestMethod.POST })
-	public void getProducts(@RequestParam("categoryId") int categoryId, HttpServletResponse response) throws IOException {
+	public void getProducts(@RequestParam("categoryId") int categoryId, HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 
-		final StringBuilder builder = new StringBuilder();
-
+		String message = "";
 		if (categoryId != 0) {
 			List<ProductModel> products = productManager.getCategoryProducts(categoryId, 0, 1000);
-
-			for (ProductModel productModel : products) {
-				builder.append("<li class=\"item\">" + productModel.getTitle() + "</li>");
-			}
+			message = buildProductIcons(products, request);
+		} else {
+			message = "No Products currently for category...";
 		}
-
-		if (StringUtils.isEmpty(builder.toString())) {
-			builder.append("No Products to display...");
-		}
-		
-		System.out.println(builder.toString());
 
 		JSONObject jsonObject = new JSONObject();
 
 		try {
-			jsonObject.put("product", builder.toString());
+			jsonObject.put("product", message);
 		} catch (JSONException e) {
 			throw new IOException(e);
 		}
@@ -91,6 +83,42 @@ public class ProductController {
 		response.getOutputStream().print(jsonObject.toString());
 		response.getOutputStream().flush();
 
+	}
+
+	@RequestMapping(value = "/getProductsSearch", method = { RequestMethod.GET, RequestMethod.POST })
+	public void getProductsSearch(@RequestParam("searchString") String searchString, HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+
+		String message = "";
+		if (StringUtils.isNotEmpty(searchString)) {
+			List<ProductModel> products = productManager.findProducts(searchString, 0, 1000);
+			message = buildProductIcons(products, request);
+		} else {
+			message = "No Products found...";
+		}
+
+		JSONObject jsonObject = new JSONObject();
+
+		try {
+			jsonObject.put("product", message);
+		} catch (JSONException e) {
+			throw new IOException(e);
+		}
+
+		response.setContentType("text/plain");
+		response.getOutputStream().print(jsonObject.toString());
+		response.getOutputStream().flush();
+
+	}
+
+	@RequestMapping(value = "/select_Retail_Products", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView selectRetailProduct(@RequestParam("productId") int productId) {
+
+		ModelAndView modelAndView = new ModelAndView("products/details");
+		ProductModel product = productManager.getProduct(productId);
+		modelAndView.addObject("product", product);
+
+		return modelAndView;
 	}
 
 	private String buildTagScript() {
@@ -120,6 +148,33 @@ public class ProductController {
 			}
 
 			count++;
+		}
+
+		return builder.toString();
+	}
+
+	private String buildProductIcons(List<ProductModel> products, HttpServletRequest request) {
+		final StringBuilder builder = new StringBuilder();
+		for (ProductModel productModel : products) {
+			builder.append("<li class=\"item\" style=\"text-align: center;\">");
+			builder.append("<a href=\"");
+			builder.append(request.getContextPath());
+			builder.append("/select_Retail_Products?productId=");
+			builder.append(productModel.getProductId());
+			builder.append("\">");
+			builder.append(productModel.getTitle());
+			builder.append("<br/>");
+			builder.append(productModel.getSubTitle());
+			builder.append("<br/><img alt=\"No Image\" src=\"");
+			if (StringUtils.isNotEmpty(productModel.getPhotoUrl())) {
+				builder.append(productModel.getPhotoUrl());
+			} else {
+				builder.append(request.getContextPath());
+				builder.append("/resources/images/no-image.jpg");
+			}
+			builder.append("\" width=\"120px\" height=\"120px\" style=\"margin:1px;\" />");
+			builder.append("</a>");
+			builder.append("</li>");
 		}
 
 		return builder.toString();

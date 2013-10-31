@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,7 @@ import com.servlet.model.ProductTagModel;
 import com.servlet.model.forms.CategoryModelForm;
 import com.servlet.model.forms.ProductModelForm;
 import com.servlet.model.forms.TagModelForm;
+import com.util.CategoriesList;
 
 /**
  * @author Anton Van Zyl
@@ -57,6 +59,7 @@ public class ProductManagerImpl implements ProductManager {
 	/*
 	 * Memory items
 	 */
+	private final Object lock = new Object();
 	private final List<ProductModel> memoryProducts = new ArrayList<ProductModel>();
 	private final List<ProductCategoryMenuModel> memoryCategories = new ArrayList<ProductCategoryMenuModel>();
 	private final Map<ProductTagMenuModel, List<ProductTagMenuModel>> memoryTags = new HashMap<ProductTagMenuModel, List<ProductTagMenuModel>>();
@@ -66,7 +69,7 @@ public class ProductManagerImpl implements ProductManager {
 
 		List<ProductModel> temp = new ArrayList<ProductModel>();
 
-		synchronized (memoryProducts) {
+		synchronized (lock) {
 			temp.addAll(memoryProducts);
 		}
 
@@ -78,14 +81,86 @@ public class ProductManagerImpl implements ProductManager {
 
 		List<ProductModel> temp = new ArrayList<ProductModel>();
 
+		List<Integer> selectedCategories = getAllCategoriesForId(categoryId);
+		if (selectedCategories.isEmpty()) {
+			return temp;
+		}
+
+		for (ProductModel product : getProducts()) {
+			if (product.getCategory() == null) {
+				continue;
+			}
+			if (selectedCategories.contains(product.getCategory().getCategoryId())) {
+				temp.add(product);
+			}
+		}
+
+		return temp;
+	}
+
+	private List<Integer> getAllCategoriesForId(int categoryId) {
+
+		List<Integer> ids = new ArrayList<Integer>();
+
+		final List<ProductCategoryMenuModel> tempCategories = new ArrayList<ProductCategoryMenuModel>();
+		synchronized (lock) {
+			tempCategories.addAll(memoryCategories);
+		}
+
+		for (ProductCategoryMenuModel productCategoryMenuModel : tempCategories) {
+			if (productCategoryMenuModel.getCategoryId() == categoryId) {
+				ids.add(productCategoryMenuModel.getCategoryId());
+
+				if (productCategoryMenuModel.getSubCategories() == null) {
+					continue;
+				}
+				for (ProductCategoryMenuModel subProductCategoryMenuModel : productCategoryMenuModel.getSubCategories()) {
+					ids.add(subProductCategoryMenuModel.getCategoryId());
+				}
+			} else {
+				if (productCategoryMenuModel.getSubCategories() == null) {
+					continue;
+				}
+				for (ProductCategoryMenuModel subProductCategoryMenuModel : productCategoryMenuModel.getSubCategories()) {
+					if (subProductCategoryMenuModel.getCategoryId() == categoryId) {
+						ids.add(subProductCategoryMenuModel.getCategoryId());
+						break;
+					}
+				}
+			}
+
+			if (!ids.isEmpty()) {
+				break;
+			}
+		}
+
+		return ids;
+	}
+
+	@Override
+	public List<ProductModel> findProducts(String searchString, int startIndex, int count) {
+
+		List<ProductModel> temp = new ArrayList<ProductModel>();
+
 		for (ProductModel product : getProducts()) {
 			if (product.getCategory() == null) {
 				continue;
 			}
 
-			if (product.getCategory().getCategoryId() == categoryId) {
+			if (StringUtils.containsAny(product.getDescription(), searchString)) {
 				temp.add(product);
-				break;
+			} else if (StringUtils.containsAny(product.getTitle(), searchString)) {
+				temp.add(product);
+			} else if (StringUtils.containsAny(product.getSubTitle(), searchString)) {
+				temp.add(product);
+			} else if (product.getProductTags() != null) {
+				for (ProductTagModel productTagModel : product.getProductTags()) {
+					Tag tag = tagDao.findById(productTagModel.getTagId());
+					if (StringUtils.containsAny(tag.getName(), searchString)) {
+						temp.add(product);
+						break;
+					}
+				}
 			}
 		}
 
@@ -93,7 +168,7 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	private List<ProductModel> getProducts() {
-		synchronized (memoryProducts) {
+		synchronized (lock) {
 			return memoryProducts;
 		}
 	}
@@ -216,11 +291,12 @@ public class ProductManagerImpl implements ProductManager {
 			tempTags.put(productTagModel, subTagsModels);
 		}
 
-		synchronized (memoryProducts) {
+		synchronized (lock) {
 			memoryProducts.clear();
 			memoryProducts.addAll(temp);
 			memoryCategories.clear();
 			memoryCategories.addAll(tempCategories);
+			CategoriesList.setCategoryMenuModels(tempCategories);
 			memoryTags.clear();
 			memoryTags.putAll(tempTags);
 		}
@@ -232,7 +308,7 @@ public class ProductManagerImpl implements ProductManager {
 
 		final Map<ProductTagMenuModel, List<ProductTagMenuModel>> tempTags = new HashMap<ProductTagMenuModel, List<ProductTagMenuModel>>();
 
-		synchronized (memoryTags) {
+		synchronized (lock) {
 			tempTags.putAll(memoryTags);
 		}
 		return tempTags;
@@ -485,9 +561,11 @@ public class ProductManagerImpl implements ProductManager {
 		product.setDescription(productModelForm.getDescription());
 		product.setPrice(productModelForm.getPrice());
 		product.setCreated(new Date());
-		product.setDisplay("");
-		byte[] photo = { 1, 2, 41 };
-		product.setPhotoUrl(photo);
+		if (StringUtils.isEmpty(productModelForm.getPhotoURL())) {
+			product.setPhotoUrl("");
+		} else {
+			product.setPhotoUrl(productModelForm.getPhotoURL());
+		}
 
 		Category category = categoryDao.findById(productModelForm.getCategoryId());
 		if (category == null) {
@@ -520,10 +598,28 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
+	public ProductModel getProduct(int productId) {
+
+		List<ProductModel> temp = new ArrayList<ProductModel>();
+
+		synchronized (lock) {
+			temp.addAll(memoryProducts);
+		}
+
+		for (ProductModel productModel : temp) {
+			if (productModel.getProductId() == productId) {
+				return productModel;
+			}
+		}
+
+		return null;
+	}
+
+	@Override
 	public List<ProductCategoryMenuModel> getProductMenuCategories() {
 		final List<ProductCategoryMenuModel> returnList = new ArrayList<ProductCategoryMenuModel>();
 
-		synchronized (memoryCategories) {
+		synchronized (lock) {
 			returnList.addAll(memoryCategories);
 		}
 

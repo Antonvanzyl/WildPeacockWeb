@@ -32,7 +32,7 @@ CREATE TABLE [dbo].[Publishing](
 	[created] [datetime] NOT NULL,
 	[title] [varchar](128) NOT NULL,
 	[subtitle] [varchar](64) NOT NULL,
-	[description] [varchar](2048) NOT NULL,
+	[description] [varchar](4096) NOT NULL,
 	[eventDate] [datetime] NOT NULL,
 	[section] [varchar](50) NOT NULL,
 	[read_count] [int] NOT NULL,
@@ -97,16 +97,15 @@ CREATE TABLE [dbo].[Product](
 	[created] [datetime] NOT NULL,
 	[title] [varchar](128) NOT NULL,
 	[subTitle] [varchar](64) NOT NULL,
-	[description] [varchar](2048) NOT NULL,
-	[photoURL] [image] NOT NULL,
+	[description] [varchar](4096) NOT NULL,
+	[photoURL] [varchar](256) NOT NULL,
 	[price] [money] NOT NULL,
-	[display] [varchar](50) NOT NULL,
 	[categoryID] [int] NOT NULL,
  CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY] 
 GO
 SET ANSI_PADDING OFF
 GO
@@ -126,6 +125,41 @@ CREATE TABLE [dbo].[ProductTags](
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+/****** Object:  Table [dbo].[CustomPages]    Script Date: 10/31/2013 14:48:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CustomPages]') AND type in (N'U'))
+DROP TABLE [dbo].[CustomPages]
+GO
+
+USE [WildPeacock]
+GO
+
+/****** Object:  Table [dbo].[CustomPages]    Script Date: 10/31/2013 14:48:40 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[CustomPages](
+	[id] [int] NOT NULL,
+	[pageName] [varchar](50) NOT NULL,
+	[title] [varbinary](50) NOT NULL,
+	[description] [varchar](8000) NOT NULL,
+	[inserted] [datetime] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
 /****** Object:  ForeignKey [FK_Category_Category]    Script Date: 08/11/2013 11:40:39 ******/
 ALTER TABLE [dbo].[Category]  WITH CHECK ADD  CONSTRAINT [FK_Category_Category] FOREIGN KEY([parentId])
 REFERENCES [dbo].[Category] ([id])

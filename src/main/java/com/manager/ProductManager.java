@@ -62,4 +62,8 @@ public interface ProductManager {
 	public List<ProductCategoryMenuModel> getProductMenuCategories();
 
 	public Map<ProductTagMenuModel, List<ProductTagMenuModel>> getAllMenuProductTags();
+
+	public ProductModel getProduct(int productId);
+
+	public List<ProductModel> findProducts(String searchString, int i, int j);
 }

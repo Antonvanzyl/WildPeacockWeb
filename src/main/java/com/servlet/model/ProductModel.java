@@ -20,6 +20,7 @@ public class ProductModel {
 	private String subTitle;
 	private String description;
 	private BigDecimal price;
+	private String photoUrl;
 	private ProductCategoryModel category = new ProductCategoryModel();
 
 	private List<ProductTagModel> productTags = new ArrayList<ProductTagModel>();
@@ -78,6 +79,14 @@ public class ProductModel {
 
 	public void setProductTags(List<ProductTagModel> productTags) {
 		this.productTags = productTags;
+	}
+	
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+	
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 
 }

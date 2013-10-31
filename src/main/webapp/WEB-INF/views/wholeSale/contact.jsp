@@ -1,6 +1,10 @@
 <%@include file="/WEB-INF/jspf/include-header.jspf"%>
 
 <wp:page pageCSS="wholesale" pageHeader="Page Header" slogan="contact">
+<jsp:attribute name="extraScripts">
+    	<script src="${pageContext.request.contextPath}/resources/js/gmaps.js" type="text/javascript"></script>
+</jsp:attribute>
+<jsp:body>
 	<div class="mainContentWrapper_WS_Contact">
 		<%@include file="/WEB-INF/jspf/wholeSaleLinks.jspf"%>
 
@@ -55,6 +59,13 @@
 					<p class="mainText_Contacts">
 						<b>Postal Address:</b><br /> P.O. Box 12168<br />Die Boord<br />Stellenbosch<br />7613
 					</p>
+	                <wp:facebook-like pageURL="" showFaces="false" height="25px"/>
+				</div>
+	            </div>
+	            <wp:GoogleMap style="margin:25px;"></wp:GoogleMap>
+	            <div class="WS_Main_Holder_Right">
+	            <div class="WS_Main_Holder_Right1">
+	                
 					 <form:form commandName="contact" action="${pageContext.request.contextPath}/message">
 	                    <c:choose>
 		                    <c:when test="${not empty sent && sent == true }">
@@ -72,9 +83,7 @@
 	                    <br/>
 	                    <input type="submit" value="Send Message">  
                 </form:form>
-                <wp:facebook-like pageURL="" showFaces="false" height="25px"/>
 				</div>
-
 			</div>
 		</div>
 
@@ -85,4 +94,5 @@
 		
 
 	</div>
+	</jsp:body>
 </wp:page>

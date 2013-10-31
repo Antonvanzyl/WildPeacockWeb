@@ -10,6 +10,7 @@ public class ProductModelForm {
 	private String title;
 	private String subTitle;
 	private String description;
+	private String photoURL;
 	private BigDecimal price;
 
 	private int categoryId;
@@ -61,6 +62,14 @@ public class ProductModelForm {
 
 	public void setTagIds(int[] tagIds) {
 		this.tagIds = tagIds;
+	}
+	
+	public String getPhotoURL() {
+		return photoURL;
+	}
+	
+	public void setPhotoURL(String photoURL) {
+		this.photoURL = photoURL;
 	}
 
 	public void validate(BindingResult bindingResult) {

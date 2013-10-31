@@ -3,7 +3,7 @@
 <sec:authorize ifNotGranted="ROLE_ADMIN">
 	<div id="menu" class="mainContentWrapper_WSP_TopLinks" style="position: relative">
 		<ul class="menu">
-			<li><a href="${pageContext.request.contextPath}/wholesale/home"><span>Home</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/wholesale_home"><span>Home</span></a></li>
 			<li><a href="${pageContext.request.contextPath}/retail_home" class="parent"><span>Retail</span></a>
 				<div>
 					<ul>
@@ -14,15 +14,15 @@
 						<li><a href="${pageContext.request.contextPath}/contact"><span>Contact</span></a></li>
 					</ul>
 				</div></li>
-			<li><a href="${pageContext.request.contextPath}/wholesale/products"><span>Whole Sale Products</span></a></li>
-			<li class="last"><a href="${pageContext.request.contextPath}/wholesale/contact"><span>Contact</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/wholesale_products"><span>Whole Sale Products</span></a></li>
+			<li class="last"><a href="${pageContext.request.contextPath}/wholesale_contact"><span>Contact</span></a></li>
 		</ul>
 	</div>
 </sec:authorize>
 <sec:authorize ifAnyGranted="ROLE_ADMIN">
 	<div id="menu" class="mainContentWrapper_WSP_TopLinks" style="position: relative">
 		<ul class="menu">
-			<li><a href="${pageContext.request.contextPath}/wholesale/home"><span>Home</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/wholesale_home"><span>Home</span></a></li>
 			<li><a href="${pageContext.request.contextPath}/retail_home" class="parent"><span>Retail</span></a>
 				<div>
 					<ul>
@@ -33,7 +33,7 @@
 						<li><a href="${pageContext.request.contextPath}/contact"><span>Contact</span></a></li>
 					</ul>
 				</div></li>
-			<li><a href="${pageContext.request.contextPath}/wholesale/products"><span>Whole Sale Products</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/wholesale_products"><span>Whole Sale Products</span></a></li>
 			<li><a href="#" class="parent"><span>Deli Products</span></a>
 				<div>
 					<ul>
@@ -70,7 +70,8 @@
 						<li><a href="${pageContext.request.contextPath}/searchPublishing"><span>Edit or Delete A Publishing</span></a></li>
 					</ul>
 				</div></li>
-			<li><a href="${pageContext.request.contextPath}/wholesale/contact"><span>Contact</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/wholesale_contact"><span>Contact</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/refreshSiteDate"><span>Refresh Site Data</span></a></li>
 			<li class="last"><a href="${pageContext.request.contextPath}/logout"><span>Sign Out</span></a></li>
 		</ul>
 	</div>

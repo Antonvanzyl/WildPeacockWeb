@@ -7,6 +7,7 @@
 <%@attribute name="pageCSS" required="false" %>
 <%@attribute name="slogan" required="false" %>
 <%@attribute name="paging" required="false" %>
+<%@attribute name="extraScripts" required="false" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -19,23 +20,20 @@
 		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" >
 		<link rel="icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" type="image/gif" >
 
+		<!-- Original Page Styles -->
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/retailStyle.css" type="text/css" media="screen" />
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wholesaleStyle.css" type="text/css" media="screen" />
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wildPeacock.css" type="text/css" media="screen" />
-	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style_1/style.css" type="text/css"  />
 
 		<!-- New styling for jquery mobile -->	    
-	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/multi-select.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui-1.10.3.custom.min.css" type="text/css"/>
     	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu-green-yellow.css" type="text/css" />
-    	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/simplePagination.css" type="text/css" />
   		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/jquery.multi-select.js" type="text/javascript"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/freewall.js" type="text/javascript"></script>
     	<script src="${pageContext.request.contextPath}/resources/js/menu-green-yellow.js" type="text/javascript"></script>
-    	<script src="${pageContext.request.contextPath}/resources/js/jquery.simplePagination.js" type="text/javascript"></script>
+    	
+    	${extraScripts }
     	
 		<!-- IMAGE SCROLLER DETAILS -->
 	
@@ -44,7 +42,6 @@
 	<body class="${pageCSS }">
 		<div id="page-wrap">
 			<div class="pageContent">
-			
 				<!-- Header with logo's -->
 				<div class="headerContent-${pageCSS }">
 		        	<div class="headerwrapperCol1">
@@ -60,14 +57,12 @@
 			
 				<!-- Main Content -->
 				<div class="mainContent">
-					
 			        <jsp:doBody />
-
 		    	</div>
 		        ${paging }
 		        <!-- Content Footer -->
 			    <div class="footerwithround">
-			       	<div align="center"><p class="footerTextForRoundCorners">Wild Peacock Food Emporium  |  30 Piet Retief Street  |  Stellenbosch  |  7600  |  tel: 082 697 0870 | <a href="mailto:sarah@wildpeacock.co.za?subject=Contact from Website" class="footerLink">sarah@wildpeacock.co.za</a>   </p></div>
+			       	<div align="center"><p class="footerTextForRoundCorners"><a href="${pageContext.request.contextPath}/contact">Wild Peacock Food Emporium  |  32 Piet Retief Street  |  Stellenbosch  |  7600  </a>|  tel: 082 697 0870 | <a href="mailto:sarah@wildpeacock.co.za?subject=Contact from Website" class="footerLink">sarah@wildpeacock.co.za</a>   </p></div>
 			    </div>
 		  	</div>
 		
@@ -79,8 +74,7 @@
 	           		  		<div align="center">
 								<p class="footer_copyright">
 	                    			&copy; Copyright 2011 Wild Peacock Products.  All rights reserved. Designed by <a class="footer_link" href="http://www.tenfourmedia.co.za" target="_blank">tenfour media</a>. Development by <a class="footer_link" href="http://www.linkedin.com/pub/anton-adriaan-van-zyl/4a/252/90" target="_blank">Anton Van Zyl</a>.
-	                    		<div id="copyright">Copyright &copy; 2013 <a href="http://apycom.com/">Apycom jQuery Menus</a></div>
-	                    		
+	                    			<div id="copyright">Copyright &copy; 2013 <a href="http://apycom.com/">Apycom jQuery Menus</a></div>
 	                    		</p>
 					  		</div>
 	              		</div>

@@ -3,6 +3,10 @@
 <jsp:attribute name="paging">
 <wp:pagingControl pageNumber="${currentPage }" pageURL="${pageContext.request.contextPath}/blog/page?page=" itemsTotal="${totalRecords }" itemsOnPage="20"/>
 </jsp:attribute>
+<jsp:attribute name="extraScripts">
+    	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/simplePagination.css" type="text/css" />
+    	<script src="${pageContext.request.contextPath}/resources/js/jquery.simplePagination.js" type="text/javascript"></script>
+</jsp:attribute>
 <jsp:body>
 	<div class="mainContentWrapper_WSP_Press">
 		<div class="WSP_Main_Holder">

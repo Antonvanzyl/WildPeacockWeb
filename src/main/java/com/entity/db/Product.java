@@ -32,15 +32,14 @@ public class Product implements java.io.Serializable {
 	private String title;
 	private String subTitle;
 	private String description;
-	private byte[] photoUrl;
+	private String photoUrl;
 	private BigDecimal price;
-	private String display;
 	private Set<ProductTags> productTagses = new HashSet<ProductTags>(0);
 
 	public Product() {
 	}
 
-	public Product(int id, Category category, Date created, String title, String subTitle, String description, byte[] photoUrl,
+	public Product(int id, Category category, Date created, String title, String subTitle, String description, String photoUrl,
 			BigDecimal price, String display) {
 		this.id = id;
 		this.category = category;
@@ -50,10 +49,9 @@ public class Product implements java.io.Serializable {
 		this.description = description;
 		this.photoUrl = photoUrl;
 		this.price = price;
-		this.display = display;
 	}
 
-	public Product(int id, Category category, Date created, String title, String subTitle, String description, byte[] photoUrl,
+	public Product(int id, Category category, Date created, String title, String subTitle, String description, String photoUrl,
 			BigDecimal price, String display, Set<ProductTags> productTagses) {
 		this.id = id;
 		this.category = category;
@@ -63,7 +61,6 @@ public class Product implements java.io.Serializable {
 		this.description = description;
 		this.photoUrl = photoUrl;
 		this.price = price;
-		this.display = display;
 		this.productTagses = productTagses;
 	}
 
@@ -116,7 +113,7 @@ public class Product implements java.io.Serializable {
 		this.subTitle = subTitle;
 	}
 
-	@Column(name = "description", nullable = false, length = 2048)
+	@Column(name = "description", nullable = false, length = 4096)
 	public String getDescription() {
 		return this.description;
 	}
@@ -126,11 +123,11 @@ public class Product implements java.io.Serializable {
 	}
 
 	@Column(name = "photoURL", nullable = false)
-	public byte[] getPhotoUrl() {
+	public String getPhotoUrl() {
 		return this.photoUrl;
 	}
 
-	public void setPhotoUrl(byte[] photoUrl) {
+	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
 	}
 
@@ -141,15 +138,6 @@ public class Product implements java.io.Serializable {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
-	}
-
-	@Column(name = "display", nullable = false, length = 50)
-	public String getDisplay() {
-		return this.display;
-	}
-
-	public void setDisplay(String display) {
-		this.display = display;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")

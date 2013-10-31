@@ -22,34 +22,33 @@ import com.servlet.model.ContactModel;
  * 
  */
 @Controller
-@RequestMapping("/wholesale")
 public class WholeSaleController  {
 	
 	@Autowired
 	private MessagingManager messagingManager;
 
-	@RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/wholesale_home", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView WholesaleHome() {
 		ModelAndView modelAndView = new ModelAndView("wholesale/home");
 
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/products", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/wholesale_products", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView WholesaleProducts() {
 		ModelAndView modelAndView = new ModelAndView("wholesale/products");
 
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/contact", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/wholesale_contact", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView WholesaleContact() {
 		ModelAndView modelAndView = new ModelAndView("wholesale/contact");
 		modelAndView.addObject("contact",new ContactModel());
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/message", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/wholesale_message", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView sendMessage(@ModelAttribute("contact") ContactModel contact, BindingResult bindingResult) {
 
 		contact.validate(bindingResult);
