@@ -1,5 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<jsp:useBean id="customLinks" class="com.util.CustomLinks" scope="application" />
+
+
 <sec:authorize ifNotGranted="ROLE_ADMIN">
 	<div id="menu" class="mainContentWrapper_WSP_TopLinks" style="position: relative">
 		<ul class="menu">
@@ -11,10 +14,16 @@
 						<li><a href="${pageContext.request.contextPath}/view_Retail_Products"><span>Deli Products</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/blog"><span>Blog</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/news"><span>News</span></a></li>
+						<c:forEach items="${customLinks.retailLinks }" var="link">
+							<li><a href="${pageContext.request.contextPath}/${link.url}"><span>${link.linkName}</span></a></li>
+						</c:forEach>
 						<li><a href="${pageContext.request.contextPath}/contact"><span>Contact</span></a></li>
 					</ul>
 				</div></li>
 			<li><a href="${pageContext.request.contextPath}/wholesale_products"><span>Whole Sale Products</span></a></li>
+			<c:forEach items="${customLinks.wholeSaleLinks }" var="link">
+				<li><a href="${pageContext.request.contextPath}/${link.url}"><span>${link.linkName}</span></a></li>
+			</c:forEach>
 			<li class="last"><a href="${pageContext.request.contextPath}/wholesale_contact"><span>Contact</span></a></li>
 		</ul>
 	</div>
@@ -30,6 +39,9 @@
 						<li><a href="${pageContext.request.contextPath}/view_Retail_Products"><span>Deli Products</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/blog"><span>Blog</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/news"><span>News</span></a></li>
+						<c:forEach items="${customLinks.retailLinks }" var="link">
+							<li><a href="${pageContext.request.contextPath}/${link.url}"><span>${link.linkName}</span></a></li>
+						</c:forEach>
 						<li><a href="${pageContext.request.contextPath}/contact"><span>Contact</span></a></li>
 					</ul>
 				</div></li>
@@ -61,15 +73,26 @@
 							</div></li>
 					</ul>
 				</div></li>
-			<li><a href="${pageContext.request.contextPath}/blog"><span>Blog</span></a></li>
-			<li><a href="${pageContext.request.contextPath}/news"><span>News</span></a></li>
 			<li><a href="#" class="parent"><span>Publishing</span></a>
 				<div>
 					<ul>
+						<li><a href="${pageContext.request.contextPath}/blog"><span>Blog</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/news"><span>News</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/viewAddPublishing"><span>Add A Publishing</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/searchPublishing"><span>Edit or Delete A Publishing</span></a></li>
 					</ul>
 				</div></li>
+			<li><a href="#" class="parent"><span>Custom Pages</span></a>
+				<div>
+					<ul>
+						<c:forEach items="${customLinks.retailLinks }" var="link">
+							<li><a href="${pageContext.request.contextPath}/${link.url}"><span>${link.linkName}</span></a></li>
+						</c:forEach>
+						<li><a href="${pageContext.request.contextPath}/viewAddPublishing"><span>Add A Custom Page</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/searchPublishing"><span>Edit/Delete A Custom Page</span></a></li>
+					</ul>
+				</div>
+			</li>
 			<li><a href="${pageContext.request.contextPath}/wholesale_contact"><span>Contact</span></a></li>
 			<li><a href="${pageContext.request.contextPath}/refreshSiteDate"><span>Refresh Site Data</span></a></li>
 			<li class="last"><a href="${pageContext.request.contextPath}/logout"><span>Sign Out</span></a></li>

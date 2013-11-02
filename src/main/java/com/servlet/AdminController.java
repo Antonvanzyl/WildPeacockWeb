@@ -30,8 +30,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.AuthorityManager;
+import com.manager.CategoryManager;
 import com.manager.ProductManager;
 import com.manager.PublishingManager;
+import com.manager.TagManager;
 import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductTagModel;
 import com.servlet.model.PublishRecordModel;
@@ -58,6 +60,12 @@ public class AdminController {
 
 	@Autowired
 	private PublishingManager publishingManager;
+
+	@Autowired
+	private CategoryManager categoryManager;
+
+	@Autowired
+	private TagManager tagManager;
 
 	/**
 	 * Authenticate
@@ -98,7 +106,7 @@ public class AdminController {
 				log.debug("Session already invalidated: " + session.getId());
 			}
 		}
-		
+
 		SecurityContext securityContext = SecurityContextHolder.getContext();
 		securityContext.setAuthentication(null);
 
@@ -123,15 +131,15 @@ public class AdminController {
 		}
 		return modelAndView;
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/refreshSiteDate", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView refreshSiteDate(@RequestParam(value = "message", required = false) String message) {
 
 		log.info("Refresh of products requested");
-		productManager.refreshProducts(); 
+		productManager.refreshProducts();
 		publishingManager.loadPublishings();
-		
+
 		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
 		modelAndView.addObject("message", "Success - Adding a new category");
 
@@ -161,7 +169,7 @@ public class AdminController {
 	@RequestMapping(value = "/viewAddCategory", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewAddCategory() {
 
-		List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
+		List<ProductCategoryModel> mainCategories = categoryManager.getAllMainCategories();
 
 		ModelAndView modelAndView = new ModelAndView("admin/category/AddCategory");
 		modelAndView.addObject("mainCategories", mainCategories);
@@ -177,7 +185,7 @@ public class AdminController {
 		categoryModelForm.validate(bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
+			List<ProductCategoryModel> mainCategories = categoryManager.getAllMainCategories();
 			ModelAndView modelAndView = new ModelAndView("admin/category/AddCategory");
 			modelAndView.addObject("mainCategories", mainCategories);
 			modelAndView.addObject("categoryModelForm", categoryModelForm);
@@ -185,9 +193,10 @@ public class AdminController {
 		}
 
 		if (categoryModelForm.getParentId() <= 0) {
-			productManager.addMainCategory(categoryModelForm.getName(), categoryModelForm.getDescription());
+			categoryManager.addMainCategory(categoryModelForm.getName(), categoryModelForm.getDescription());
 		} else {
-			productManager.addSubCategory(categoryModelForm.getParentId(), categoryModelForm.getName(), categoryModelForm.getDescription());
+			categoryManager
+					.addSubCategory(categoryModelForm.getParentId(), categoryModelForm.getName(), categoryModelForm.getDescription());
 		}
 
 		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
@@ -200,7 +209,7 @@ public class AdminController {
 	@RequestMapping(value = "/searchCategory", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchCategory() {
 
-		List<ProductCategoryModel> categories = productManager.getAllCategories();
+		List<ProductCategoryModel> categories = categoryManager.getAllCategories();
 		ModelAndView modelAndView = new ModelAndView("admin/category/FindCategory");
 		modelAndView.addObject("categories", categories);
 		return modelAndView;
@@ -210,12 +219,12 @@ public class AdminController {
 	@RequestMapping(value = "/editCategory", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView editCategory(@RequestParam("categoryId") int categoryId) throws Exception {
 
-		List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
+		List<ProductCategoryModel> mainCategories = categoryManager.getAllMainCategories();
 
 		ModelAndView modelAndView = new ModelAndView("admin/category/EditCategory");
 		modelAndView.addObject("mainCategories", mainCategories);
 
-		CategoryModelForm categoryForm = productManager.getCategory(categoryId);
+		CategoryModelForm categoryForm = categoryManager.getCategory(categoryId);
 		modelAndView.addObject("categoryModelForm", categoryForm);
 
 		return modelAndView;
@@ -229,7 +238,7 @@ public class AdminController {
 		categoryModelForm.validate(bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			List<ProductCategoryModel> mainCategories = productManager.getAllMainCategories();
+			List<ProductCategoryModel> mainCategories = categoryManager.getAllMainCategories();
 			ModelAndView modelAndView = new ModelAndView("admin/category/EditCategory");
 			modelAndView.addObject("mainCategories", mainCategories);
 			modelAndView.addObject("categoryModelForm", categoryModelForm);
@@ -237,9 +246,9 @@ public class AdminController {
 		}
 
 		if (categoryModelForm.getParentId() <= 0) {
-			productManager.updateMainCategory(categoryModelForm.getId(), categoryModelForm.getName(), categoryModelForm.getDescription());
+			categoryManager.updateMainCategory(categoryModelForm.getId(), categoryModelForm.getName(), categoryModelForm.getDescription());
 		} else {
-			productManager.updateSubCategory(categoryModelForm.getId(), categoryModelForm.getParentId(), categoryModelForm.getName(),
+			categoryManager.updateSubCategory(categoryModelForm.getId(), categoryModelForm.getParentId(), categoryModelForm.getName(),
 					categoryModelForm.getDescription());
 		}
 
@@ -259,7 +268,7 @@ public class AdminController {
 	@RequestMapping(value = "/viewAddTag", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewAddTag() {
 
-		List<ProductTagModel> mainTags = productManager.getMainProductTags();
+		List<ProductTagModel> mainTags = tagManager.getMainProductTags();
 		ModelAndView modelAndView = new ModelAndView("admin/tag/AddTag");
 		modelAndView.addObject("mainTags", mainTags);
 		modelAndView.addObject("tagModelForm", new TagModelForm());
@@ -274,7 +283,7 @@ public class AdminController {
 		tagModelForm.validate(bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			List<ProductTagModel> mainTags = productManager.getMainProductTags();
+			List<ProductTagModel> mainTags = tagManager.getMainProductTags();
 			ModelAndView modelAndView = new ModelAndView("admin/tag/AddTag");
 			modelAndView.addObject("mainTags", mainTags);
 			modelAndView.addObject("tagModelForm", tagModelForm);
@@ -282,9 +291,9 @@ public class AdminController {
 		}
 
 		if (tagModelForm.getParentId() <= 0) {
-			productManager.addMainTag(tagModelForm.getName());
+			tagManager.addMainTag(tagModelForm.getName());
 		} else {
-			productManager.addSubTag(tagModelForm.getParentId(), tagModelForm.getName());
+			tagManager.addSubTag(tagModelForm.getParentId(), tagModelForm.getName());
 		}
 
 		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
@@ -296,7 +305,7 @@ public class AdminController {
 	@RequestMapping(value = "/searchTag", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchTag() {
 
-		List<ProductTagModel> tags = productManager.getAllProductTags();
+		List<ProductTagModel> tags = tagManager.getAllProductTags();
 		ModelAndView modelAndView = new ModelAndView("admin/tag/FindTag");
 		modelAndView.addObject("tags", tags);
 		return modelAndView;
@@ -307,11 +316,11 @@ public class AdminController {
 	@RequestMapping(value = "/editTag", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView editTag(@RequestParam("tagId") int tagId) throws Exception {
 
-		List<ProductTagModel> mainTags = productManager.getMainProductTags();
+		List<ProductTagModel> mainTags = tagManager.getMainProductTags();
 		ModelAndView modelAndView = new ModelAndView("admin/tag/EditTag");
 		modelAndView.addObject("mainTags", mainTags);
 
-		TagModelForm tagModelForm = productManager.getTags(tagId);
+		TagModelForm tagModelForm = tagManager.getTags(tagId);
 
 		modelAndView.addObject("tagModelForm", tagModelForm);
 
@@ -326,7 +335,7 @@ public class AdminController {
 		tagModelForm.validate(bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			List<ProductTagModel> mainTags = productManager.getMainProductTags();
+			List<ProductTagModel> mainTags = tagManager.getMainProductTags();
 			ModelAndView modelAndView = new ModelAndView("admin/tag/EditTag");
 			modelAndView.addObject("mainTags", mainTags);
 			modelAndView.addObject("tagModelForm", tagModelForm);
@@ -334,9 +343,9 @@ public class AdminController {
 		}
 
 		if (tagModelForm.getParentId() <= 0) {
-			productManager.updateMainTag(tagModelForm.getId(), tagModelForm.getName());
+			tagManager.updateMainTag(tagModelForm.getId(), tagModelForm.getName());
 		} else {
-			productManager.updateSubTag(tagModelForm.getId(), tagModelForm.getParentId(), tagModelForm.getName());
+			tagManager.updateSubTag(tagModelForm.getId(), tagModelForm.getParentId(), tagModelForm.getName());
 		}
 
 		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
@@ -354,8 +363,8 @@ public class AdminController {
 	@RequestMapping(value = "/viewAddProduct", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewAddProduct() {
 
-		List<ProductTagModel> mainTags = productManager.getAllProductTags();
-		List<ProductCategoryModel> mainCategories = productManager.getAllCategories();
+		List<ProductTagModel> mainTags = tagManager.getAllProductTags();
+		List<ProductCategoryModel> mainCategories = categoryManager.getAllCategories();
 
 		ModelAndView modelAndView = new ModelAndView("admin/product/AddProduct");
 		modelAndView.addObject("categoryList", mainCategories);
@@ -372,8 +381,8 @@ public class AdminController {
 		productModelForm.validate(bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			List<ProductTagModel> mainTags = productManager.getAllProductTags();
-			List<ProductCategoryModel> mainCategories = productManager.getAllCategories();
+			List<ProductTagModel> mainTags = tagManager.getAllProductTags();
+			List<ProductCategoryModel> mainCategories = categoryManager.getAllCategories();
 
 			ModelAndView modelAndView = new ModelAndView("admin/product/AddProduct");
 			modelAndView.addObject("categoryList", mainCategories);
@@ -481,10 +490,5 @@ public class AdminController {
 		return modelAndView;
 
 	}
-	
-	
-	
-	
-	
 
 }

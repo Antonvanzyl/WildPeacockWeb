@@ -77,7 +77,7 @@ public class WholeSaleController  {
 
 		boolean success = messagingManager.sendEmail(contact.getEmail(), subjectBuilder.toString(), messageBuilder.toString());
 
-		ModelAndView modelAndView = new ModelAndView("forward:/wholeSale/contact");
+		ModelAndView modelAndView = new ModelAndView("forward:/wholesale_contact");
 		modelAndView.addObject("sent", success);
 		if (success) {
 			contact.clear();

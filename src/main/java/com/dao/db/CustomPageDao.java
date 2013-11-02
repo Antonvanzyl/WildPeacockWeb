@@ -9,7 +9,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,12 +115,10 @@ public class CustomPageDao {
 		}
 	}
 
-	public CustomPages getRecordByUsername(String username) {
-
+	public List<CustomPages> getAllCustomPages() {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(CustomPages.class);
-		criteria.add(Restrictions.eq("username", username));
-		criteria.setMaxResults(1);
-
-		return (CustomPages) criteria.uniqueResult();
+		return (List<CustomPages>) criteria.list();
 	}
+
+	
 }

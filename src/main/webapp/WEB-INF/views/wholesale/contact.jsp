@@ -6,7 +6,7 @@
 </jsp:attribute>
 <jsp:body>
 	<div class="mainContentWrapper_WS_Contact">
-		<%@include file="/WEB-INF/jspf/wholeSaleLinks.jspf"%>
+		<%@include file="/WEB-INF/jspf/WholeSaleLinks.jspf"%>
 
 		<div class="WS_Main_Holder">
 			<div class="WS_Main_Holder_Left">
@@ -66,7 +66,7 @@
 	            <div class="WS_Main_Holder_Right">
 	            <div class="WS_Main_Holder_Right1">
 	                
-					 <form:form commandName="contact" action="${pageContext.request.contextPath}/message">
+					 <form:form commandName="contact" action="${pageContext.request.contextPath}/wholesale_message">
 	                    <c:choose>
 		                    <c:when test="${not empty sent && sent == true }">
 		                    	<p class="mainText_Contacts" style="color: red"><b>Message Sent Success</b></p>

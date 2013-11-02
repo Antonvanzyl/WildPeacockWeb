@@ -3,7 +3,7 @@
 <wp:page pageCSS="wholesale" pageHeader="Page Header" slogan="home">
 	<div class="mainContentWrapper_WSH">
 		
-		<%@include file="/WEB-INF/jspf/wholeSaleLinks.jspf"%>
+		<%@include file="/WEB-INF/jspf/WholeSaleLinks.jspf"%>
 
 		<div class="WSH_Main_Holder">
 			<div class="WSH_Main_Holder_Left">

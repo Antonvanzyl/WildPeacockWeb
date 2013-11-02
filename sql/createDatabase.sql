@@ -149,6 +149,7 @@ CREATE TABLE [dbo].[CustomPages](
 	[pageName] [varchar](50) NOT NULL,
 	[title] [varbinary](50) NOT NULL,
 	[description] [varchar](8000) NOT NULL,
+	[siteSpaceType] [varchar](8000) NOT NULL,
 	[inserted] [datetime] NOT NULL
 ) ON [PRIMARY]
 
@@ -156,8 +157,6 @@ GO
 
 SET ANSI_PADDING OFF
 GO
-
-
 
 
 /****** Object:  ForeignKey [FK_Category_Category]    Script Date: 08/11/2013 11:40:39 ******/

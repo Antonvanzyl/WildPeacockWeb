@@ -2,7 +2,7 @@
 
 <wp:page pageCSS="wholesale" pageHeader="Page Header" slogan="products">
 	<div class="mainContentWrapper_WSP">
-		<%@include file="/WEB-INF/jspf/wholeSaleLinks.jspf"%>
+		<%@include file="/WEB-INF/jspf/WholeSaleLinks.jspf"%>
 
 		<div class="WSP_Main_Holder">
 			<div class="WSP_Main_Holder_Left">

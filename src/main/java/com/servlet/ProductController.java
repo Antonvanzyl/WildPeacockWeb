@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.manager.CategoryManager;
 import com.manager.ProductManager;
+import com.manager.TagManager;
 import com.servlet.model.ProductCategoryMenuModel;
 import com.servlet.model.ProductModel;
 import com.servlet.model.ProductTagMenuModel;
@@ -40,6 +42,12 @@ public class ProductController {
 	@Autowired
 	private ProductManager productManager;
 
+	@Autowired
+	private CategoryManager categoryManager;
+
+	@Autowired
+	private TagManager tagManager;
+
 	private final TagComparator tagComparator = new TagComparator();
 
 	@RequestMapping(value = "/view_Retail_Products", method = { RequestMethod.GET, RequestMethod.POST })
@@ -47,7 +55,7 @@ public class ProductController {
 
 		ModelAndView modelAndView = new ModelAndView("products/summary");
 
-		List<ProductCategoryMenuModel> categories = productManager.getProductMenuCategories();
+		List<ProductCategoryMenuModel> categories = categoryManager.getProductMenuCategories();
 		if (categoryId == null && categories.size() > 0) {
 			categoryId = categories.get(0).getCategoryId();
 		}
@@ -122,7 +130,7 @@ public class ProductController {
 	}
 
 	private String buildTagScript() {
-		Map<ProductTagMenuModel, List<ProductTagMenuModel>> tags = productManager.getAllMenuProductTags();
+		Map<ProductTagMenuModel, List<ProductTagMenuModel>> tags = tagManager.getAllMenuProductTags();
 
 		final StringBuilder builder = new StringBuilder();
 		int count = 1;
