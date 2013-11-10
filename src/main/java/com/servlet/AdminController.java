@@ -5,6 +5,7 @@
  */
 package com.servlet;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -27,10 +28,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.AuthorityManager;
 import com.manager.CategoryManager;
+import com.manager.CustomPageManager;
 import com.manager.ProductManager;
 import com.manager.PublishingManager;
 import com.manager.TagManager;
@@ -38,6 +41,7 @@ import com.servlet.model.ProductCategoryModel;
 import com.servlet.model.ProductTagModel;
 import com.servlet.model.PublishRecordModel;
 import com.servlet.model.forms.CategoryModelForm;
+import com.servlet.model.forms.CustomPageModelForm;
 import com.servlet.model.forms.ProductModelForm;
 import com.servlet.model.forms.PublishModelForm;
 import com.servlet.model.forms.TagModelForm;
@@ -63,6 +67,9 @@ public class AdminController {
 
 	@Autowired
 	private CategoryManager categoryManager;
+
+	@Autowired
+	private CustomPageManager customPageManager;
 
 	@Autowired
 	private TagManager tagManager;
@@ -128,6 +135,7 @@ public class AdminController {
 			modelAndView.addObject("message", message);
 			productManager.refreshProducts();
 			publishingManager.loadPublishings();
+			customPageManager.refreshCustomPages();
 		}
 		return modelAndView;
 	}
@@ -139,6 +147,7 @@ public class AdminController {
 		log.info("Refresh of products requested");
 		productManager.refreshProducts();
 		publishingManager.loadPublishings();
+		customPageManager.refreshCustomPages();
 
 		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
 		modelAndView.addObject("message", "Success - Adding a new category");
@@ -376,7 +385,8 @@ public class AdminController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/submitAddProduct", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView submitAddProduct(@ModelAttribute("productModelForm") ProductModelForm productModelForm, BindingResult bindingResult) {
+	public ModelAndView submitAddProduct(@ModelAttribute("productModelForm") ProductModelForm productModelForm, BindingResult bindingResult)
+			throws IOException {
 
 		productModelForm.validate(bindingResult);
 
@@ -391,12 +401,30 @@ public class AdminController {
 			return modelAndView;
 		}
 
-		productManager.addProduct(productModelForm);
+		int productId = productManager.addProduct(productModelForm);
 
-		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
-		modelAndView.addObject("message", "Success - Adding a new Product");
+		ModelAndView modelAndView =  new ModelAndView("admin/product/SetProductPhoto");
+		modelAndView.addObject("productId", productId);
 		return modelAndView;
+	}
 
+
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/uploadProductPhoto", method = RequestMethod.POST)
+	public ModelAndView handleFormUpload(@RequestParam("productId")int productId, @RequestParam("file") MultipartFile file) throws IOException {
+
+		if (file != null && !file.isEmpty()) {
+			if (file.getContentType() == "image/JPEG") {
+				productManager.setProductImage(productId,file.getBytes());
+				ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+				modelAndView.addObject("message", "Success - Successfully added the product");
+				return modelAndView;
+			}
+		}
+
+		ModelAndView modelAndView = new ModelAndView("admin/product/SetProductPhoto");
+		modelAndView.addObject("message", "You need to choose a jpeg image");
+		return modelAndView;
 	}
 
 	/**
@@ -489,6 +517,41 @@ public class AdminController {
 		modelAndView.addObject("message", "Success - publishing deleted");
 		return modelAndView;
 
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/viewAddCustomPage", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView viewAddCustomPage() {
+
+		ModelAndView modelAndView = new ModelAndView("admin/customPages/AddCustomPage");
+		modelAndView.addObject("customPageModelForm", new CustomPageModelForm());
+
+		return modelAndView;
+	}
+
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/submitAddCustomPage", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView submitAddCustomPage(@ModelAttribute("customPageModelForm") CustomPageModelForm customPageModelForm,
+			BindingResult bindingResult) throws ParseException {
+
+		customPageModelForm.validate(bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			ModelAndView modelAndView = new ModelAndView("admin/customPages/AddCustomPage");
+			modelAndView.addObject("customPageModelForm", customPageModelForm);
+			return modelAndView;
+		}
+
+		customPageManager.addCustomPage(customPageModelForm.getTitle(), customPageModelForm.getPageName(),
+				customPageModelForm.getDescription(), customPageModelForm.getSiteSpaceType());
+
+		ModelAndView modelAndView = new ModelAndView("redirect:viewManage");
+		modelAndView.addObject("message", "Success - Adding a new " + customPageModelForm.getPageName() + " Success");
+		return modelAndView;
 	}
 
 }

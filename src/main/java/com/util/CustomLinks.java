@@ -35,7 +35,7 @@ public class CustomLinks {
 		for (CustomPageModel customPageModel : customPageModels) {
 
 			Link link = new Link();
-			link.setUrl("viewCustomPage?id=" + customPageModel.getId() + ";siteSpaceType=" + customPageModel.getSiteSpaceType());
+			link.setUrl("viewCustomPage?id=" + customPageModel.getId() + "&siteSpaceType=" + customPageModel.getSiteSpaceType());
 			link.setLinkName(customPageModel.getPageName());
 
 			if (customPageModel.getSiteSpaceType() == SiteSpaceType.RETAIL) {

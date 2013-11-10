@@ -46,8 +46,8 @@ public class TagModelForm {
 
 		if (StringUtils.isEmpty(name)) {
 			bindingResult.rejectValue("name", "", "*Required");
-		} else if (!StringUtils.isAlpha(this.name)) {
-			bindingResult.rejectValue("name", "", "*Must Be Aplha");
+		} else if (!StringUtils.isAlphanumericSpace(this.name)) {
+			bindingResult.rejectValue("name", "", "*Must Be AplhaNumeric");
 		} else if (StringUtils.length(this.name) > 64) {
 			bindingResult.rejectValue("name", "", "*Incorrect Length (Max 64 char)");
 		}

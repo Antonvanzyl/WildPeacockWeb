@@ -33,7 +33,7 @@
 							<form:input path="subTitle" /> 
 							<form:errors path="subTitle" cssStyle="color:red" />
 							
-							<label>Description (Max 2048)</label>
+							<label>Description (Max 4096)</label>
 							<form:textarea path="description" /> 
 							<form:errors path="description" cssStyle="color:red" />
 							
@@ -59,10 +59,6 @@
 							
 							<br /> <input type="submit" value="Add Product">
 					</form:form>
-                
-                
-                
-                
                 
 			</div>
 			<div class="mainContentWrapperCol2_holder_WSP">

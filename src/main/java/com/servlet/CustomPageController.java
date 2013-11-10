@@ -27,10 +27,17 @@ public class CustomPageController {
 	private CustomPageManager customPageManager;
 
 	@RequestMapping(value = "/viewCustomPage", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView home(@RequestParam("id") int id,@RequestParam("siteSpaceType") SiteSpaceType siteSpaceType) {
+	public ModelAndView home(@RequestParam("id") int id, @RequestParam("siteSpaceType") SiteSpaceType siteSpaceType) {
 
-		ModelAndView modelAndView = new ModelAndView("customPage");
+		ModelAndView modelAndView = new ModelAndView();
 		CustomPageModel customPage = customPageManager.getCustomPage(id);
+
+		if (siteSpaceType == SiteSpaceType.RETAIL) {
+			modelAndView.setViewName("customRetailPage");
+		} else {
+			modelAndView.setViewName("customWholeSalePage");
+		}
+		
 		modelAndView.addObject("customPage", customPage);
 		modelAndView.addObject("siteSpaceType", siteSpaceType);
 		return modelAndView;

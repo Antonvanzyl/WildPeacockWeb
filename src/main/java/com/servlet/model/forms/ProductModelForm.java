@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ProductModelForm {
 
 	private String title;
 	private String subTitle;
 	private String description;
-	private String photoURL;
 	private BigDecimal price;
 
 	private int categoryId;
@@ -63,33 +63,25 @@ public class ProductModelForm {
 	public void setTagIds(int[] tagIds) {
 		this.tagIds = tagIds;
 	}
-	
-	public String getPhotoURL() {
-		return photoURL;
-	}
-	
-	public void setPhotoURL(String photoURL) {
-		this.photoURL = photoURL;
-	}
 
 	public void validate(BindingResult bindingResult) {
 
-		if (StringUtils.isEmpty(this.getTitle())) {
-			bindingResult.rejectValue("title", "", "*Required");
+		if (StringUtils.isAlphanumericSpace(this.getTitle())) {
+			bindingResult.rejectValue("title", "", "*Must be Alpha Numeric ");
 		} else if (StringUtils.length(this.getTitle()) > 128) {
 			bindingResult.rejectValue("title", "", "*Too Long (127 char max)");
 		}
 
-		if (StringUtils.isEmpty(this.getSubTitle())) {
-			bindingResult.rejectValue("subTitle", "", "*Required");
+		if (StringUtils.isAlphanumericSpace(this.getSubTitle())) {
+			bindingResult.rejectValue("subTitle", "", "*Must be Alpha Numeric ");
 		} else if (StringUtils.length(this.getSubTitle()) > 64) {
 			bindingResult.rejectValue("subTitle", "", "*Too Long (64 char max)");
 		}
 
 		if (StringUtils.isEmpty(this.getDescription())) {
 			bindingResult.rejectValue("description", "", "*Required");
-		} else if (StringUtils.length(this.getDescription()) > 2048) {
-			bindingResult.rejectValue("description", "", "*Too Long (2048 char max)");
+		} else if (StringUtils.length(this.getDescription()) > 4096) {
+			bindingResult.rejectValue("description", "", "*Too Long (4096 char max)");
 		}
 
 		if (this.getPrice() == null || BigDecimal.ZERO.compareTo(this.getPrice()) > 0) {
@@ -103,6 +95,7 @@ public class ProductModelForm {
 		if (this.getTagIds() == null || this.getTagIds().length == 0) {
 			bindingResult.rejectValue("tagIds", "", "*Required");
 		}
+
 	}
 
 }

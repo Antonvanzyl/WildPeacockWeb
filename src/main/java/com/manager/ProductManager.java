@@ -3,6 +3,7 @@
  */
 package com.manager;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.servlet.model.ProductModel;
@@ -20,11 +21,13 @@ public interface ProductManager {
 
 	public List<ProductModel> getTagsProducts(int tagId, int startIndex, int count);
 
-	void addProduct(ProductModelForm productModelForm);
+	int addProduct(ProductModelForm productModelForm) throws IOException;
 
 	void refreshProducts();
 
 	public ProductModel getProduct(int productId);
 
 	public List<ProductModel> findProducts(String searchString, int i, int j);
+
+	public void setProductImage(int productId, byte[] bytes);
 }

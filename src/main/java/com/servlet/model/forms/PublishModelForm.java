@@ -73,14 +73,14 @@ public class PublishModelForm {
 	}
 
 	public void validate(BindingResult bindingResult) {
-		if (StringUtils.isEmpty(this.getTitle())) {
-			bindingResult.rejectValue("title", "", "*Required");
+		if (StringUtils.isAlphanumericSpace(this.getTitle())) {
+			bindingResult.rejectValue("title", "", "*Must be Alpha Numeric ");
 		} else if (StringUtils.length(this.getTitle()) > 128) {
 			bindingResult.rejectValue("title", "", "*Too Long (127 char max)");
 		}
 
-		if (StringUtils.isEmpty(this.getSubtitle())) {
-			bindingResult.rejectValue("subtitle", "", "*Required");
+		if (StringUtils.isAlphanumericSpace(this.getSubtitle())) {
+			bindingResult.rejectValue("subtitle", "", "*Must be Alpha Numeric ");
 		} else if (StringUtils.length(this.getSubtitle()) > 64) {
 			bindingResult.rejectValue("subtitle", "", "*Too Long (64 char max)");
 		}
@@ -97,8 +97,8 @@ public class PublishModelForm {
 
 		if (StringUtils.isEmpty(this.getDescription())) {
 			bindingResult.rejectValue("description", "", "*Required");
-		} else if (StringUtils.length(this.getDescription()) > 2048) {
-			bindingResult.rejectValue("description", "", "*Too Long (2048 char max)");
+		} else if (StringUtils.length(this.getDescription()) > 4096) {
+			bindingResult.rejectValue("description", "", "*Too Long (4096 char max)");
 		}
 
 		if (eventDate == null) {

@@ -1,6 +1,6 @@
 package com.entity.db;
 
-// Generated 08 Oct 2013 7:47:57 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10 Nov 2013 6:11:31 PM by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -32,34 +32,34 @@ public class Product implements java.io.Serializable {
 	private String title;
 	private String subTitle;
 	private String description;
-	private String photoUrl;
+	private byte[] photo;
 	private BigDecimal price;
 	private Set<ProductTags> productTagses = new HashSet<ProductTags>(0);
 
 	public Product() {
 	}
 
-	public Product(int id, Category category, Date created, String title, String subTitle, String description, String photoUrl,
-			BigDecimal price, String display) {
+	public Product(int id, Category category, Date created, String title, String subTitle, String description, byte[] photo,
+			BigDecimal price) {
 		this.id = id;
 		this.category = category;
 		this.created = created;
 		this.title = title;
 		this.subTitle = subTitle;
 		this.description = description;
-		this.photoUrl = photoUrl;
+		this.photo = photo;
 		this.price = price;
 	}
 
-	public Product(int id, Category category, Date created, String title, String subTitle, String description, String photoUrl,
-			BigDecimal price, String display, Set<ProductTags> productTagses) {
+	public Product(int id, Category category, Date created, String title, String subTitle, String description, byte[] photo,
+			BigDecimal price, Set<ProductTags> productTagses) {
 		this.id = id;
 		this.category = category;
 		this.created = created;
 		this.title = title;
 		this.subTitle = subTitle;
 		this.description = description;
-		this.photoUrl = photoUrl;
+		this.photo = photo;
 		this.price = price;
 		this.productTagses = productTagses;
 	}
@@ -122,13 +122,13 @@ public class Product implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Column(name = "photoURL", nullable = false)
-	public String getPhotoUrl() {
-		return this.photoUrl;
+	@Column(name = "photo", nullable = true)
+	public byte[] getPhoto() {
+		return this.photo;
 	}
 
-	public void setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
 	}
 
 	@Column(name = "price", nullable = false, scale = 4)

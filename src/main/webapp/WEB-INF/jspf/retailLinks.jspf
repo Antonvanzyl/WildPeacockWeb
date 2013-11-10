@@ -84,7 +84,7 @@
 						<c:forEach items="${customLinks.retailLinks }" var="link">
 							<li><a href="${pageContext.request.contextPath}/${link.url}"><span>${link.linkName}</span></a></li>
 						</c:forEach>
-						<li><a href="${pageContext.request.contextPath}/viewAddPublishing"><span>Add A Custom Page</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/viewAddCustomPage"><span>Add A Custom Page</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/searchPublishing"><span>Edit/Delete A Custom Page</span></a></li>
 					</ul>
 				</div>

@@ -1,6 +1,6 @@
 package com.entity.db;
 
-// Generated 08 Oct 2013 7:47:57 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10 Nov 2013 6:11:31 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -35,9 +35,8 @@ public class Tag implements java.io.Serializable {
 	public Tag() {
 	}
 
-	public Tag(int id, Tag tag, String name, Date created) {
+	public Tag(int id, String name, Date created) {
 		this.id = id;
-		this.tag = tag;
 		this.name = name;
 		this.created = created;
 	}
@@ -63,7 +62,7 @@ public class Tag implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tagId", nullable = true)
+	@JoinColumn(name = "tagId")
 	public Tag getTag() {
 		return this.tag;
 	}

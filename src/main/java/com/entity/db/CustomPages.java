@@ -33,7 +33,7 @@ public class CustomPages implements java.io.Serializable {
 	public CustomPages() {
 	}
 
-	public CustomPages(int id, String pageName, String title, String description,SiteSpaceType siteSpaceType, Date inserted) {
+	public CustomPages(int id, String pageName, String title, String description, SiteSpaceType siteSpaceType, Date inserted) {
 		super();
 		this.id = id;
 		this.pageName = pageName;
@@ -80,17 +80,17 @@ public class CustomPages implements java.io.Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "siteSpaceType", nullable = false, length = 20)
 	public SiteSpaceType getSiteSpaceType() {
 		return siteSpaceType;
 	}
-	
+
 	public void setSiteSpaceType(SiteSpaceType siteSpaceType) {
 		this.siteSpaceType = siteSpaceType;
 	}
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "inserted", nullable = false, length = 23)
 	public Date getInserted() {

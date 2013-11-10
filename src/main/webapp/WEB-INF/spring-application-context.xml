@@ -59,5 +59,6 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 
 	<bean id="productLoadTask" class="com.tasks.ProductLoadTask" />
 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
 </beans>

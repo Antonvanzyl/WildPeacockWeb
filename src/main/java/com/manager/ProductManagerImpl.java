@@ -5,6 +5,7 @@
  */
 package com.manager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,7 +44,7 @@ public class ProductManagerImpl implements ProductManager {
 
 	@Autowired
 	private CategoryManager categoryManager;
-	
+
 	@Autowired
 	private TagManager tagManager;
 
@@ -195,8 +196,6 @@ public class ProductManagerImpl implements ProductManager {
 			temp.add(productModel);
 		}
 
-		
-
 		synchronized (lock) {
 			memoryProducts.clear();
 			memoryProducts.addAll(temp);
@@ -208,7 +207,7 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public void addProduct(ProductModelForm productModelForm) {
+	public int addProduct(ProductModelForm productModelForm) throws IOException {
 
 		Product product = new Product();
 		product.setTitle(productModelForm.getTitle());
@@ -216,11 +215,6 @@ public class ProductManagerImpl implements ProductManager {
 		product.setDescription(productModelForm.getDescription());
 		product.setPrice(productModelForm.getPrice());
 		product.setCreated(new Date());
-		if (StringUtils.isEmpty(productModelForm.getPhotoURL())) {
-			product.setPhotoUrl("");
-		} else {
-			product.setPhotoUrl(productModelForm.getPhotoURL());
-		}
 
 		Category category = categoryManager.findById(productModelForm.getCategoryId());
 		product.setCategory(category);
@@ -245,6 +239,17 @@ public class ProductManagerImpl implements ProductManager {
 
 			productTagsDao.merge(productTag);
 		}
+
+		refreshProducts();
+		return product.getId();
+	}
+
+	@Override
+	public void setProductImage(int productId, byte[] bytes) {
+
+		Product product = productDao.findById(productId);
+		product.setPhoto(bytes);
+		productDao.merge(product);
 
 		refreshProducts();
 	}

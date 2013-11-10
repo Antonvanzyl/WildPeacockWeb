@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.manager.CustomPageManager;
 import com.manager.ProductManager;
 import com.manager.PublishingManager;
 import com.util.ResourceLoaderTask;
@@ -25,12 +26,16 @@ public class ProductLoadTask extends ResourceLoaderTask {
 	
 	@Autowired
 	private PublishingManager publishingManager;
+	
+	@Autowired
+	private CustomPageManager customPageManager;
 
 	@Override
 	protected void loadResource() throws Exception {
 		log.info("Loading Products");
 		productManager.refreshProducts();
 		publishingManager.loadPublishings();
+		customPageManager.refreshCustomPages();
 	}
 
 }
